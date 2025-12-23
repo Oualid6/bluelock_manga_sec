@@ -10,6 +10,7 @@ import ChapterReader from './pages/ChapterReader';
 import Characters from './pages/Characters';
 import About from './pages/About';
 import Legal from './pages/Legal';
+import { useSecurity } from './hooks/useSecurity';
 
 // Wrapper to conditionally render layout based on path (optional, keeping it simple here)
 const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -25,6 +26,8 @@ const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 };
 
 const App: React.FC = () => {
+  useSecurity();
+
   return (
     <MangaProvider>
       <ThemeProvider>

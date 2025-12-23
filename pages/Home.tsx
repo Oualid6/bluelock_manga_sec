@@ -27,7 +27,10 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
           <img
             src="/hero-bg.png"
-            alt="JJK Background"
+            alt=""
+            width="1920"
+            height="1080"
+            fetchPriority="high"
             className="w-full h-full object-cover"
           />
         </div>
@@ -51,7 +54,7 @@ const Home: React.FC = () => {
               <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-6 border-b lg:border-b-0 lg:border-r border-white/10 pb-6 lg:pb-0 lg:pr-6">
 
                 {/* Rating Block */}
-                <div className="col-span-2 sm:col-span-4 flex items-center gap-3 mb-2">
+                <div className="col-span-2 sm:col-span-4 flex items-center gap-3 mb-2" aria-label="rated 4.8 out of 5 stars">
                   <div className="flex items-center gap-0.5">
                     {[1, 2, 3, 4].map(i => <Star key={i} className="fill-yellow-400 text-yellow-400 w-5 h-5" />)}
                     <Star className="fill-yellow-400/30 text-yellow-400 w-5 h-5" />
@@ -102,7 +105,7 @@ const Home: React.FC = () => {
 
               {/* Right Column: Actions/Social Proof */}
               <div className="flex lg:flex-col justify-center items-center gap-8 min-w-[140px]">
-                <div className="text-center group cursor-pointer w-full">
+                <div className="text-center group w-full">
                   <MessageCircle className="w-8 h-8 text-gray-500 group-hover:text-jjk-red mx-auto mb-2 transition-colors" />
                   <span className="block text-2xl font-bold text-white">1,240</span>
                   <span className="text-xs text-gray-500 uppercase tracking-wide">Comments</span>
