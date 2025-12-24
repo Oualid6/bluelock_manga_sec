@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       <section className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-jjk-dark py-20">
         <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
           <img
-            src="/hero-bg.png"
+            src="/hero-bg.webp"
             alt=""
             width="1920"
             height="1080"
