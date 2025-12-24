@@ -13,12 +13,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setTheme] = useState<Theme>('dark'); // Default to dark for JJK vibe
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as Theme;
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setTheme('dark');
-    }
+    // Force dark mode for JJK style, ignore local storage for 'light' preference to ensure consistency
+    setTheme('dark');
   }, []);
 
   useEffect(() => {

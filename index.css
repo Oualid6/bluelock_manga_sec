@@ -8,13 +8,13 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100 dark:bg-jjk-dark;
+  @apply bg-bb-light dark:bg-gray-800;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-400 dark:bg-gray-600 rounded;
+  @apply bg-bb-blue/50 dark:bg-bb-blue/30 rounded;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-jjk-red;
+  @apply bg-bb-blue;
 }

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rejjk.com/sitemap.xml
+Sitemap: https://blueboxmanga.online/sitemap.xml

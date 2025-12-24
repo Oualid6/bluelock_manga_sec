@@ -10,9 +10,7 @@ import ChapterReader from './pages/ChapterReader';
 import Characters from './pages/Characters';
 import About from './pages/About';
 import Legal from './pages/Legal';
-import { useSecurity } from './hooks/useSecurity';
-
-// Wrapper to conditionally render layout based on path (optional, keeping it simple here)
+// Wrapper to conditionally render layout based on path
 const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="flex flex-col min-h-screen">
@@ -26,14 +24,12 @@ const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 };
 
 const App: React.FC = () => {
-  useSecurity();
-
   return (
     <MangaProvider>
       <ThemeProvider>
         <Router>
           {/* Helps scroll to top on navigation */}
-          <div className="font-sans antialiased text-gray-900 dark:text-gray-100 bg-gray-50 dark:bg-jjk-dark transition-colors duration-200 min-h-screen">
+          <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen">
             <Routes>
               <Route path="/" element={<LayoutWrapper><Home /></LayoutWrapper>} />
               <Route path="/manga" element={<LayoutWrapper><MangaList /></LayoutWrapper>} />

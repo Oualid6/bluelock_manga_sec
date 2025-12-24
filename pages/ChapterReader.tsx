@@ -50,8 +50,8 @@ const ChapterReader: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-jjk-dark">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-jjk-red"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-bb-dark">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-bb-blue"></div>
       </div>
     );
   }
@@ -70,17 +70,17 @@ const ChapterReader: React.FC = () => {
   return (
     <div className="bg-gray-100 dark:bg-[#121212] min-h-screen flex flex-col">
       <SEOHead
-        title={`Jujutsu Kaisen Manga Chapter ${chapter.number} - Read Online`}
-        description={`Read Jujutsu Kaisen Manga Chapter ${chapter.number}: ${chapter.title} online in high quality free. Official English scans available.`}
+        title={`Blue Box Manga Chapter ${chapter.number} - Read Online`}
+        description={`Read Blue Box Manga Chapter ${chapter.number}: ${chapter.title} online in high quality free. Official English scans available.`}
         schema={{
           "@context": "https://schema.org",
           "@type": "Article",
-          "headline": `Jujutsu Kaisen Chapter ${chapter.number}`,
+          "headline": `Blue Box Chapter ${chapter.number}`,
           "image": chapter.pages[0],
           "datePublished": chapter.releaseDate,
           "author": {
             "@type": "Person",
-            "name": "Gege Akutami"
+            "name": "Kouji Miura"
           }
         }}
       />
@@ -88,14 +88,14 @@ const ChapterReader: React.FC = () => {
 
 
       {/* Sticky Top Controls */}
-      <div className={`fixed top-0 left-0 right-0 bg-white/95 dark:bg-jjk-gray/95 backdrop-blur shadow-md transition-transform duration-300 z-50 ${showControls ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className={`fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur shadow-md transition-transform duration-300 z-50 ${showControls ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/manga" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
               <ChevronLeft size={24} className="dark:text-white" />
             </Link>
             <div className="flex flex-col">
-              <span className="text-xs text-jjk-red font-bold uppercase tracking-wider">Reading</span>
+              <span className="text-xs text-bb-blue font-bold uppercase tracking-wider">Reading</span>
               <h1 className="font-bold text-sm md:text-base dark:text-white truncate max-w-[150px] md:max-w-md">
                 Ch. {chapter.number}
               </h1>
@@ -105,14 +105,14 @@ const ChapterReader: React.FC = () => {
           <div className="flex items-center gap-2 bg-gray-100 dark:bg-black/20 p-1 rounded-lg">
             <button
               onClick={() => setReadingMode('vertical')}
-              className={`p-2 rounded-md transition-all ${readingMode === 'vertical' ? 'bg-white dark:bg-jjk-red text-jjk-red dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white'}`}
+              className={`p-2 rounded-md transition-all ${readingMode === 'vertical' ? 'bg-white dark:bg-bb-blue text-bb-blue dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white'}`}
               title="Vertical Scroll"
             >
               <ArrowDown size={20} />
             </button>
             <button
               onClick={() => setReadingMode('horizontal')}
-              className={`p-2 rounded-md transition-all ${readingMode === 'horizontal' ? 'bg-white dark:bg-jjk-red text-jjk-red dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white'}`}
+              className={`p-2 rounded-md transition-all ${readingMode === 'horizontal' ? 'bg-white dark:bg-bb-blue text-bb-blue dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white'}`}
               title="Horizontal Slide"
             >
               <ArrowRight size={20} />
@@ -140,15 +140,29 @@ const ChapterReader: React.FC = () => {
 
       {/* Reader Content */}
       <div className={`flex-1 pt-16 ${readingMode === 'horizontal' ? 'h-[calc(100vh-64px)] overflow-hidden' : ''}`}>
-
-        {readingMode === 'vertical' ? (
+        {chapter.pages.length === 0 ? (
+          <div className="flex flex-col items-center justify-center min-h-[60vh] p-8 text-center bg-gray-50 dark:bg-bb-dark">
+            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm max-w-md w-full">
+              <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Coming Soon</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
+                This chapter is not available yet. Please check back later for the latest updates on <strong className="text-bb-blue">Blue Box</strong>.
+              </p>
+              <button
+                onClick={() => navigate('/manga')}
+                className="px-6 py-3 bg-bb-blue hover:bg-blue-700 text-white font-bold rounded-lg transition-all"
+              >
+                Back to Chapter List
+              </button>
+            </div>
+          </div>
+        ) : readingMode === 'vertical' ? (
           // Vertical Layout
           <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
             {chapter.pages.map((pageUrl, idx) => (
               <img
                 key={idx}
                 src={pageUrl}
-                alt={`Jujutsu Kaisen Chapter ${chapter.number} Page ${idx + 1}`}
+                alt={`Blue Box Chapter ${chapter.number} Page ${idx + 1}`}
                 className="w-full h-auto block"
                 loading="lazy"
                 decoding="async"
@@ -165,7 +179,7 @@ const ChapterReader: React.FC = () => {
               <div key={idx} className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
                 <img
                   src={pageUrl}
-                  alt={`Jujutsu Kaisen Chapter ${chapter.number} Page ${idx + 1}`}
+                  alt={`Blue Box Chapter ${chapter.number} Page ${idx + 1}`}
                   className="max-h-full max-w-full object-contain shadow-2xl"
                   loading="lazy"
                   decoding="async"
@@ -205,9 +219,9 @@ const ChapterReader: React.FC = () => {
                 <div className="relative z-10 flex items-center justify-between">
                   <div>
                     <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Previous</span>
-                    <span className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-jjk-red transition-colors">Chapter {prevChapter.number}</span>
+                    <span className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-bb-blue transition-colors">Chapter {prevChapter.number}</span>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-jjk-red group-hover:text-white transition-all">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center group-hover:bg-bb-blue group-hover:text-white transition-all">
                     <ChevronLeft size={20} />
                   </div>
                 </div>
@@ -217,15 +231,15 @@ const ChapterReader: React.FC = () => {
             {nextChapter ? (
               <button
                 onClick={() => handleNav(nextChapter.number)}
-                className="group relative overflow-hidden rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 p-6 text-right hover:border-jjk-red/50 dark:hover:border-jjk-red/50 transition-all hover:shadow-xl hover:shadow-jjk-red/10 hover:-translate-y-1"
+                className="group relative overflow-hidden rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 p-6 text-right hover:border-bb-blue/50 dark:hover:border-bb-blue/50 transition-all hover:shadow-xl hover:shadow-bb-blue/10 hover:-translate-y-1"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-jjk-red/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-bb-blue/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div className="relative z-10 flex items-center justify-between flex-row-reverse">
                   <div>
                     <span className="text-xs font-bold text-gray-400 uppercase tracking-wider block mb-1">Next</span>
-                    <span className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-jjk-red transition-colors">Chapter {nextChapter.number}</span>
+                    <span className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-bb-blue transition-colors">Chapter {nextChapter.number}</span>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-jjk-red/10 text-jjk-red flex items-center justify-center group-hover:bg-jjk-red group-hover:text-white transition-all">
+                  <div className="w-10 h-10 rounded-full bg-bb-blue/10 text-bb-blue flex items-center justify-center group-hover:bg-bb-blue group-hover:text-white transition-all">
                     <ChevronRight size={20} />
                   </div>
                 </div>
@@ -245,7 +259,7 @@ const ChapterReader: React.FC = () => {
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-white/5 bg-white/5">
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <MessageSquare size={18} className="text-jjk-red" />
+                <MessageSquare size={18} className="text-bb-blue" />
                 Discussion <span className="text-gray-500 text-sm font-normal">({MOCK_COMMENTS.length})</span>
               </h3>
               <button className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-lg text-sm font-medium transition-colors border border-white/5">
@@ -256,16 +270,16 @@ const ChapterReader: React.FC = () => {
             <div className="p-6 md:p-8">
               {/* Input Area */}
               <div className="mb-10 flex gap-4">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-jjk-red to-red-900 flex-shrink-0 flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-white/5">
-                  Y
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-bb-blue to-blue-900 flex-shrink-0 flex items-center justify-center text-white font-bold text-sm shadow-lg ring-2 ring-white/5">
+                  T
                 </div>
                 <div className="flex-1">
                   <textarea
                     placeholder="What are your thoughts on this chapter?"
-                    className="w-full p-4 rounded-xl border border-white/10 bg-black/40 text-gray-200 focus:ring-1 focus:ring-jjk-red focus:border-jjk-red/50 focus:outline-none transition-all placeholder:text-gray-600 min-h-[100px] resize-y"
+                    className="w-full p-4 rounded-xl border border-white/10 bg-black/40 text-gray-200 focus:ring-1 focus:ring-bb-blue focus:border-bb-blue/50 focus:outline-none transition-all placeholder:text-gray-600 min-h-[100px] resize-y"
                   ></textarea>
                   <div className="flex justify-end mt-3">
-                    <button className="px-6 py-2.5 bg-jjk-red hover:bg-red-700 text-white font-bold rounded-lg transition-all shadow-lg shadow-red-900/20 text-sm">
+                    <button className="px-6 py-2.5 bg-bb-blue hover:bg-blue-700 text-white font-bold rounded-lg transition-all shadow-lg shadow-blue-900/20 text-sm">
                       Post Comment
                     </button>
                   </div>
@@ -277,19 +291,19 @@ const ChapterReader: React.FC = () => {
                 {MOCK_COMMENTS.map((comment) => (
                   <div key={comment.id} className="group">
                     <div className="flex gap-4">
-                      <div className="w-10 h-10 rounded-full bg-gray-800 flex flex-shrink-0 items-center justify-center text-gray-300 font-bold text-sm border border-white/5 group-hover:border-jjk-red/30 transition-colors">
+                      <div className="w-10 h-10 rounded-full bg-gray-800 flex flex-shrink-0 items-center justify-center text-gray-300 font-bold text-sm border border-white/5 group-hover:border-bb-blue/30 transition-colors">
                         {comment.user.charAt(0)}
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="font-bold text-gray-200 group-hover:text-jjk-red transition-colors">{comment.user}</span>
+                          <span className="font-bold text-gray-200 group-hover:text-bb-blue transition-colors">{comment.user}</span>
                           <span className="text-xs text-gray-500">{comment.date}</span>
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed mb-3">{comment.content}</p>
 
                         <div className="flex items-center gap-4">
                           <button className="text-xs font-medium text-gray-500 hover:text-white transition-colors flex items-center gap-1.5">
-                            <span className="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-jjk-red"></span>
+                            <span className="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-bb-blue"></span>
                             Like ({comment.likes})
                           </button>
                           <button className="text-xs font-medium text-gray-500 hover:text-white transition-colors">
@@ -309,12 +323,12 @@ const ChapterReader: React.FC = () => {
       {/* SEO Footer (Visible in all modes, pushed to bottom) */}
       <div className="bg-black py-12 px-4 border-t border-white/10 mt-auto">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-jjk-red font-bold uppercase tracking-widest mb-4 text-xs">Jujutsu Kaisen Manga</h3>
+          <h3 className="text-bb-blue font-bold uppercase tracking-widest mb-4 text-xs">Blue Box Manga</h3>
           <p className="text-gray-500 text-sm leading-relaxed max-w-2xl mx-auto">
-            You are reading <strong className="text-gray-400">Jujutsu Kaisen Chapter {chapter.number}</strong> in English high quality.
-            Read Jujutsu Kaisen Manga Online at JujutsuKaisenMangaHub.
+            You are reading <strong className="text-gray-400">Blue Box Chapter {chapter.number}</strong> in English high quality.
+            Read Blue Box Manga Online at BlueBoxManga.online.
             <br className="hidden sm:block" />
-            Keywords: Jujutsu Kaisen Chapter {chapter.number}, Read JJK Chapter {chapter.number}, Yuji Itadori, Ryomen Sukuna, Gojo Satoru, Cursed Energy, Shonen Jump.
+            Keywords: Blue Box Chapter {chapter.number}, Read Blue Box Chapter {chapter.number}, Taiki Inomata, Chinatsu Kano, Weekly Shonen Jump, Romance Manga, Sports Manga.
           </p>
         </div>
       </div>

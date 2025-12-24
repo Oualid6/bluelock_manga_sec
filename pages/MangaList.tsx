@@ -22,9 +22,9 @@ const MangaList: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0a0a0a]">
       <SEOHead
-        title="Jujutsu Kaisen Manga Library - All Chapters"
-        description="Browse the complete collection of Jujutsu Kaisen manga chapters. Read online in high quality."
-        canonicalUrl="https://rejjk.com/manga"
+        title="Blue Box Manga Library - All Chapters"
+        description="Browse the complete collection of Blue Box manga chapters. Read online in high quality."
+        canonicalUrl="https://readbluebox.com/manga"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
@@ -33,14 +33,14 @@ const MangaList: React.FC = () => {
 
       {/* Hero Header */}
       <div className="relative bg-[#111] border-b border-white/5 py-16 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-jjk-red/5 blur-3xl rounded-full scale-150 opacity-20 translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute inset-0 bg-bb-blue/5 blur-3xl rounded-full scale-150 opacity-20 translate-x-1/2 -translate-y-1/2"></div>
         <div className="max-w-7xl mx-auto relative z-10 text-center">
-          <span className="text-jjk-red font-bold tracking-widest uppercase text-xs mb-3 block">Complete Collection</span>
+          <span className="text-bb-blue font-bold tracking-widest uppercase text-xs mb-3 block">Complete Collection</span>
           <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">
-            Jujutsu Kaisen <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Manga Library</span>
+            Blue Box <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Manga Library</span>
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
-            Read every chapter of the Jujutsu Kaisen Manga by Gege Akutami. From the very beginning to the latest release.
+            Read every chapter of the Blue Box Manga by Kouji Miura. From the very beginning to the latest release.
           </p>
         </div>
       </div>
@@ -51,7 +51,7 @@ const MangaList: React.FC = () => {
         <div className="bg-white dark:bg-[#1a1a1a] p-4 rounded-xl shadow-xl shadow-black/10 border border-gray-100 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 mb-10 backdrop-blur-md">
 
           <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 font-medium px-2">
-            <BookOpen size={20} className="text-jjk-red" />
+            <BookOpen size={20} className="text-bb-blue" />
             <span>{filteredChapters.length} Chapters</span>
           </div>
 
@@ -62,7 +62,7 @@ const MangaList: React.FC = () => {
                 placeholder="Search by Title or Number..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2.5 w-full border border-gray-200 dark:border-white/10 rounded-lg bg-gray-50 dark:bg-black/30 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-jjk-red/50 transition-all font-medium"
+                className="pl-10 pr-4 py-2.5 w-full border border-gray-200 dark:border-white/10 rounded-lg bg-gray-50 dark:bg-black/30 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-bb-blue/50 transition-all font-medium"
               />
               <Search className="absolute left-3 top-3 text-gray-400" size={18} />
             </div>
@@ -83,10 +83,10 @@ const MangaList: React.FC = () => {
             <Link
               key={chapter.id}
               to={`/chapter/${chapter.number}`}
-              className="group relative flex flex-col justify-between h-32 bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-100 dark:border-white/5 p-5 hover:border-jjk-red/50 hover:bg-gray-50 dark:hover:bg-[#222] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-jjk-red/5 overflow-hidden"
+              className="group relative flex flex-col justify-between h-32 bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-100 dark:border-white/5 p-5 hover:border-bb-blue/50 hover:bg-gray-50 dark:hover:bg-[#222] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-bb-blue/5 overflow-hidden"
             >
               {/* Decor */}
-              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-jjk-red/0 to-jjk-red/5 rounded-bl-full -mr-4 -mt-4 transition-all group-hover:scale-150 group-hover:to-jjk-red/10"></div>
+              <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-bb-blue/0 to-bb-blue/5 rounded-bl-full -mr-4 -mt-4 transition-all group-hover:scale-150 group-hover:to-bb-blue/10"></div>
 
               <div className="relative z-10">
                 <div className="flex justify-between items-start mb-2">
@@ -95,14 +95,14 @@ const MangaList: React.FC = () => {
                     {new Date(chapter.releaseDate).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-jjk-red transition-colors line-clamp-1 pr-4">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-bb-blue transition-colors line-clamp-1 pr-4">
                   {chapter.title}
                 </h3>
               </div>
 
               <div className="relative z-10 flex items-center gap-2 text-xs font-bold text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors mt-auto pt-2">
                 <span>Read Now</span>
-                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform text-jjk-red" />
+                <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform text-bb-blue" />
               </div>
             </Link>
           ))}

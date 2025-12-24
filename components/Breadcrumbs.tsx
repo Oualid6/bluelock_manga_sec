@@ -19,7 +19,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
             "@type": "ListItem",
             "position": index + 1,
             "name": item.label,
-            "item": item.path ? `https://rejjk.com${item.path}` : undefined
+            "item": item.path ? `https://blueboxmanga.online${item.path}` : undefined
         }))
     };
 
@@ -44,7 +44,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
 
     return (
         <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-6 font-medium overflow-x-auto whitespace-nowrap pb-2 md:pb-0">
-            <Link to="/" className="flex items-center hover:text-jjk-red transition-colors flex-shrink-0">
+            <Link to="/" className="flex items-center hover:text-bb-blue transition-colors flex-shrink-0">
                 <Home size={16} />
             </Link>
 
@@ -54,7 +54,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
                     {item.path ? (
                         <Link
                             to={item.path}
-                            className="hover:text-jjk-red transition-colors"
+                            className="hover:text-bb-blue transition-colors"
                         >
                             {item.label}
                         </Link>

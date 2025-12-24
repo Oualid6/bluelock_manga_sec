@@ -13,9 +13,10 @@ export default {
     theme: {
         extend: {
             colors: {
-                'jjk-red': '#D32F2F',
-                'jjk-dark': '#121212',
-                'jjk-gray': '#1E1E1E',
+                'bb-blue': '#2563EB', // Vibrant Blue (replacing Red)
+                'bb-light': '#E3F2FD',
+                'bb-dark': '#121212', // JJK Dark Background
+                'bb-gray': '#1E1E1E', // JJK Dark Gray
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
