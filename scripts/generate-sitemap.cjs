@@ -7,7 +7,7 @@ const DOMAIN = 'https://blueboxmanga.online';
 const chapters = [];
 
 // Generate Chapters 1-227
-for (let i = 227; i >= 1; i--) {
+for (let i = 271; i >= 1; i--) {
   chapters.push(i);
 }
 
