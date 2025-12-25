@@ -1,15 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 
-const DOMAIN = 'https://blueboxmanga.online';
+const DOMAIN = 'https://bluelocken.com';
 
 // Replicate logic from constants.ts to get all chapter IDs
-const chapters = [];
+const chapters = Array.from({ length: 329 }, (_, i) => i + 1);
 
-// Generate Chapters 1-227
-for (let i = 271; i >= 1; i--) {
-  chapters.push(i);
-}
 
 const pages = [
   '',

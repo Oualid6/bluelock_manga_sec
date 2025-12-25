@@ -22,9 +22,9 @@ const MangaList: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-[#0a0a0a]">
       <SEOHead
-        title="Blue Box Manga Library - All Chapters"
-        description="Browse the complete collection of Blue Box manga chapters. Read online in high quality."
-        canonicalUrl="https://readbluebox.com/manga"
+        title="Blue Lock Manga Library - All Chapters"
+        description="Browse the complete collection of Blue Lock manga chapters. Read online in high quality."
+        canonicalUrl="https://bluelocken.com/manga"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
@@ -37,10 +37,10 @@ const MangaList: React.FC = () => {
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <span className="text-bb-blue font-bold tracking-widest uppercase text-xs mb-3 block">Complete Collection</span>
           <h1 className="text-4xl md:text-6xl font-heading font-bold text-white mb-6">
-            Blue Box <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Manga Library</span>
+            Blue Lock <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Manga Library</span>
           </h1>
           <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
-            Read every chapter of the Blue Box Manga by Kouji Miura. From the very beginning to the latest release.
+            Read every chapter of the Blue Lock Manga by Muneyuki Kaneshiro. From the very beginning to the latest release.
           </p>
         </div>
       </div>

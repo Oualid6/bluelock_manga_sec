@@ -70,17 +70,17 @@ const ChapterReader: React.FC = () => {
   return (
     <div className="bg-gray-100 dark:bg-[#121212] min-h-screen flex flex-col">
       <SEOHead
-        title={`Blue Box Manga Chapter ${chapter.number} - Read Online`}
-        description={`Read Blue Box Manga Chapter ${chapter.number}: ${chapter.title} online in high quality free. Official English scans available.`}
+        title={`Blue Lock Manga Chapter ${chapter.number} - Read Online`}
+        description={`Read Blue Lock Manga Chapter ${chapter.number}: ${chapter.title} online in high quality free. Official English scans available.`}
         schema={{
           "@context": "https://schema.org",
           "@type": "Article",
-          "headline": `Blue Box Chapter ${chapter.number}`,
+          "headline": `Blue Lock Chapter ${chapter.number}`,
           "image": chapter.pages[0],
           "datePublished": chapter.releaseDate,
           "author": {
             "@type": "Person",
-            "name": "Kouji Miura"
+            "name": "Muneyuki Kaneshiro"
           }
         }}
       />
@@ -145,7 +145,7 @@ const ChapterReader: React.FC = () => {
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm max-w-md w-full">
               <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Coming Soon</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                This chapter is not available yet. Please check back later for the latest updates on <strong className="text-bb-blue">Blue Box</strong>.
+                This chapter is not available yet. Please check back later for the latest updates on <strong className="text-bb-blue">Blue Lock</strong>.
               </p>
               <button
                 onClick={() => navigate('/manga')}
@@ -162,10 +162,11 @@ const ChapterReader: React.FC = () => {
               <img
                 key={idx}
                 src={pageUrl}
-                alt={`Blue Box Chapter ${chapter.number} Page ${idx + 1}`}
+                alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
                 className="w-full h-auto block"
                 loading="lazy"
                 decoding="async"
+                referrerPolicy="no-referrer"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
@@ -179,10 +180,11 @@ const ChapterReader: React.FC = () => {
               <div key={idx} className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
                 <img
                   src={pageUrl}
-                  alt={`Blue Box Chapter ${chapter.number} Page ${idx + 1}`}
+                  alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
                   className="max-h-full max-w-full object-contain shadow-2xl"
                   loading="lazy"
                   decoding="async"
+                  referrerPolicy="no-referrer"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
@@ -323,12 +325,12 @@ const ChapterReader: React.FC = () => {
       {/* SEO Footer (Visible in all modes, pushed to bottom) */}
       <div className="bg-black py-12 px-4 border-t border-white/10 mt-auto">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-bb-blue font-bold uppercase tracking-widest mb-4 text-xs">Blue Box Manga</h3>
+          <h3 className="text-bb-blue font-bold uppercase tracking-widest mb-4 text-xs">Blue Lock Manga</h3>
           <p className="text-gray-500 text-sm leading-relaxed max-w-2xl mx-auto">
-            You are reading <strong className="text-gray-400">Blue Box Chapter {chapter.number}</strong> in English high quality.
-            Read Blue Box Manga Online at BlueBoxManga.online.
+            You are reading <strong className="text-gray-400">Blue Lock Chapter {chapter.number}</strong> in English high quality.
+            Read Blue Lock Manga Online at BlueBoxManga.online.
             <br className="hidden sm:block" />
-            Keywords: Blue Box Chapter {chapter.number}, Read Blue Box Chapter {chapter.number}, Taiki Inomata, Chinatsu Kano, Weekly Shonen Jump, Romance Manga, Sports Manga.
+            Keywords: Blue Lock Chapter {chapter.number}, Read Blue Lock Chapter {chapter.number}, Yoichi Isagi, Meguru Bachira, Weekly Shonen Magazine, Sports Manga, Thriller.
           </p>
         </div>
       </div>

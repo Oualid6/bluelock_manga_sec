@@ -13,7 +13,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                'bb-blue': '#2563EB', // Vibrant Blue (replacing Red)
+                'bb-blue': '#134a9f', // Blue Lock Blue (Cyan/Electric Blue)
                 'bb-light': '#E3F2FD',
                 'bb-dark': '#121212', // JJK Dark Background
                 'bb-gray': '#1E1E1E', // JJK Dark Gray

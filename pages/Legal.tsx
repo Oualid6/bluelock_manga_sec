@@ -15,13 +15,13 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
                     title: "Privacy Policy",
                     content: (
                         <>
-                            <p className="mb-4">At Blue Box Manga, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Blue Box Manga and how we use it.</p>
+                            <p className="mb-4">At Blue Lock Manga, accessible from our website, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Blue Lock Manga and how we use it.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">Log Files</h2>
-                            <p className="mb-4">Blue Box Manga follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
+                            <p className="mb-4">Blue Lock Manga follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">Cookies and Web Beacons</h2>
-                            <p className="mb-4">Like any other website, Blue Box Manga uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
+                            <p className="mb-4">Like any other website, Blue Lock Manga uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">Google DoubleClick DART Cookie</h2>
                             <p className="mb-4">Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" className="text-bb-blue hover:underline" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/ads</a></p>
@@ -40,7 +40,7 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
                     title: "DMCA Copyright Policy",
                     content: (
                         <>
-                            <p className="mb-4">Blue Box Manga respects the intellectual property rights of others. We comply with the Digital Millennium Copyright Act (DMCA) and other applicable copyright laws. It is our policy to respond to any infringement notices and take appropriate actions under the Digital Millennium Copyright Act ("DMCA") and other applicable intellectual property laws.</p>
+                            <p className="mb-4">Blue Lock Manga respects the intellectual property rights of others. We comply with the Digital Millennium Copyright Act (DMCA) and other applicable copyright laws. It is our policy to respond to any infringement notices and take appropriate actions under the Digital Millennium Copyright Act ("DMCA") and other applicable intellectual property laws.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">DMCA Notice of Alleged Infringement</h2>
                             <p className="mb-4">If you believe that your copyrighted work has been copied in a way that constitutes copyright infringement and is accessible on this site, please notify our copyright agent as set forth in the Digital Millennium Copyright Act of 1998 (DMCA). For your complaint to be valid under the DMCA, you must provide the following information when providing notice of the claimed copyright infringement:</p>
@@ -53,7 +53,7 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
                                 <li>A statement that the information in the notification is accurate, and under penalty of perjury, that the complaining party is authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
                             </ul>
 
-                            <p className="mb-4">Please submit your info to: <strong>Support@blueboxmanga.online</strong></p>
+                            <p className="mb-4">Please submit your info to: <strong>Support@bluelocken.com</strong></p>
                             <p className="mb-4">UNDER FEDERAL LAW, IF YOU KNOWINGLY MISREPRESENT THAT ONLINE MATERIAL IS INFRINGING, YOU MAY BE SUBJECT TO CRIMINAL PROSECUTION FOR PERJURY AND CIVIL PENALTIES, INCLUDING MONETARY DAMAGES, COURT COSTS, AND ATTORNEYS' FEES.</p>
                         </>
                     )
@@ -63,16 +63,16 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
                     title: "Disclaimer",
                     content: (
                         <>
-                            <p className="mb-4">If you require any more information or have any questions about our site's disclaimer, please feel free to contact us by email at Support@blueboxmanga.online.</p>
+                            <p className="mb-4">If you require any more information or have any questions about our site's disclaimer, please feel free to contact us by email at Support@bluelocken.com.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">Fair Use Notice</h2>
                             <p className="mb-4">This website may contain copyrighted material the use of which has not always been specifically authorized by the copyright owner. We are making such material available in an effort to advance understanding of anime, manga, and cultural topics. We believe this constitutes a 'fair use' of any such copyrighted material as provided for in section 107 of the US Copyright Law.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">Fan Project Declaration</h2>
-                            <p className="mb-4">Blue Box Manga is a non-profit fan-made website dedicated to the Blue Box series. We are <strong>not affiliated with, endorsed, sponsored, or specifically approved by Kouji Miura, Shueisha, or any of their partners</strong>. All characters, images, names, and related indicia are trademarks of their respective owners.</p>
+                            <p className="mb-4">Blue Lock Manga is a non-profit fan-made website dedicated to the Blue Lock series. We are <strong>not affiliated with, endorsed, sponsored, or specifically approved by Muneyuki Kaneshiro, Kodansha, or any of their partners</strong>. All characters, images, names, and related indicia are trademarks of their respective owners.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">Proprietary Rights</h2>
-                            <p className="mb-4">Blue Box and all related characters and elements are distinct from this website. This site acts merely as a database and community site for fans. We do not claim ownership over the manga content provided.</p>
+                            <p className="mb-4">Blue Lock and all related characters and elements are distinct from this website. This site acts merely as a database and community site for fans. We do not claim ownership over the manga content provided.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">Content Removal</h2>
                             <p className="mb-4">If you are a copyright owner and wish to have your content removed from our site, please contact us via our DMCA page or email us directly, and we will process your request immediately.</p>
@@ -84,19 +84,19 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
                     title: "Terms and Conditions",
                     content: (
                         <>
-                            <p className="mb-4">Welcome to Blue Box Manga! These terms and conditions outline the rules and regulations for the use of our Website.</p>
+                            <p className="mb-4">Welcome to Blue Lock Manga! These terms and conditions outline the rules and regulations for the use of our Website.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">1. Acceptance of Terms</h2>
-                            <p className="mb-4">By accessing this website we assume you accept these terms and conditions. Do not continue to use Blue Box Manga if you do not agree to take all of the terms and conditions stated on this page.</p>
+                            <p className="mb-4">By accessing this website we assume you accept these terms and conditions. Do not continue to use Blue Lock Manga if you do not agree to take all of the terms and conditions stated on this page.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">2. License</h2>
-                            <p className="mb-4">Unless otherwise stated, Blue Box Manga and/or its licensors own the intellectual property rights for all material on Blue Box Manga. All intellectual property rights are reserved. You may access this from Blue Box Manga for your own personal use subjected to restrictions set in these terms and conditions.</p>
+                            <p className="mb-4">Unless otherwise stated, Blue Lock Manga and/or its licensors own the intellectual property rights for all material on Blue Lock Manga. All intellectual property rights are reserved. You may access this from Blue Lock Manga for your own personal use subjected to restrictions set in these terms and conditions.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">3. User Content</h2>
-                            <p className="mb-4">Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website (Comments). Blue Box Manga does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Blue Box Manga,its agents and/or affiliates.</p>
+                            <p className="mb-4">Parts of this website offer an opportunity for users to post and exchange opinions and information in certain areas of the website (Comments). Blue Lock Manga does not filter, edit, publish or review Comments prior to their presence on the website. Comments do not reflect the views and opinions of Blue Lock Manga,its agents and/or affiliates.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">4. Limitation of Liability</h2>
-                            <p className="mb-4">In no event shall Blue Box Manga, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract. Blue Box Manga, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Website.</p>
+                            <p className="mb-4">In no event shall Blue Lock Manga, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this Website whether such liability is under contract. Blue Lock Manga, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Website.</p>
                         </>
                     )
                 };
@@ -107,7 +107,7 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-16 min-h-screen">
-            <SEOHead title={`${title} - Blue Box Manga`} description={`Read our ${title}.`} />
+            <SEOHead title={`${title} - Blue Lock Manga`} description={`Read our ${title}.`} />
             <h1 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-4">{title}</h1>
             <div className="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
                 {content}

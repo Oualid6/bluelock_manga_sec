@@ -12,13 +12,13 @@ const Home: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Blue Box Manga - Read Online High Quality"
-        description="Read Blue Box Manga online in high quality. The best place for Blue Box chapters, character info, and latest updates. All chapters available."
+        title="Blue Lock Manga - Read Online High Quality"
+        description="Read Blue Lock Manga online in high quality. The best place for Blue Lock chapters, character info, and latest updates. All chapters available."
         schema={{
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "name": "Blue Box Manga",
-          "url": "https://readbluebox.com",
+          "name": "Blue Lock Manga",
+          "url": "https://bluelocken.com",
         }}
       />
 
@@ -26,7 +26,7 @@ const Home: React.FC = () => {
       <section className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-bb-dark py-20">
         <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
           <img
-            src="/blue-box.webp"
+            src="/blue-lock.webp"
             alt=""
             width="1920"
             height="1080"
@@ -39,14 +39,14 @@ const Home: React.FC = () => {
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
 
           <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-4 drop-shadow-2xl tracking-tighter text-center">
-            BLUE <span className="text-bb-blue">BOX MANGA</span>
+            BLUE <span className="text-bb-blue">LOCK MANGA</span>
           </h1>
 
           <p className="text-gray-300 text-lg md:text-xl max-w-3xl text-center mb-10 font-light leading-relaxed">
-            Read Blue Box Manga Online In High Quality, All Chapters and Volumes in English With HD scans and No Sign-Up Required.
+            Read Blue Lock Manga Online In High Quality, All Chapters and Volumes in English With HD scans and No Sign-Up Required.
           </p>
 
-          {/* Info Card */}
+          {/* Info Card - Dark by default, Light/Dark supported if needed, but keeping Dark for Hero */}
           <div className="w-full bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 mb-10 shadow-2xl">
             <div className="flex flex-col lg:flex-row gap-8">
 
@@ -66,11 +66,11 @@ const Home: React.FC = () => {
                 {/* Info Fields */}
                 <div className="space-y-1">
                   <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">Rank</span>
-                  <span className="text-white font-medium">1st, 11M views</span>
+                  <span className="text-white font-medium">1st, 20M views</span>
                 </div>
                 <div className="space-y-1">
                   <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">Release</span>
-                  <span className="text-white font-medium">2021</span>
+                  <span className="text-white font-medium">2018</span>
                 </div>
                 <div className="space-y-1">
                   <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">Status</span>
@@ -78,17 +78,17 @@ const Home: React.FC = () => {
                 </div>
                 <div className="space-y-1">
                   <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">Type</span>
-                  <span className="text-white font-medium">Shounen, Romance, Sports</span>
+                  <span className="text-white font-medium">Shounen, Sports, Thriller</span>
                 </div>
 
                 <div className="col-span-2 sm:col-span-4 flex flex-col gap-3 mt-2">
                   <div className="flex flex-wrap gap-2 items-center border-t border-white/5 pt-3">
                     <span className="text-gray-500 text-xs font-bold uppercase tracking-wider mr-2">Author(s):</span>
-                    <span className="text-white hover:text-bb-blue cursor-pointer transition-colors">Kouji Miura</span>
+                    <span className="text-white hover:text-bb-blue cursor-pointer transition-colors">Muneyuki Kaneshiro</span>
                   </div>
                   <div className="flex flex-wrap gap-2 items-center border-t border-white/5 pt-3">
                     <span className="text-gray-500 text-xs font-bold uppercase tracking-wider mr-2">Genre(s):</span>
-                    {['Romance', 'Sports', 'School Life', 'Slice of Life', 'Drama', 'Badminton'].map(g => (
+                    {['Sports', 'Thriller', 'Psychological', 'Shonen', 'Drama'].map(g => (
                       <span key={g} className="text-xs text-gray-400 hover:text-white transition-colors cursor-pointer">
                         {g},
                       </span>
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
                   <div className="flex flex-col gap-2 items-start border-t border-white/5 pt-3">
                     <span className="text-gray-500 text-xs font-bold uppercase tracking-wider">Synopsis:</span>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      <strong className="text-white">Taiki Inomata</strong>, a student at Eimei Junior and Senior High who is on the boys' badminton team, has a crush on the basketball star <strong className="text-white">Chinatsu Kano</strong>, the older girl he trains alongside every morning in the gymnasium.
+                      <strong className="text-white">Yoichi Isagi</strong>, a high school striker, is invited to a controversial project called <strong className="text-white">Blue Lock</strong>, designed to create the world's best egoist striker. 300 strikers compete against each other in a battle for survival.
                     </p>
                   </div>
                 </div>
@@ -164,7 +164,7 @@ const Home: React.FC = () => {
               <Link
                 key={chapter.id}
                 to={`/chapter/${chapter.number}`}
-                className="group relative flex flex-col justify-between h-full bg-[#1a1a1a] backdrop-blur-sm rounded-lg border border-white/10 p-5 hover:border-bb-blue/50 hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-bb-blue/10"
+                className="group relative flex flex-col justify-between h-full bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-200 dark:border-white/10 p-5 hover:border-bb-blue/50 hover:bg-gray-50 dark:hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-bb-blue/10"
               >
                 <div className="flex flex-col gap-2">
                   <span className="text-xs font-bold text-bb-blue uppercase tracking-wider">
@@ -185,26 +185,26 @@ const Home: React.FC = () => {
         </section>
 
         <section className="mb-16">
-          <div className="bg-[#1a1a1a] backdrop-blur-sm rounded-2xl p-8 border border-white/10 shadow-sm">
-            <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-6">About Blue Box</h2>
+          <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-gray-200 dark:border-white/10 shadow-sm">
+            <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-6">About Blue Lock</h2>
             <div className="prose prose-lg dark:prose-invert text-gray-700 dark:text-gray-300 max-w-none space-y-4">
               <p>
-                <strong className="text-gray-900 dark:text-white">Blue Box</strong> (Japanese: アオのハコ), is a Japanese romantic comedy and sports manga series written and illustrated by <strong className="text-gray-900 dark:text-white">Kouji Miura</strong>. Readers who follow the <strong className="text-gray-900 dark:text-white">Blue Box manga</strong> are immersed in a touching coming-of-age story that has been serialized in Shueisha&apos;s <em>Weekly Shōnen Jump</em> since April 2021. The story follows <strong className="text-gray-900 dark:text-white">Taiki Inomata</strong>, a student at Eimei Junior and Senior High who plays badminton and has a crush on the basketball star Chinatsu Kano.
+                <strong className="text-gray-900 dark:text-white">Blue Lock</strong> (Japanese: ブルーロック), is a Japanese sports manga series written by <strong className="text-gray-900 dark:text-white">Muneyuki Kaneshiro</strong> and illustrated by Yusuke Nomura. It has been serialized in Kodansha's <em>Weekly Shōnen Magazine</em> since August 2018. The story follows <strong className="text-gray-900 dark:text-white">Yoichi Isagi</strong> and other strikers in a facility called Blue Lock.
               </p>
 
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Sports and Romance</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Sports and Survival</h3>
               <p>
-                Unlike many shonen series that focus solely on battles, <strong className="text-bb-blue">Blue Box</strong> beautifully blends competitive sports with a delicate romance. When Chinatsu moves into Taiki's house due to family circumstances, their relationship deepens as they both strive to reach the Nationals in their respective sports.
+                Unlike traditional sports manga, <strong className="text-bb-blue">Blue Lock</strong> introduces a battle royale element where strikers must outscore each other to survive and become the best. It focuses on egoism and individual skill rather than teamwork.
               </p>
 
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Key Characters</h3>
               <p>
-                The series features a lovable cast including the hardworking <strong className="text-gray-900 dark:text-white">Taiki Inomata</strong>, the talented and focused <strong className="text-gray-900 dark:text-white">Chinatsu Kano</strong>, and the rhythmic gymnast <strong className="text-gray-900 dark:text-white">Hina Chono</strong>. Together they navigate the complexities of high school life, sports training, and first loves.
+                The series features intense characters including <strong className="text-gray-900 dark:text-white">Yoichi Isagi</strong>, the eccentric <strong className="text-gray-900 dark:text-white">Meguru Bachira</strong>, and the disciplined <strong className="text-gray-900 dark:text-white">Rensuke Kunigami</strong>.
               </p>
 
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Why Read Blue Box?</h3>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Why Read Blue Lock?</h3>
               <p>
-                As a standout title in the modern shonen genre, <strong className="text-gray-900 dark:text-white">Blue Box</strong> offers a refreshing change of pace with its grounded storytelling and relatable characters. It captures the essence of youth, the drive to improve oneself, and the sweetness of falling in love. Whether you are a fan of sports manga or romance, this series delivers heartwarming moments and exciting tournament arcs.
+                <strong className="text-gray-900 dark:text-white">Blue Lock</strong> offers a unique take on football, blending high-stakes drama with psychological thriller elements. The art is explosive, and the matches are intense.
               </p>
             </div>
           </div>
@@ -219,31 +219,58 @@ const Home: React.FC = () => {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
-            <div className="bg-[#1a1a1a] p-6 rounded-xl border border-white/5 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Why Read Blue Box Manga on this Site?</h3>
+            <div className="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Why Read Blue Lock Manga on this Site?</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                Experience <strong>Blue Box manga</strong> like never before with high-quality scans and regularly updated chapters. Dive into the heartwarming storyline at your own pace—without delays. Our user-friendly interface makes it easy to navigate through all chapters and follow your favorite characters seamlessly. Whether you’re a first-time reader or picking up where you left off, this is the best place to read Blue Box manga online.
+                Experience <strong>Blue Lock manga</strong> like never before with high-quality scans and regularly updated chapters. Dive into the intense storyline without delays.
               </p>
             </div>
 
-            <div className="bg-[#1a1a1a] p-6 rounded-xl border border-white/5 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Differences between Blue Box Manga and Anime?</h3>
+            <div className="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Differences between Blue Lock Manga and Anime?</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                The <strong>Blue Box manga</strong> offers the original vision of Kouji Miura. While the anime adaptation brings the sports action to life, the manga allows for more detailed inner monologues and pacing that perfectly captures the subtle romantic tensions. Some side stories and extra panels are also exclusive to the manga release.
+                The <strong>Blue Lock manga</strong> offers intense and detailed art that the anime sometimes simplifies. The aura and ego effects are more visceral in the manga.
               </p>
             </div>
 
-            <div className="bg-[#1a1a1a] p-6 rounded-xl border border-white/5 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Is the Blue Box Manga Finished?</h3>
+            <div className="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Is the Blue Lock Manga Finished?</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                No, the <strong>Blue Box manga</strong> is currently ongoing. New chapters are released weekly in Weekly Shonen Jump, following Taiki and Chinatsu's journey towards the Nationals and their evolving relationship. We update our library immediately so you can say up to date.
+                No, the <strong>Blue Lock manga</strong> is currently ongoing. New chapters are released in Weekly Shonen Magazine.
               </p>
             </div>
 
-            <div className="bg-[#1a1a1a] p-6 rounded-xl border border-white/5 shadow-sm hover:shadow-md transition-shadow">
+            <div className="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Where should I start reading?</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                 If you are new to the series, start with <Link to="/chapter/1" className="text-bb-blue hover:underline">Chapter 1</Link>. The story builds progressively, so starting from the beginning is highly recommended to fully appreciate the character development and relationships.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Improved SEO Content Section */}
+        <section className="mb-12">
+          <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-gray-200 dark:border-white/10 shadow-sm">
+            <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-6">Read Blue Lock Manga Online Free</h2>
+            <div className="prose prose-lg dark:prose-invert text-gray-700 dark:text-gray-300 max-w-none space-y-4">
+              <p>
+                Welcome to <strong>Bluelocken.com</strong>, the premier destination for fans to <strong className="text-bb-blue">Read Blue Lock Manga</strong> online. We provide high-quality scans of the latest chapters as soon as they are released in Japan. Join millions of fans worldwide in following the journey of Yoichi Isagi as he aims to become the world's greatest striker.
+              </p>
+
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">What is the "Blue Lock"?</h3>
+              <p>
+                The Blue Lock is a controversial training facility created by Jinpachi Ego. Following Japan's defeat in the 2018 World Cup, the Japanese Football Union initiated this project to cultivate a striker with a massive ego who can lead Japan to World Cup glory. Three hundred high school forwards are imprisoned in this facility, competing in a battle royale where only one will emerge as the chosen striker, while the careers of the losers will be ended forever.
+              </p>
+
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">The Neo Egoist League</h3>
+              <p>
+                The story has evolved into the exciting <strong>Neo Egoist League</strong> arc, where the Blue Lock survivors join forces with Europe's top U-20 clubs. Witness Isagi evolve as he faces off against world-class talents like Michael Kaiser and relights his rivalry with Rin Itoshi.
+              </p>
+
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Why is Blue Lock Manga So Popular?</h3>
+              <p>
+                Written by <strong className="text-gray-900 dark:text-white">Muneyuki Kaneshiro</strong>, <em>Blue Lock</em> deconstructs the traditional team-spirit trope of sports manga. It champions individualism and "ego" as necessary traits for success. Combined with Yusuke Nomura's dynamic art style, which depicts "aura" and intensity like no other, it has become a global phenomenon.
               </p>
             </div>
           </div>

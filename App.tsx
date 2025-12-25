@@ -32,13 +32,17 @@ const LoadingSpinner = () => (
   </div>
 );
 
+import { useContentProtection } from './hooks/useContentProtection';
+
 const App: React.FC = () => {
+  useContentProtection();
+
   return (
     <MangaProvider>
       <ThemeProvider>
         <Router>
           {/* Helps scroll to top on navigation */}
-          <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen">
+          <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen select-none">
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
                 <Route path="/" element={<LayoutWrapper><Home /></LayoutWrapper>} />

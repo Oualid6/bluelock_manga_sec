@@ -1,97 +1,114 @@
 import { Arc, Chapter, Character, Comment } from "./types";
 
-export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 227 }, (_, i) => {
-  const num = 227 - i; // Descending order
-  const isComingSoon = [225, 226, 227].includes(num);
-
-  if (isComingSoon) {
-    return {
-      id: `ch-${num}`,
-      number: num,
-      title: `Blue Box Chapter ${num}`,
-      releaseDate: new Date(Date.now() - i * 86400000).toISOString(),
-      pages: []
-    };
-  }
-
-  const isNewSource = num >= 184;
-  const baseUrl = isNewSource
-    ? `https://pic.readkakegurui.com/file/sancdn/ao-no-hako/chapter-${num}`
-    : `https://cdn.readkakegurui.com/file/cdnpog/ao-no-hako/chapter-${num}`;
-
+export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 329 }, (_, i) => {
+  const number = i + 1;
   return {
-    id: `ch-${num}`,
-    number: num,
-    title: `Blue Box Chapter ${num}`,
-    releaseDate: new Date(Date.now() - i * 86400000).toISOString(),
-    pages: Array.from({ length: 60 }, (_, p) => `${baseUrl}/${p + 1}.webp`)
+    id: String(number),
+    number: number,
+    title: `Blue Lock Chapter ${number}`,
+    releaseDate: new Date().toISOString(), // Mock date, normally would vary
+    pages: Array.from({ length: 80 }, (_, p) =>
+      `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number}/blue_lock_${number}_${p + 1}.jpg`
+    )
   };
-});
+}).reverse(); // Latest chapters first
 
 export const CHARACTERS: Character[] = [
   {
-    id: "taiki",
-    name: "Taiki Inomata",
+    id: "isagi",
+    name: "Yoichi Isagi",
     role: "Protagonist",
-    grade: "Badminton Player",
-    description: "A member of the boys' badminton team at Eimei Junior and Senior High. He has a crush on Chinatsu Kano.",
+    grade: "Forward",
+    description: "The main protagonist. A striker who aims to become the world's best egoist striker.",
     image: "https://picsum.photos/400/600?random=10"
   },
   {
-    id: "chinatsu",
-    name: "Chinatsu Kano",
-    role: "Protagonist",
-    grade: "Basketball Star",
-    description: "The star player of the girls' basketball team. She starts living with Taiki's family.",
+    id: "bachira",
+    name: "Meguru Bachira",
+    role: "Main Character",
+    grade: "Forward",
+    description: "A whimsical striker who plays following his instinct. He seeks a 'monster' to play with.",
     image: "https://picsum.photos/400/600?random=11"
   },
   {
-    id: "haryu",
-    name: "Kengo Haryu",
-    role: "Senior",
-    grade: "Badminton Ace",
-    description: "Taiki's senior and a top-tier badminton player. Strict but caring mentor.",
+    id: "kunigami",
+    name: "Rensuke Kunigami",
+    role: "Rival",
+    grade: "Forward",
+    description: "A passionate striker with a strong sense of justice and powerful left-legged shot.",
     image: "https://picsum.photos/400/600?random=12"
   },
   {
-    id: "hina",
-    name: "Hina Chono",
-    role: "Friend",
-    grade: "Rhythm Gymnastic",
-    description: "Taiki's close friend who is a rhythmic gymnast. She harbors feelings for Taiki.",
+    id: "chigiri",
+    name: "Hyoma Chigiri",
+    role: "Rival",
+    grade: "Forward",
+    description: "A speedster who overcomes his fear of injury to run freely on the field again.",
     image: "https://picsum.photos/400/600?random=13"
+  },
+  {
+    id: "nagi",
+    name: "Seishiro Nagi",
+    role: "Rival",
+    grade: "Forward",
+    description: "A prodigy with exceptional ball control who plays football half-heartedly until he finds a challenge.",
+    image: "https://picsum.photos/400/600?random=14"
+  },
+  {
+    id: "reo",
+    name: "Reo Mikage",
+    role: "Rival",
+    grade: "Midfielder",
+    description: "A wealthy heir who is Nagi's partner. He is an all-rounder capable of copying plays.",
+    image: "https://picsum.photos/400/600?random=15"
+  },
+  {
+    id: "barou",
+    name: "Shoei Barou",
+    role: "Villain",
+    grade: "Forward",
+    description: "The 'King' of the field. A selfish player with a powerful physique and devastating shot.",
+    image: "https://picsum.photos/400/600?random=16"
+  },
+  {
+    id: "rin",
+    name: "Rin Itoshi",
+    role: "Rival",
+    grade: "Forward",
+    description: "The top player in Blue Lock. Sae Itoshi's younger brother, who plays with cold, calculated precision.",
+    image: "https://picsum.photos/400/600?random=17"
   }
 ];
 
 export const ARCS: Arc[] = [
   {
-    id: "preliminaries",
-    title: "District Preliminaries",
-    description: "Taiki and Chinatsu strive to reach Nationals to make their wishes come true.",
+    id: "selection",
+    title: "First Selection",
+    description: "The 300 strikers are divided into teams and must compete in a round-robin tournament to survive.",
     chapterStart: 1,
-    chapterEnd: 15,
+    chapterEnd: 38,
     image: "https://picsum.photos/600/300?random=20"
   },
   {
-    id: "nationals",
-    title: "National Tournament",
-    description: "The intense competition at the National level. Friendships and rivalries are tested.",
-    chapterStart: 30,
-    chapterEnd: 55,
+    id: "second-selection",
+    title: "Second Selection",
+    description: "Players form teams of three and steal teammates from losing teams to advance.",
+    chapterStart: 39,
+    chapterEnd: 87,
     image: "https://picsum.photos/600/300?random=21"
   },
   {
-    id: "culture-fest",
-    title: "Culture Festival",
-    description: "A break from sports where romance begins to bloom amidst the school festivities.",
-    chapterStart: 60,
-    chapterEnd: 75,
+    id: "neo-egoist",
+    title: "Neo Egoist League",
+    description: "Blue Lock players join top European U-20 teams to prove their worth on the world stage.",
+    chapterStart: 153,
+    chapterEnd: 250,
     image: "https://picsum.photos/600/300?random=22"
   }
 ];
 
 export const MOCK_COMMENTS: Comment[] = [
-  { id: '1', user: 'BadmintonPro', content: 'Taiki is working so hard! I hope he makes it to Nationals.', date: '2 hours ago', likes: 45 },
-  { id: '2', user: 'ChinatsuFan', content: 'They are so cute together! Just confess already!', date: '5 hours ago', likes: 120 },
-  { id: '3', user: 'TeamHina', content: 'Hina deserves happiness too...', date: '1 day ago', likes: 12 },
+  { id: '1', user: 'Striker99', content: 'Isagi is devouring everyone on the field! What a monster.', date: '2 hours ago', likes: 155 },
+  { id: '2', user: 'BachiraFan', content: 'Bachira\'s dribbling is insane. Best boy!', date: '5 hours ago', likes: 230 },
+  { id: '3', user: 'Egoist', content: 'Lock off! This manga is pure hype.', date: '1 day ago', likes: 89 },
 ];
