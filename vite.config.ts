@@ -12,6 +12,13 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: false,
       minify: 'esbuild',
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['react', 'react-dom', 'react-router-dom'],
+          },
+        },
+      },
     },
     plugins: [react()],
     define: {
