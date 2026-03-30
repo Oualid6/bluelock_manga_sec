@@ -4,7 +4,7 @@ const path = require('path');
 const DOMAIN = 'https://bluelocken.com';
 
 // Replicate logic from constants.ts to get all chapter IDs
-const chapters = Array.from({ length: 329 }, (_, i) => i + 1);
+const chapters = Array.from({ length: 340 }, (_, i) => i + 1);
 
 
 const pages = [

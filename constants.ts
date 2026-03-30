@@ -1,6 +1,6 @@
 import { Arc, Chapter, Character, Comment } from "./types";
 
-export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 329 }, (_, i) => {
+export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 340 }, (_, i) => {
   const number = i + 1;
   return {
     id: String(number),
@@ -102,7 +102,7 @@ export const ARCS: Arc[] = [
     title: "Neo Egoist League",
     description: "Blue Lock players join top European U-20 teams to prove their worth on the world stage.",
     chapterStart: 153,
-    chapterEnd: 250,
+    chapterEnd: 340,
     image: "https://picsum.photos/600/300?random=22"
   }
 ];
