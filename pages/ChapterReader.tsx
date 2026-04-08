@@ -48,6 +48,15 @@ const ChapterReader: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Show content locker for Chapter 343
+  useEffect(() => {
+    if (chapter && chapter.number === 343) {
+      if (!document.getElementById('ogjs')) {
+        window.location.reload();
+      }
+    }
+  }, [chapter]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-bb-dark">
