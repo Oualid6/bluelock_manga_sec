@@ -8,10 +8,12 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  const navLinks = [
+  type NavLink = { name: string; path: string; isExternal?: boolean };
+  const navLinks: NavLink[] = [
     { name: 'Home', path: '/' },
     { name: 'All Chapters', path: '/manga' },
     { name: 'Characters', path: '/characters' },
+    { name: 'Explore More Manga', path: 'https://mangalix.com', isExternal: true },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -30,16 +32,28 @@ const Navbar: React.FC = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`px-3 py-2 rounded-md text-base font-bold tracking-wide transition-colors ${isActive(link.path)
-                    ? 'text-bb-blue font-bold'
-                    : 'text-gray-300 hover:text-bb-blue hover:bg-white/5'
-                    }`}
-                >
-                  {link.name}
-                </Link>
+                link.isExternal ? (
+                  <a
+                    key={link.name}
+                    href={link.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-2 rounded-md text-base font-bold tracking-wide transition-colors text-gray-300 hover:text-bb-blue hover:bg-white/5"
+                  >
+                    {link.name}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className={`px-3 py-2 rounded-md text-base font-bold tracking-wide transition-colors ${isActive(link.path)
+                      ? 'text-bb-blue font-bold'
+                      : 'text-gray-300 hover:text-bb-blue hover:bg-white/5'
+                      }`}
+                  >
+                    {link.name}
+                  </Link>
+                )
               ))}
             </div>
           </div>
@@ -76,17 +90,30 @@ const Navbar: React.FC = () => {
         <div className="md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className={`block px-3 py-2 rounded-md text-base font-bold tracking-wide ${isActive(link.path)
-                  ? 'text-bb-blue bg-gray-50 dark:bg-gray-800'
-                  : 'text-gray-700 dark:text-gray-300 hover:text-bb-blue'
-                  }`}
-              >
-                {link.name}
-              </Link>
+              link.isExternal ? (
+                <a
+                  key={link.name}
+                  href={link.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className="block px-3 py-2 rounded-md text-base font-bold tracking-wide text-gray-700 dark:text-gray-300 hover:text-bb-blue"
+                >
+                  {link.name}
+                </a>
+              ) : (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`block px-3 py-2 rounded-md text-base font-bold tracking-wide ${isActive(link.path)
+                    ? 'text-bb-blue bg-gray-50 dark:bg-gray-800'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-bb-blue'
+                    }`}
+                >
+                  {link.name}
+                </Link>
+              )
             ))}
             <button
               onClick={() => {

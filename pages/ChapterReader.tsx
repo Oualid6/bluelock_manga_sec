@@ -328,7 +328,7 @@ const ChapterReader: React.FC = () => {
           <h3 className="text-bb-blue font-bold uppercase tracking-widest mb-4 text-xs">Blue Lock Manga</h3>
           <p className="text-gray-500 text-sm leading-relaxed max-w-2xl mx-auto">
             You are reading <strong className="text-gray-400">Blue Lock Chapter {chapter.number}</strong> in English high quality.
-            Read Blue Lock Manga Online at BlueBoxManga.online.
+            Read Blue Lock Manga Online.
             <br className="hidden sm:block" />
             Keywords: Blue Lock Chapter {chapter.number}, Read Blue Lock Chapter {chapter.number}, Yoichi Isagi, Meguru Bachira, Weekly Shonen Magazine, Sports Manga, Thriller.
           </p>
