@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, MessageSquare, Share2, AlignJustify, Columns, ArrowDown, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MessageSquare, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
@@ -48,14 +48,7 @@ const ChapterReader: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Show content locker for Chapter 343
-  useEffect(() => {
-    if (chapter && chapter.number === 343) {
-      if (!document.getElementById('ogjs')) {
-        window.location.reload();
-      }
-    }
-  }, [chapter]);
+
 
   if (loading) {
     return (
@@ -152,16 +145,27 @@ const ChapterReader: React.FC = () => {
         {chapter.pages.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[60vh] p-8 text-center bg-gray-50 dark:bg-bb-dark">
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm max-w-md w-full">
-              <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Coming Soon</h2>
+              <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Available Soon...</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                This chapter is not available yet. Please check back later for the latest updates on <strong className="text-bb-blue">Blue Lock</strong>.
+                Next chapter will be available first on our Telegram channel.
               </p>
-              <button
-                onClick={() => navigate('/manga')}
-                className="px-6 py-3 bg-bb-blue hover:bg-blue-700 text-white font-bold rounded-lg transition-all"
-              >
-                Back to Chapter List
-              </button>
+              <div className="flex flex-col gap-3">
+                <a
+                  href="https://t.me/Mangalix"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold rounded-lg transition-all"
+                >
+                  <Send size={20} />
+                  Join Telegram
+                </a>
+                <button
+                  onClick={() => navigate('/manga')}
+                  className="px-6 py-3 bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-900 dark:text-white font-bold rounded-lg transition-all"
+                >
+                  Back to Chapter List
+                </button>
+              </div>
             </div>
           </div>
         ) : readingMode === 'vertical' ? (
