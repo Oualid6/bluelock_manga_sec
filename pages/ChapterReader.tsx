@@ -16,9 +16,7 @@ const ChapterReader: React.FC = () => {
   const [showControls, setShowControls] = useState(true);
   const [readingMode, setReadingMode] = useState<'vertical' | 'horizontal'>('vertical');
   
-  // Pre-lander state
-  const [isUnlocking, setIsUnlocking] = useState(false);
-  const [progress, setProgress] = useState(0);
+
 
   // Use a number for parsing
   const currentNum = parseInt(chapterId || "0", 10);
@@ -64,110 +62,6 @@ const ChapterReader: React.FC = () => {
 
   if (!chapter) {
     return <div className="p-10 text-center dark:text-white">Chapter not found.</div>;
-  }
-
-  if (chapter.number === 343) {
-    const handleUnlock = () => {
-      setIsUnlocking(true);
-      let currentProgress = 0;
-      const stepTime = 30; // ms
-      const duration = 1500; // 1.5 seconds
-      const steps = duration / stepTime;
-      const increment = 100 / steps;
-      
-      const interval = setInterval(() => {
-        currentProgress += increment;
-        if (currentProgress >= 100) {
-          currentProgress = 100;
-          clearInterval(interval);
-          setTimeout(() => {
-            window.location.href = "https://omg10.com/4/10851325";
-          }, 100);
-        }
-        setProgress(Math.min(Math.round(currentProgress), 100));
-      }, stepTime);
-    };
-
-    return (
-      <div className="min-h-[100vh] min-h-[100dvh] bg-gray-50 dark:bg-bb-dark flex flex-col items-center justify-center p-4 relative overflow-hidden w-full">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-bb-blue/5 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-bb-blue/5 rounded-full blur-[120px] pointer-events-none"></div>
-
-        <div className="z-10 w-full max-w-md bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-xl flex flex-col items-center text-center relative">
-          
-          <div className="flex items-center justify-center mb-6">
-            <img src="/logo.png" alt="Blue Lock Manga" className="h-16 md:h-20 w-auto object-contain drop-shadow-md" />
-          </div>
-
-          <h1 className="text-3xl md:text-4xl font-heading font-bold mb-3 text-gray-900 dark:text-white leading-tight">
-            Something BIG Happens Next...
-          </h1>
-          
-          <p className="text-bb-blue text-sm mb-8 font-bold tracking-widest uppercase">
-            You’re about to unlock the next chapter
-          </p>
-
-          <div className="w-full bg-gray-50 dark:bg-black/40 rounded-xl p-6 mb-6 border border-gray-200 dark:border-white/5">
-            <ul className="space-y-5 text-left">
-              <li className="flex items-center text-gray-700 dark:text-gray-300">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-white dark:bg-white/10 flex items-center justify-center mr-4 text-sm shadow-sm border border-gray-200 dark:border-white/5 text-gray-900 dark:text-white">⚡</span>
-                <span className="font-semibold text-base tracking-wide flex-1">Instant access</span>
-              </li>
-              <li className="flex items-center text-gray-700 dark:text-gray-300">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-white dark:bg-white/10 flex items-center justify-center mr-4 text-sm shadow-sm border border-gray-200 dark:border-white/5 text-gray-900 dark:text-white">📱</span>
-                <span className="font-semibold text-base tracking-wide flex-1">Works on all devices</span>
-              </li>
-              <li className="flex items-center text-gray-700 dark:text-gray-300">
-                <span className="flex-shrink-0 w-8 h-8 rounded-full bg-white dark:bg-white/10 flex items-center justify-center mr-4 text-sm shadow-sm border border-gray-200 dark:border-white/5 text-gray-900 dark:text-white">🔒</span>
-                <span className="font-semibold text-base tracking-wide flex-1">No download required</span>
-              </li>
-            </ul>
-          </div>
-
-          <div className="w-full p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-xl mb-8 flex items-center justify-center">
-            <p className="text-red-600 dark:text-red-400 text-[13px] sm:text-sm font-bold flex items-center gap-2.5 uppercase tracking-wider">
-              <span className="relative flex h-3 w-3 flex-shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.3)] dark:shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
-              </span>
-              Limited access – continue now before it expires
-            </p>
-          </div>
-
-          <div className="w-full min-h-[60px] flex flex-col justify-center">
-            {!isUnlocking ? (
-              <button 
-                className="w-full py-4 bg-bb-blue hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg shadow-blue-900/20 transform transition-all hover:scale-105 active:scale-95 text-lg uppercase tracking-wide flex items-center justify-center gap-2 group"
-                onClick={handleUnlock}
-                disabled={isUnlocking}
-              >
-                Unlock Chapter Now
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-            ) : (
-              <div className="w-full transition-opacity duration-300">
-                <div className="flex justify-between text-xs text-bb-blue font-bold mb-3 uppercase tracking-wider pt-2">
-                  <span className="animate-pulse">Unlocking chapter...</span>
-                  <span>{progress}%</span>
-                </div>
-                <div className="w-full bg-gray-200 dark:bg-black/50 rounded-full h-4 overflow-hidden shadow-inner border border-gray-300 dark:border-white/10">
-                   <div 
-                     className="bg-bb-blue h-full rounded-full transition-all duration-75 ease-linear relative" 
-                     style={{ width: `${progress}%` }}
-                   >
-                   </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <p className="text-gray-500 dark:text-gray-400 text-xs mt-6 font-medium">
-            Takes less than 5 seconds
-          </p>
-
-        </div>
-      </div>
-    );
   }
 
   const prevChapter = chapters.find(c => c.number === currentNum - 1);
