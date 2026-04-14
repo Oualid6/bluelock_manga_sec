@@ -107,8 +107,80 @@ export const ARCS: Arc[] = [
   }
 ];
 
-export const MOCK_COMMENTS: Comment[] = [
-  { id: '1', user: 'Striker99', content: 'Isagi is devouring everyone on the field! What a monster.', date: '2 hours ago', likes: 155 },
-  { id: '2', user: 'BachiraFan', content: 'Bachira\'s dribbling is insane. Best boy!', date: '5 hours ago', likes: 230 },
-  { id: '3', user: 'Egoist', content: 'Lock off! This manga is pure hype.', date: '1 day ago', likes: 89 },
+// Pools of realistic comments based on story progression
+const GENERIC_COMMENTS = [
+  "Peak fiction right here.",
+  "The art quality is consistently insane. Nomura is a beast.",
+  "I've read this 5 times and it still gives me chills.",
+  "Can't wait for the next update!",
+  "Is it just me or is the pacing getting even better?",
+  "Found this manga today and already binged 50 chapters.",
+  "The 'aura' in these panels is just next level.",
+  "I need this animated with a huge budget.",
 ];
+
+const EARLY_ARC_COMMENTS = [
+  "Isagi finally finding his 'monster' is so satisfying.",
+  "Bachira's backstory really makes you feel for him.",
+  "The idea of a striker-only facility is so unique.",
+  "Don't sleep on Team Z, they have so much potential.",
+  "Ego Jinpachi is creepy but his philosophy makes sense.",
+  "Just started this, the survival element is crazy.",
+];
+
+const SECOND_SELECTION_COMMENTS = [
+  "Nagi is such a cheat code, how is he so good without trying?",
+  "The 3v3 format is so much more intense than the 11v11.",
+  "Barou really thinks he's the King... and honestly, he might be.",
+  "Isagi's adaptability is his true weapon. Devour them all!",
+  "Reo's character development after the split is painful to watch.",
+  "Seeing the top 3 in action is humbling. Rin is on another level.",
+];
+
+const U20_ARC_COMMENTS = [
+  "Sae Itoshi is actually cracked. The gap between him and Blue Lock is huge.",
+  "The stadium atmosphere in these chapters is incredible.",
+  "Shidou and Ryusei is pure chaos, I love it.",
+  "Isagi and Rin's chemical reaction is what I live for.",
+  "This is peak sports manga. The stakes have never been higher.",
+  "That last goal was actually impossible. I had to re-read it three times.",
+];
+
+const NEL_ARC_COMMENTS = [
+  "Kaiser is the perfect antagonist for Isagi right now.",
+  "The bidding system adds such a cool professional layer to the story.",
+  "Kunigami coming back as a 'Wild Card' is NOT what I expected.",
+  "Bastard Munchen's internal rivalry is more intense than the actual matches.",
+  "Hiori's development in this match was so well written.",
+  "Isagi's Metavision is finally letting him see the whole field like a pro.",
+];
+
+export const getCommentsForChapter = (chapterNum: number): Comment[] => {
+  const users = ["Striker99", "Egoist_Kun", "BachiraFan", "BlueLockDevotee", "MangaMaster", "NagiProdigy", "RinSimp", "GoalHunter", "IsagiEgo", "FootballFanatic"];
+  
+  // Select appropriate pool based on chapter range
+  let pool = [...GENERIC_COMMENTS];
+  if (chapterNum <= 40) pool = [...pool, ...EARLY_ARC_COMMENTS];
+  else if (chapterNum <= 90) pool = [...pool, ...SECOND_SELECTION_COMMENTS];
+  else if (chapterNum <= 150) pool = [...pool, ...U20_ARC_COMMENTS];
+  else pool = [...pool, ...NEL_ARC_COMMENTS];
+
+  // Seeded-ish selection based on chapter number to keep it consistent
+  const result: Comment[] = [];
+  const count = 3 + (chapterNum % 3); // 3 to 5 comments
+  
+  for (let i = 0; i < count; i++) {
+    const userIdx = (chapterNum + i) % users.length;
+    const commentIdx = (chapterNum * (i + 1)) % pool.length;
+    
+    result.push({
+      id: `${chapterNum}-${i}`,
+      user: users[userIdx],
+      content: pool[commentIdx],
+      date: `${(i + 1) * 2} hours ago`,
+      likes: Math.floor(((chapterNum + i) * 17) % 500) + 10
+    });
+  }
+
+  return result;
+};
