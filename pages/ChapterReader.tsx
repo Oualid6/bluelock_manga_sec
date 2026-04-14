@@ -15,6 +15,7 @@ const ChapterReader: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [showControls, setShowControls] = useState(true);
   const [readingMode, setReadingMode] = useState<'vertical' | 'horizontal'>('vertical');
+  const [showServers, setShowServers] = useState(false);
   
 
 
@@ -23,6 +24,7 @@ const ChapterReader: React.FC = () => {
 
   useEffect(() => {
     setLoading(true);
+    setShowServers(false);
     setTimeout(() => {
       const found = chapters.find(c => c.number === currentNum);
       if (found) {
@@ -30,6 +32,9 @@ const ChapterReader: React.FC = () => {
       }
       setLoading(false);
       window.scrollTo(0, 0);
+      
+      // Delay server buttons appearance
+      setTimeout(() => setShowServers(true), 2500);
     }, 500);
   }, [currentNum, chapters]);
 
@@ -222,7 +227,89 @@ const ChapterReader: React.FC = () => {
 
       {/* Navigation Footer (Visible in all modes, pushed to bottom) */}
       <div className="bg-white dark:bg-[#121212] relative z-10 block">
-        <div className="max-w-4xl mx-auto py-20 px-4 flex flex-col items-center gap-10">
+        <div className="max-w-4xl mx-auto pt-10 pb-20 px-4 flex flex-col items-center gap-10">
+          
+          {/* Adsterra Smartlink Server Selection Section */}
+          <div className={`w-full max-w-2xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-xl transition-all duration-1000 transform ${showServers ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+            <div className="text-center mb-8">
+              <p className="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1 flex items-center justify-center gap-2">
+                <span className="flex h-2 w-2 relative">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                If one server doesn't work, try another
+              </p>
+              <h3 className="text-gray-900 dark:text-white text-xl font-bold font-heading uppercase tracking-wider">Select Reading Server</h3>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <a 
+                href="https://www.profitablecpmratenetwork.com/a7ia008h25?key=242924684a1836138c63ac098e3f40fa" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center justify-between px-6 py-5 bg-cyan-500/10 dark:bg-cyan-500/20 hover:bg-cyan-600 border border-cyan-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-cyan-500/20 group"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="relative">
+                    <span className="text-2xl group-hover:animate-bounce block">⚡</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors">Fast Server</span>
+                    <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-bold uppercase group-hover:text-white/80 transition-colors">Ping: 24ms • Optimized</span>
+                  </div>
+                </div>
+                <ChevronRight size={20} className="text-cyan-500 group-hover:text-white transition-colors" />
+              </a>
+
+              <a 
+                href="https://www.profitablecpmratenetwork.com/a7ia008h25?key=242924684a1836138c63ac098e3f40fa" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center justify-between px-6 py-5 bg-amber-500/10 dark:bg-amber-500/20 hover:bg-amber-600 border border-amber-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-amber-500/20 group"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl group-hover:rotate-12 transition-transform block">💎</span>
+                  <div className="flex flex-col">
+                    <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors">HD Server</span>
+                    <span className="text-[10px] text-amber-600 dark:text-amber-400 font-bold uppercase group-hover:text-white/80 transition-colors">4K Ultra • High Qual</span>
+                  </div>
+                </div>
+                <ChevronRight size={20} className="text-amber-500 group-hover:text-white transition-colors" />
+              </a>
+
+              <a 
+                href="https://www.profitablecpmratenetwork.com/a7ia008h25?key=242924684a1836138c63ac098e3f40fa" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center justify-between px-6 py-5 bg-emerald-500/10 dark:bg-emerald-500/20 hover:bg-emerald-600 border border-emerald-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-emerald-500/20 group"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl group-hover:animate-pulse block">🔁</span>
+                  <div className="flex flex-col">
+                    <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors">Backup Server</span>
+                    <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase group-hover:text-white/80 transition-colors">Stable • Link 02</span>
+                  </div>
+                </div>
+                <ChevronRight size={20} className="text-emerald-500 group-hover:text-white transition-colors" />
+              </a>
+
+              <a 
+                href="https://www.profitablecpmratenetwork.com/a7ia008h25?key=242924684a1836138c63ac098e3f40fa" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="flex items-center justify-between px-6 py-5 bg-indigo-600 hover:bg-indigo-700 border border-transparent rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-indigo-500/30 group shadow-md shadow-indigo-500/10"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-2xl group-hover:translate-x-1 transition-transform block">➡️</span>
+                  <div className="flex flex-col">
+                    <span className="text-white font-bold">Next Chapter</span>
+                    <span className="text-[10px] text-indigo-200 font-bold uppercase group-hover:text-white/80 transition-colors">Auto Redirect • ON</span>
+                  </div>
+                </div>
+                <ChevronRight size={20} className="text-white transition-colors" />
+              </a>
+            </div>
+          </div>
           <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500">
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-800"></div>
             <span className="uppercase tracking-[0.2em] text-xs font-bold">End of Chapter {chapter.number}</span>
