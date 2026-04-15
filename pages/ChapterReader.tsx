@@ -149,21 +149,21 @@ const ChapterReader: React.FC = () => {
       {/* Reader Content */}
       <div className={`flex-1 pt-16 ${readingMode === 'horizontal' ? 'h-[calc(100vh-64px)] overflow-hidden' : ''}`}>
         {chapter.pages.length === 0 ? (
-          <div className="flex flex-col items-center justify-center min-h-[60vh] p-8 text-center bg-gray-50 dark:bg-bb-dark">
-            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm max-w-md w-full">
+          <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
+            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm max-w-md w-full shadow-2xl">
               <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Available Soon...</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Next chapter will be available first on our Telegram channel.
+                This chapter is still being uploaded. You can try reading it early on our partner server.
               </p>
               <div className="flex flex-col gap-3">
                 <a
-                  href="https://t.me/Mangalix"
+                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold rounded-lg transition-all"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
                 >
-                  <Send size={20} />
-                  Join Telegram
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  Read on Partner Server
                 </a>
                 <button
                   onClick={() => navigate('/manga')}
@@ -230,86 +230,51 @@ const ChapterReader: React.FC = () => {
         <div className="max-w-4xl mx-auto pt-10 pb-20 px-4 flex flex-col items-center gap-10">
           
           {/* Adsterra Smartlink Server Selection Section */}
-          <div className={`w-full max-w-2xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-xl transition-all duration-1000 transform ${showServers ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-            <div className="text-center mb-8">
-              <p className="text-gray-500 dark:text-gray-400 text-sm font-medium mb-1 flex items-center justify-center gap-2">
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                If one server doesn't work, try another
-              </p>
-              <h3 className="text-gray-900 dark:text-white text-xl font-bold font-heading uppercase tracking-wider">Select Reading Server</h3>
-            </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a 
-                href="https://www.profitablecpmratenetwork.com/a7ia008h25?key=242924684a1836138c63ac098e3f40fa" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex items-center justify-between px-6 py-5 bg-cyan-500/10 dark:bg-cyan-500/20 hover:bg-cyan-600 border border-cyan-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-cyan-500/20 group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <span className="text-2xl group-hover:animate-bounce block">⚡</span>
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors">Fast Server</span>
-                    <span className="text-[10px] text-cyan-600 dark:text-cyan-400 font-bold uppercase group-hover:text-white/80 transition-colors">Ping: 24ms • Optimized</span>
-                  </div>
-                </div>
-                <ChevronRight size={20} className="text-cyan-500 group-hover:text-white transition-colors" />
-              </a>
+          {chapter.number === 343 && (
+            <div className={`w-full max-w-2xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-xl transition-all duration-1000 transform ${showServers ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+              <div className="text-center mb-8">
+                <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-3 flex flex-col sm:flex-row items-center justify-center gap-2">
+                  <span className="flex h-3 w-3 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                  </span>
+                  This chapter is very popular. If it doesn't load, try one of the servers below.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <a 
+                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center justify-center gap-3 px-6 py-4 bg-cyan-500/10 dark:bg-cyan-500/20 hover:bg-cyan-600 border border-cyan-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-cyan-500/20 group text-center"
+                >
+                  <span className="text-2xl group-hover:animate-bounce block">⚡</span>
+                  <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors text-lg">Server 1</span>
+                </a>
 
-              <a 
-                href="https://www.profitablecpmratenetwork.com/a7ia008h25?key=242924684a1836138c63ac098e3f40fa" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex items-center justify-between px-6 py-5 bg-amber-500/10 dark:bg-amber-500/20 hover:bg-amber-600 border border-amber-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-amber-500/20 group"
-              >
-                <div className="flex items-center gap-3">
+                <a 
+                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center justify-center gap-3 px-6 py-4 bg-amber-500/10 dark:bg-amber-500/20 hover:bg-amber-600 border border-amber-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-amber-500/20 group text-center"
+                >
                   <span className="text-2xl group-hover:rotate-12 transition-transform block">💎</span>
-                  <div className="flex flex-col">
-                    <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors">HD Server</span>
-                    <span className="text-[10px] text-amber-600 dark:text-amber-400 font-bold uppercase group-hover:text-white/80 transition-colors">4K Ultra • High Qual</span>
-                  </div>
-                </div>
-                <ChevronRight size={20} className="text-amber-500 group-hover:text-white transition-colors" />
-              </a>
+                  <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors text-lg">Server 2</span>
+                </a>
 
-              <a 
-                href="https://www.profitablecpmratenetwork.com/a7ia008h25?key=242924684a1836138c63ac098e3f40fa" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex items-center justify-between px-6 py-5 bg-emerald-500/10 dark:bg-emerald-500/20 hover:bg-emerald-600 border border-emerald-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-emerald-500/20 group"
-              >
-                <div className="flex items-center gap-3">
+                <a 
+                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center justify-center gap-3 px-6 py-4 bg-emerald-500/10 dark:bg-emerald-500/20 hover:bg-emerald-600 border border-emerald-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-emerald-500/20 group text-center"
+                >
                   <span className="text-2xl group-hover:animate-pulse block">🔁</span>
-                  <div className="flex flex-col">
-                    <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors">Backup Server</span>
-                    <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold uppercase group-hover:text-white/80 transition-colors">Stable • Link 02</span>
-                  </div>
-                </div>
-                <ChevronRight size={20} className="text-emerald-500 group-hover:text-white transition-colors" />
-              </a>
-
-              <a 
-                href="https://www.profitablecpmratenetwork.com/a7ia008h25?key=242924684a1836138c63ac098e3f40fa" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex items-center justify-between px-6 py-5 bg-indigo-600 hover:bg-indigo-700 border border-transparent rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-indigo-500/30 group shadow-md shadow-indigo-500/10"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl group-hover:translate-x-1 transition-transform block">➡️</span>
-                  <div className="flex flex-col">
-                    <span className="text-white font-bold">Next Chapter</span>
-                    <span className="text-[10px] text-indigo-200 font-bold uppercase group-hover:text-white/80 transition-colors">Auto Redirect • ON</span>
-                  </div>
-                </div>
-                <ChevronRight size={20} className="text-white transition-colors" />
-              </a>
+                  <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors text-lg">Server 3</span>
+                </a>
+              </div>
             </div>
-          </div>
+          )}
           <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500">
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-800"></div>
             <span className="uppercase tracking-[0.2em] text-xs font-bold">End of Chapter {chapter.number}</span>
