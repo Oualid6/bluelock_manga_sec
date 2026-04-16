@@ -176,56 +176,50 @@ const ChapterReader: React.FC = () => {
           </div>
         ) : readingMode === 'vertical' ? (
           <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
-            {chapter.pages.map((pageUrl, idx) => {
-              const optimizedUrl = `https://wsrv.nl/?url=${encodeURIComponent(pageUrl)}&output=webp&q=80`;
-              return (
-                <img
-                  key={idx}
-                  src={optimizedUrl}
-                  alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
-                  width="800"
-                  height="1200"
-                  className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto"
-                  loading="lazy"
-                  decoding="async"
-                  referrerPolicy="no-referrer"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
-                />
-              );
-            })}
+            {chapter.pages.map((pageUrl, idx) => (
+              <img
+                key={idx}
+                src={pageUrl}
+                alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
+                width="800"
+                height="1200"
+                className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto"
+                loading="lazy"
+                decoding="async"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
+            ))}
           </div>
         ) : (
           // Horizontal Layout
           <div className="h-full w-full flex overflow-x-auto snap-x snap-mandatory bg-black items-center">
-            {chapter.pages.map((pageUrl, idx) => {
-              const optimizedUrl = `https://wsrv.nl/?url=${encodeURIComponent(pageUrl)}&output=webp&q=80`;
-              return (
-                <div key={idx} className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
-                  <img
-                    src={optimizedUrl}
-                    alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
-                    width="800"
-                    height="1200"
-                    className="max-h-full max-w-full object-contain shadow-2xl bg-gray-900 mx-auto"
-                    loading="lazy"
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = 'none';
-                      // Also hide the counter for this slide if image fails
-                      const parent = target.parentElement;
-                      if (parent) parent.style.display = 'none';
-                    }}
-                  />
-                  <span className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-mono backdrop-blur-md">
-                    {idx + 1} / {chapter.pages.length}
-                  </span>
-                </div>
-              );
-            })}
+            {chapter.pages.map((pageUrl, idx) => (
+              <div key={idx} className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
+                <img
+                  src={pageUrl}
+                  alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
+                  width="800"
+                  height="1200"
+                  className="max-h-full max-w-full object-contain shadow-2xl bg-gray-900 mx-auto"
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    // Also hide the counter for this slide if image fails
+                    const parent = target.parentElement;
+                    if (parent) parent.style.display = 'none';
+                  }}
+                />
+                <span className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-mono backdrop-blur-md">
+                  {idx + 1} / {chapter.pages.length}
+                </span>
+              </div>
+            ))}
           </div>
         )}
 

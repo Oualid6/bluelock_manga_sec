@@ -37,9 +37,8 @@ const DisqusComments: React.FC<DisqusCommentsProps> = ({ url, identifier, title 
   }, [url, identifier, title]);
 
   return (
-    <div className="w-full min-h-[400px] relative transition-all duration-300">
-      {/* Reserve space so the page doesn't jump aggressively when Disqus (+ its ads) injects its iframe */}
-      <div id="disqus_thread" className="min-h-[400px] w-full"></div>
+    <div>
+      <div id="disqus_thread"></div>
       <noscript>
         Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
       </noscript>
