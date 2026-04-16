@@ -29,11 +29,3 @@ export interface SEOMeta {
   description: string;
   schema?: object;
 }
-
-export interface Comment {
-  id: string;
-  user: string;
-  content: string;
-  date: string;
-  likes: number;
-}

@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, MessageSquare, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
 import { Chapter } from '../types';
-import DisqusComments from '../components/DisqusComments';
 
 const ChapterReader: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
@@ -297,21 +296,8 @@ const ChapterReader: React.FC = () => {
           </div>
         </div>
 
-        {/* Disqus Integration Section */}
-        <div className="max-w-4xl mx-auto mt-12 px-4 pb-20">
-          <div className="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/5 rounded-2xl overflow-hidden shadow-2xl p-6 md:p-8">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-8">
-              <MessageSquare size={20} className="text-bb-blue" />
-              Chapter {chapter.number} Discussion
-            </h3>
-            <DisqusComments 
-              url={`${window.location.origin}/chapter/${chapter.number}`} 
-              identifier={`chapter-${chapter.number}`} 
-              title={`Blue Lock Chapter ${chapter.number}`} 
-            />
-          </div>
-        </div>
       </div>
+
 
       {/* SEO Footer (Visible in all modes, pushed to bottom) */}
       <div className="bg-black py-12 px-4 border-t border-white/10 mt-auto">

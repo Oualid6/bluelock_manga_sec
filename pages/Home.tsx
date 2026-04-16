@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Users, Star, MessageCircle, Bookmark } from 'lucide-react';
+import { ArrowRight, BookOpen, Users, Star, Bookmark } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { useManga } from '../context/MangaContext';
 import { ARCS } from '../constants';
@@ -105,12 +105,7 @@ const Home: React.FC = () => {
 
               {/* Right Column: Actions/Social Proof */}
               <div className="flex lg:flex-col justify-center items-center gap-8 min-w-[140px]">
-                <div className="text-center group w-full">
-                  <MessageCircle className="w-8 h-8 text-gray-500 group-hover:text-bb-blue mx-auto mb-2 transition-colors" />
-                  <span className="block text-2xl font-bold text-white">256</span>
-                  <span className="text-xs text-gray-500 uppercase tracking-wide">Comments</span>
-                </div>
-                <div className="w-px h-12 bg-white/10 lg:w-16 lg:h-px"></div>
+
                 <button
                   onClick={() => {
                     const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
