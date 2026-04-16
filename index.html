@@ -37,17 +37,7 @@
       rel="stylesheet">
   </noscript>
 
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
-  }
-}
-</script>
+
 </head>
 
 <body class="bg-[#121212] text-gray-100 transition-colors duration-200">
@@ -60,39 +50,53 @@
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
   <script id="dsq-count-scr" src="//bluelocken.disqus.com/count.js" async></script>
-  <!-- Optimized Adsterra Popunder -->
+  <!-- Adsterra Social Bar (Preloaded instantly, visual execution at 3s) -->
+  <script>
+    (function() {
+      // Fetch script immediately in background (no network delay)
+      var preload = document.createElement('link');
+      preload.rel = 'preload';
+      preload.as = 'script';
+      preload.href = "https://pl29154957.profitablecpmratenetwork.com/94/12/2d/94122da8a5f6856e50c578d4251a8e95.js";
+      document.head.appendChild(preload);
+
+      // Execute and visually display after 3s
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.src = "https://pl29154957.profitablecpmratenetwork.com/94/12/2d/94122da8a5f6856e50c578d4251a8e95.js";
+        s.async = true;
+        document.body.appendChild(s);
+      }, 3000);
+    })();
+  </script>
+
+  <!-- Adsterra Popunder (Executed ONLY on first interaction) -->
   <script>
     (function() {
       const POP_URL = "https://pl29100923.profitablecpmratenetwork.com/b6/a0/2c/b6a02c6bd9ae359fd2d1a48ecfc4f720.js";
       const KEY = 'adst_p_last';
-      const DAY = 86400000; // 24h in ms
+      const DAY = 86400000; // 24h
 
-      function trigger() {
+      function triggerPop() {
         const last = localStorage.getItem(KEY);
         if (!last || (Date.now() - parseInt(last) > DAY)) {
-          const s = document.createElement('script');
-          s.src = POP_URL;
-          document.body.appendChild(s);
+          const p = document.createElement('script');
+          p.src = POP_URL;
+          p.async = true;
+          document.body.appendChild(p);
           localStorage.setItem(KEY, Date.now().toString());
         }
-        document.removeEventListener('click', trigger);
-        document.removeEventListener('touchstart', trigger);
+        document.removeEventListener('click', triggerPop);
+        document.removeEventListener('touchstart', triggerPop);
       }
 
+      // Ensure execution correctly evaluates before firing
       const last = localStorage.getItem(KEY);
       if (!last || (Date.now() - parseInt(last) > DAY)) {
-        document.addEventListener('click', trigger);
-        document.addEventListener('touchstart', trigger);
+        document.addEventListener('click', triggerPop);
+        document.addEventListener('touchstart', triggerPop);
       }
     })();
-  </script>
-  <!-- Optimized Adsterra Social Bar -->
-  <script>
-    setTimeout(function() {
-      const s = document.createElement('script');
-      s.src = "https://pl29154957.profitablecpmratenetwork.com/94/12/2d/94122da8a5f6856e50c578d4251a8e95.js";
-      document.body.appendChild(s);
-    }, Math.floor(Math.random() * 3001 + 5000)); // 5-8s delay
   </script>
 </body>
 
