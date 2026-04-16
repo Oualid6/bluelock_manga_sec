@@ -16,7 +16,6 @@ const ChapterReader: React.FC = () => {
   const [showControls, setShowControls] = useState(true);
   const [readingMode, setReadingMode] = useState<'vertical' | 'horizontal'>('vertical');
   const [showServers, setShowServers] = useState(false);
-  const [showLocker, setShowLocker] = useState(false);
   
 
 
@@ -30,9 +29,6 @@ const ChapterReader: React.FC = () => {
       const found = chapters.find(c => c.number === currentNum);
       if (found) {
         setChapter(found);
-        if (found.number === 343) {
-          setShowLocker(true);
-        }
       }
       setLoading(false);
       window.scrollTo(0, 0);
@@ -43,6 +39,27 @@ const ChapterReader: React.FC = () => {
   }, [currentNum, chapters]);
 
 
+
+  useEffect(() => {
+    // Only inject OGAds script if on chapter 343
+    if (currentNum === 343) {
+      const script = document.createElement('script');
+      script.id = 'ogjs';
+      script.type = 'text/javascript';
+      script.src = 'https://appchecker.space/cl/js/9vmq3g';
+      script.async = true;
+      document.head.appendChild(script);
+
+      return () => {
+        // Cleanup script when leaving chapter 343
+        const oldScript = document.getElementById('ogjs');
+        if (oldScript) oldScript.remove();
+        // Also remove any global objects/iframes the script might have created
+        const iframes = document.querySelectorAll('iframe[src*="appchecker.space"]');
+        iframes.forEach(f => f.remove());
+      };
+    }
+  }, [currentNum]);
 
   // Hide controls on scroll down, show on scroll up
   const lastScrollY = useRef(0);
@@ -157,20 +174,41 @@ const ChapterReader: React.FC = () => {
         {chapter.pages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm max-w-md w-full shadow-2xl">
-              <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Available Soon...</h2>
+              <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">
+                {chapter.number === 343 ? "🔒 Limited Access" : "Available Soon..."}
+              </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                This chapter is still being uploaded. You can try reading it early on our partner server.
+                {chapter.number === 343 
+                  ? "This chapter is very popular. Due to high demand, you need to unlock it to continue reading for free." 
+                  : "This chapter is still being uploaded. You can try reading it early on our partner server."}
               </p>
               <div className="flex flex-col gap-3">
-                <a
-                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
-                >
-                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                  Read on Partner Server
-                </a>
+                {chapter.number === 343 ? (
+                  <button
+                    onClick={() => {
+                      // Attempt to trigger OGAds locker if script is loaded, else redirect
+                      if (typeof (window as any).og_load === 'function') {
+                        (window as any).og_load();
+                      } else {
+                        window.open('https://appchecker.space/cl/i/9vmq3g', '_blank');
+                      }
+                    }}
+                    className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
+                  >
+                    <Unlock size={20} className="group-hover:scale-110 transition-transform" />
+                    Unlock Full Chapter
+                  </button>
+                ) : (
+                  <a
+                    href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
+                  >
+                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    Read on Partner Server
+                  </a>
+                )}
                 <button
                   onClick={() => navigate('/manga')}
                   className="px-6 py-3 bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-900 dark:text-white font-bold rounded-lg transition-all"
@@ -235,40 +273,7 @@ const ChapterReader: React.FC = () => {
       <div className="bg-white dark:bg-[#121212] relative z-10 block">
         <div className="max-w-4xl mx-auto pt-10 pb-20 px-4 flex flex-col items-center gap-10">
           
-      {/* Soft Locker Overlay for Chapter 343 */}
-      {chapter.number === 343 && showLocker && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-500">
-          <div className="bg-white dark:bg-gray-900 w-full max-w-md rounded-3xl p-8 shadow-2xl relative border border-white/10 overflow-hidden group">
-            <button 
-              onClick={() => setShowLocker(false)}
-              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
-            >
-              <X size={20} />
-            </button>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-bb-blue/10 rounded-full flex items-center justify-center mx-auto mb-6 text-bb-blue">
-                <Lock size={32} />
-              </div>
-              <h3 className="text-2xl font-bold dark:text-white mb-2">Limited Access</h3>
-              <p className="text-gray-400 mb-8 leading-relaxed">
-                🔒 This chapter is limited due to high demand. Please verify below to continue reading.
-              </p>
-              <a 
-                href="https://appchecker.space/cl/i/9vmq3g"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-3 w-full py-4 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-bb-blue/20 group transform hover:scale-[1.02]"
-              >
-                <Unlock size={20} />
-                Unlock Full Chapter
-              </a>
-              <p className="mt-6 text-xs text-gray-500 font-medium">
-                Safe & Secure Verification
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+
           <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500">
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-800"></div>
             <span className="uppercase tracking-[0.2em] text-xs font-bold">End of Chapter {chapter.number}</span>
