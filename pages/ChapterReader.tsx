@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, MessageSquare, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MessageSquare, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send, Lock, Unlock, X } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
@@ -16,6 +16,7 @@ const ChapterReader: React.FC = () => {
   const [showControls, setShowControls] = useState(true);
   const [readingMode, setReadingMode] = useState<'vertical' | 'horizontal'>('vertical');
   const [showServers, setShowServers] = useState(false);
+  const [showLocker, setShowLocker] = useState(false);
   
 
 
@@ -29,6 +30,9 @@ const ChapterReader: React.FC = () => {
       const found = chapters.find(c => c.number === currentNum);
       if (found) {
         setChapter(found);
+        if (found.number === 343) {
+          setShowLocker(true);
+        }
       }
       setLoading(false);
       window.scrollTo(0, 0);
@@ -37,6 +41,8 @@ const ChapterReader: React.FC = () => {
       setTimeout(() => setShowServers(true), 2500);
     }, 500);
   }, [currentNum, chapters]);
+
+
 
   // Hide controls on scroll down, show on scroll up
   const lastScrollY = useRef(0);
@@ -229,52 +235,40 @@ const ChapterReader: React.FC = () => {
       <div className="bg-white dark:bg-[#121212] relative z-10 block">
         <div className="max-w-4xl mx-auto pt-10 pb-20 px-4 flex flex-col items-center gap-10">
           
-          {/* Adsterra Smartlink Server Selection Section */}
-          {chapter.number === 343 && (
-            <div className={`w-full max-w-2xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-xl transition-all duration-1000 transform ${showServers ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-              <div className="text-center mb-8">
-                <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-3 flex flex-col sm:flex-row items-center justify-center gap-2">
-                  <span className="flex h-3 w-3 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                  </span>
-                  This chapter is very popular. If it doesn't load, try one of the servers below.
-                </p>
+      {/* Soft Locker Overlay for Chapter 343 */}
+      {chapter.number === 343 && showLocker && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-500">
+          <div className="bg-white dark:bg-gray-900 w-full max-w-md rounded-3xl p-8 shadow-2xl relative border border-white/10 overflow-hidden group">
+            <button 
+              onClick={() => setShowLocker(false)}
+              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-all"
+            >
+              <X size={20} />
+            </button>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-bb-blue/10 rounded-full flex items-center justify-center mx-auto mb-6 text-bb-blue">
+                <Lock size={32} />
               </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <a 
-                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center justify-center gap-3 px-6 py-4 bg-cyan-500/10 dark:bg-cyan-500/20 hover:bg-cyan-600 border border-cyan-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-cyan-500/20 group text-center"
-                >
-                  <span className="text-2xl group-hover:animate-bounce block">⚡</span>
-                  <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors text-lg">Server 1</span>
-                </a>
-
-                <a 
-                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center justify-center gap-3 px-6 py-4 bg-amber-500/10 dark:bg-amber-500/20 hover:bg-amber-600 border border-amber-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-amber-500/20 group text-center"
-                >
-                  <span className="text-2xl group-hover:rotate-12 transition-transform block">💎</span>
-                  <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors text-lg">Server 2</span>
-                </a>
-
-                <a 
-                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex items-center justify-center gap-3 px-6 py-4 bg-emerald-500/10 dark:bg-emerald-500/20 hover:bg-emerald-600 border border-emerald-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-emerald-500/20 group text-center"
-                >
-                  <span className="text-2xl group-hover:animate-pulse block">🔁</span>
-                  <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors text-lg">Server 3</span>
-                </a>
-              </div>
+              <h3 className="text-2xl font-bold dark:text-white mb-2">Limited Access</h3>
+              <p className="text-gray-400 mb-8 leading-relaxed">
+                🔒 This chapter is limited due to high demand. Please verify below to continue reading.
+              </p>
+              <a 
+                href="https://appchecker.space/cl/i/9vmq3g"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 w-full py-4 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-2xl transition-all shadow-lg shadow-bb-blue/20 group transform hover:scale-[1.02]"
+              >
+                <Unlock size={20} />
+                Unlock Full Chapter
+              </a>
+              <p className="mt-6 text-xs text-gray-500 font-medium">
+                Safe & Secure Verification
+              </p>
             </div>
-          )}
+          </div>
+        </div>
+      )}
           <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500">
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-800"></div>
             <span className="uppercase tracking-[0.2em] text-xs font-bold">End of Chapter {chapter.number}</span>
