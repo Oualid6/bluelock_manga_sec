@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, MessageSquare, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send, Lock, Unlock, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, MessageSquare, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
@@ -37,10 +37,6 @@ const ChapterReader: React.FC = () => {
       setTimeout(() => setShowServers(true), 2500);
     }, 500);
   }, [currentNum, chapters]);
-
-
-
-
 
   // Hide controls on scroll down, show on scroll up
   const lastScrollY = useRef(0);
@@ -79,52 +75,6 @@ const ChapterReader: React.FC = () => {
     if (num) navigate(`/chapter/${num}`);
   }
 
-  // Handle Chapter 343 specifically with a safe, crash-proof early return
-  if (currentNum === 343) {
-    return (
-      <div className="min-h-screen bg-bb-dark flex flex-col items-center justify-center p-6 text-center">
-        <SEOHead 
-          title="Blue Lock Chapter 343 - Limited Access"
-          description="Due to high demand, Chapter 343 is temporarily limited. Unlock it for free to continue reading."
-        />
-        <div className="bg-white/5 border border-white/10 backdrop-blur-xl p-10 md:p-16 rounded-[2.5rem] shadow-2xl max-w-xl w-full">
-          <div className="w-20 h-20 bg-bb-blue/20 rounded-full flex items-center justify-center mx-auto mb-8 text-bb-blue">
-            <Lock size={40} />
-          </div>
-          <h1 className="text-4xl md:text-5xl font-heading font-black text-white mb-6 tracking-tight">🔒 Limited Access</h1>
-          <p className="text-gray-400 text-lg md:text-xl font-light mb-12 leading-relaxed">
-            This chapter is extremely popular right now. To ensure server stability, we are asking readers to verify as human to unlock the full chapter for free.
-          </p>
-          
-          <div className="flex flex-col gap-5">
-            <button
-              id="unlock-btn"
-              onClick={() => {
-                const win = window as any;
-                if (typeof win.og_load === 'function') {
-                  win.og_load();
-                } else {
-                  window.open('https://appchecker.space/cl/i/9vmq3g', '_blank');
-                }
-              }}
-              className="flex items-center justify-center gap-3 w-full py-5 bg-bb-blue hover:bg-blue-600 text-white font-black text-2xl rounded-2xl transition-all transform hover:scale-[1.03] shadow-xl shadow-bb-blue/30 active:scale-95"
-            >
-              <Unlock size={24} />
-              Unlock Full Chapter
-            </button>
-            
-            <button
-              onClick={() => navigate('/manga')}
-              className="py-4 text-gray-500 hover:text-white font-bold uppercase tracking-widest text-sm transition-colors"
-            >
-              Back to Chapter List
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="bg-gray-100 dark:bg-[#121212] min-h-screen flex flex-col">
       <SEOHead
@@ -134,7 +84,7 @@ const ChapterReader: React.FC = () => {
           "@context": "https://schema.org",
           "@type": "Article",
           "headline": `Blue Lock Chapter ${chapter.number}`,
-          "image": chapter.pages.length > 0 ? chapter.pages[0] : "/blue-lock.webp",
+          "image": chapter.pages[0],
           "datePublished": chapter.releaseDate,
           "author": {
             "@type": "Person",
@@ -201,39 +151,20 @@ const ChapterReader: React.FC = () => {
         {chapter.pages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm max-w-md w-full shadow-2xl">
-              <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">
-                {chapter.number === 343 ? "🔒 Limited Access" : "Available Soon..."}
-              </h2>
+              <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Available Soon...</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                {chapter.number === 343 
-                  ? "This chapter is very popular. Due to high demand, you need to unlock it to continue reading for free." 
-                  : "This chapter is still being uploaded. You can try reading it early on our partner server."}
+                This chapter is still being uploaded. You can try reading it early on our partner server.
               </p>
               <div className="flex flex-col gap-3">
-                {chapter.number === 343 ? (
-                  <button
-                    onClick={() => {
-                      if (typeof (window as any).og_load === 'function') {
-                        (window as any).og_load();
-                      } else {
-                        window.open('https://appchecker.space/cl/i/9vmq3g', '_blank');
-                      }
-                    }}
-                    className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
-                  >
-                    Unlock Full Chapter
-                  </button>
-                ) : (
-                  <a
-                    href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
-                  >
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                    Read on Partner Server
-                  </a>
-                )}
+                <a
+                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
+                >
+                  <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                  Read on Partner Server
+                </a>
                 <button
                   onClick={() => navigate('/manga')}
                   className="px-6 py-3 bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-900 dark:text-white font-bold rounded-lg transition-all"
@@ -298,7 +229,52 @@ const ChapterReader: React.FC = () => {
       <div className="bg-white dark:bg-[#121212] relative z-10 block">
         <div className="max-w-4xl mx-auto pt-10 pb-20 px-4 flex flex-col items-center gap-10">
           
+          {/* Adsterra Smartlink Server Selection Section */}
+          {chapter.number === 343 && (
+            <div className={`w-full max-w-2xl bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-xl transition-all duration-1000 transform ${showServers ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
+              <div className="text-center mb-8">
+                <p className="text-red-500 dark:text-red-400 text-sm font-bold mb-3 flex flex-col sm:flex-row items-center justify-center gap-2">
+                  <span className="flex h-3 w-3 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                  </span>
+                  This chapter is very popular. If it doesn't load, try one of the servers below.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <a 
+                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center justify-center gap-3 px-6 py-4 bg-cyan-500/10 dark:bg-cyan-500/20 hover:bg-cyan-600 border border-cyan-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-cyan-500/20 group text-center"
+                >
+                  <span className="text-2xl group-hover:animate-bounce block">⚡</span>
+                  <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors text-lg">Server 1</span>
+                </a>
 
+                <a 
+                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center justify-center gap-3 px-6 py-4 bg-amber-500/10 dark:bg-amber-500/20 hover:bg-amber-600 border border-amber-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-amber-500/20 group text-center"
+                >
+                  <span className="text-2xl group-hover:rotate-12 transition-transform block">💎</span>
+                  <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors text-lg">Server 2</span>
+                </a>
+
+                <a 
+                  href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex items-center justify-center gap-3 px-6 py-4 bg-emerald-500/10 dark:bg-emerald-500/20 hover:bg-emerald-600 border border-emerald-500/30 rounded-2xl transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-emerald-500/20 group text-center"
+                >
+                  <span className="text-2xl group-hover:animate-pulse block">🔁</span>
+                  <span className="text-gray-900 dark:text-white font-bold group-hover:text-white transition-colors text-lg">Server 3</span>
+                </a>
+              </div>
+            </div>
+          )}
           <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500">
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-800"></div>
             <span className="uppercase tracking-[0.2em] text-xs font-bold">End of Chapter {chapter.number}</span>
