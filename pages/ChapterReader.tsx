@@ -40,26 +40,7 @@ const ChapterReader: React.FC = () => {
 
 
 
-  useEffect(() => {
-    // Only inject OGAds script if on chapter 343
-    if (currentNum === 343) {
-      const script = document.createElement('script');
-      script.id = 'ogjs';
-      script.type = 'text/javascript';
-      script.src = 'https://appchecker.space/cl/js/9vmq3g';
-      script.async = true;
-      document.head.appendChild(script);
 
-      return () => {
-        // Cleanup script when leaving chapter 343
-        const oldScript = document.getElementById('ogjs');
-        if (oldScript) oldScript.remove();
-        // Also remove any global objects/iframes the script might have created
-        const iframes = document.querySelectorAll('iframe[src*="appchecker.space"]');
-        iframes.forEach(f => f.remove());
-      };
-    }
-  }, [currentNum]);
 
   // Hide controls on scroll down, show on scroll up
   const lastScrollY = useRef(0);
@@ -98,6 +79,52 @@ const ChapterReader: React.FC = () => {
     if (num) navigate(`/chapter/${num}`);
   }
 
+  // Handle Chapter 343 specifically with a safe, crash-proof early return
+  if (currentNum === 343) {
+    return (
+      <div className="min-h-screen bg-bb-dark flex flex-col items-center justify-center p-6 text-center">
+        <SEOHead 
+          title="Blue Lock Chapter 343 - Limited Access"
+          description="Due to high demand, Chapter 343 is temporarily limited. Unlock it for free to continue reading."
+        />
+        <div className="bg-white/5 border border-white/10 backdrop-blur-xl p-10 md:p-16 rounded-[2.5rem] shadow-2xl max-w-xl w-full">
+          <div className="w-20 h-20 bg-bb-blue/20 rounded-full flex items-center justify-center mx-auto mb-8 text-bb-blue">
+            <Lock size={40} />
+          </div>
+          <h1 className="text-4xl md:text-5xl font-heading font-black text-white mb-6 tracking-tight">🔒 Limited Access</h1>
+          <p className="text-gray-400 text-lg md:text-xl font-light mb-12 leading-relaxed">
+            This chapter is extremely popular right now. To ensure server stability, we are asking readers to verify as human to unlock the full chapter for free.
+          </p>
+          
+          <div className="flex flex-col gap-5">
+            <button
+              id="unlock-btn"
+              onClick={() => {
+                const win = window as any;
+                if (typeof win.og_load === 'function') {
+                  win.og_load();
+                } else {
+                  window.open('https://appchecker.space/cl/i/9vmq3g', '_blank');
+                }
+              }}
+              className="flex items-center justify-center gap-3 w-full py-5 bg-bb-blue hover:bg-blue-600 text-white font-black text-2xl rounded-2xl transition-all transform hover:scale-[1.03] shadow-xl shadow-bb-blue/30 active:scale-95"
+            >
+              <Unlock size={24} />
+              Unlock Full Chapter
+            </button>
+            
+            <button
+              onClick={() => navigate('/manga')}
+              className="py-4 text-gray-500 hover:text-white font-bold uppercase tracking-widest text-sm transition-colors"
+            >
+              Back to Chapter List
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-gray-100 dark:bg-[#121212] min-h-screen flex flex-col">
       <SEOHead
@@ -107,7 +134,7 @@ const ChapterReader: React.FC = () => {
           "@context": "https://schema.org",
           "@type": "Article",
           "headline": `Blue Lock Chapter ${chapter.number}`,
-          "image": chapter.pages[0],
+          "image": chapter.pages.length > 0 ? chapter.pages[0] : "/blue-lock.webp",
           "datePublished": chapter.releaseDate,
           "author": {
             "@type": "Person",
@@ -186,7 +213,6 @@ const ChapterReader: React.FC = () => {
                 {chapter.number === 343 ? (
                   <button
                     onClick={() => {
-                      // Attempt to trigger OGAds locker if script is loaded, else redirect
                       if (typeof (window as any).og_load === 'function') {
                         (window as any).og_load();
                       } else {
@@ -195,7 +221,6 @@ const ChapterReader: React.FC = () => {
                     }}
                     className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
                   >
-                    <Unlock size={20} className="group-hover:scale-110 transition-transform" />
                     Unlock Full Chapter
                   </button>
                 ) : (
