@@ -201,7 +201,7 @@ const ChapterReader: React.FC = () => {
                 style={{ aspectHeight: '1200', aspectWidth: '800', aspectRatio: '800 / 1200' }}
               >
                 <img
-                  src={`/api/image?url=${encodeURIComponent(pageUrl)}`}
+                  src={pageUrl}
                   alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
                   width="800"
                   height="1200"
@@ -222,7 +222,7 @@ const ChapterReader: React.FC = () => {
             {chapter.pages.map((pageUrl, idx) => (
               <div key={idx} className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
                 <img
-                  src={`/api/image?url=${encodeURIComponent(pageUrl)}`}
+                  src={pageUrl}
                   alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
                   width="800"
                   height="1200"

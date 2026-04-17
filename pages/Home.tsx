@@ -24,15 +24,13 @@ const Home: React.FC = () => {
 
       {/* Hero Section */}
       <section className="hero-placeholder relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-bb-dark py-20">
-        <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none hidden md:block">
+        <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
           <img
             src="/blue-lock.webp"
             alt=""
             width="1920"
             height="1080"
             fetchPriority="high"
-            loading="eager"
-            decoding="sync"
             className="w-full h-full object-cover"
           />
         </div>
@@ -158,7 +156,7 @@ const Home: React.FC = () => {
               View All <ArrowRight size={16} />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" style={{ minHeight: '600px' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {chapters.slice(0, 12).map((chapter) => (
               <Link
                 key={chapter.id}

@@ -78,7 +78,7 @@ const MangaList: React.FC = () => {
         </div>
 
         {/* Chapters Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" style={{ minHeight: '800px' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredChapters.map((chapter) => (
             <Link
               key={chapter.id}

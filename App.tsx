@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 // Lazy load pages for performance
-import Home from './pages/Home';
+const Home = lazy(() => import('./pages/Home'));
 const MangaList = lazy(() => import('./pages/MangaList'));
 const ChapterReader = lazy(() => import('./pages/ChapterReader'));
 const Characters = lazy(() => import('./pages/Characters'));
