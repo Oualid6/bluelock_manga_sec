@@ -67,7 +67,16 @@
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div id="root"></div>
+  <div id="root">
+    <!-- Critical UI Shell to prevent CLS and improve FCP -->
+    <div class="shell-header" style="height: 64px; background: #000; border-bottom: 1px solid #333; display: flex; align-items: center; padding: 0 20px;">
+      <div style="width: 150px; height: 30px; background: #222; border-radius: 4px;"></div>
+    </div>
+    <div class="shell-hero" style="height: 85vh; background: #121212; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
+      <div style="width: 80%; max-width: 600px; height: 60px; background: #222; border-radius: 8px; mb-4: 20px;"></div>
+      <div style="width: 60%; max-width: 400px; height: 30px; background: #222; border-radius: 4px; margin-top: 20px;"></div>
+    </div>
+  </div>
   <script type="module" src="/index.tsx"></script>
 </body>
 

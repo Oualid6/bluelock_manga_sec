@@ -27,10 +27,12 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
           <img
             src="/blue-lock.webp"
-            alt=""
+            alt="Blue Lock Manga Background"
             width="1920"
             height="1080"
             fetchPriority="high"
+            loading="eager"
+            decoding="sync"
             className="w-full h-full object-cover"
           />
         </div>
