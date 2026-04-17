@@ -195,25 +195,20 @@ const ChapterReader: React.FC = () => {
         ) : readingMode === 'vertical' ? (
           <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
             {chapter.pages.map((pageUrl, idx) => (
-              <div 
-                key={idx} 
-                className="w-full bg-gray-100 dark:bg-gray-900 mx-auto overflow-hidden"
-                style={{ aspectHeight: '1200', aspectWidth: '800', aspectRatio: '800 / 1200' }}
-              >
-                <img
-                  src={pageUrl}
-                  alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
-                  width="800"
-                  height="1200"
-                  className="w-full h-auto block"
-                  loading={idx < 2 ? "eager" : "lazy"}
-                  decoding="async"
-                  referrerPolicy="no-referrer"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).parentElement!.style.display = 'none';
-                  }}
-                />
-              </div>
+              <img
+                key={idx}
+                src={pageUrl}
+                alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
+                width="800"
+                height="1200"
+                className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto"
+                loading="lazy"
+                decoding="async"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
             ))}
           </div>
         ) : (
@@ -227,8 +222,7 @@ const ChapterReader: React.FC = () => {
                   width="800"
                   height="1200"
                   className="max-h-full max-w-full object-contain shadow-2xl bg-gray-900 mx-auto"
-                  style={{ aspectRatio: '800 / 1200' }}
-                  loading={idx === 0 ? "eager" : "lazy"}
+                  loading="lazy"
                   decoding="async"
                   referrerPolicy="no-referrer"
                   onError={(e) => {

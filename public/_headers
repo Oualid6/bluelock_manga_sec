@@ -1,16 +1,20 @@
-# Extreme Cache for Assets
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
-/blue-lock.webp
-  Cache-Control: public, max-age=31536000, immutable
-/logo.png
-  Cache-Control: public, max-age=31536000, immutable
-/favicon.png
-  Cache-Control: public, max-age=31536000, immutable
 
-# SPA Routing
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: no-referrer-when-downgrade
-  Content-Security-Policy: default-src 'self' https://*; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; style-src 'self' 'unsafe-inline' https://*; font-src 'self' https://* data:; img-src 'self' data: https://*; connect-src 'self' https://*; frame-src 'self' https://*; object-src 'none';
+/*.jpg
+  Cache-Control: public, max-age=86400
+
+/*.jpeg
+  Cache-Control: public, max-age=86400
+
+/*.png
+  Cache-Control: public, max-age=86400
+
+/*.webp
+  Cache-Control: public, max-age=86400
+
+/*.svg
+  Cache-Control: public, max-age=86400
+
+/*.ico
+  Cache-Control: public, max-age=86400
