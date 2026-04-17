@@ -31,6 +31,8 @@ const Home: React.FC = () => {
             width="1920"
             height="1080"
             fetchPriority="high"
+            loading="eager"
+            decoding="sync"
             className="w-full h-full object-cover"
           />
         </div>
@@ -156,7 +158,7 @@ const Home: React.FC = () => {
               View All <ArrowRight size={16} />
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" style={{ minHeight: '600px' }}>
             {chapters.slice(0, 12).map((chapter) => (
               <Link
                 key={chapter.id}
