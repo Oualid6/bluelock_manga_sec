@@ -130,14 +130,6 @@ const Home: React.FC = () => {
               >
                 Read Chapter {latestChapter.number}
               </Link>
-              <a
-                href="https://mangalix.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 border border-white/20 bg-white/5 backdrop-blur-sm text-lg font-bold rounded-lg text-white hover:bg-white hover:text-black transition-all"
-              >
-                Explore More Manga
-              </a>
             </div>
           )}
         </div>

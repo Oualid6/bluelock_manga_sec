@@ -58,40 +58,6 @@
 
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
-  <!-- Optimized Adsterra Popunder -->
-  <script>
-    (function() {
-      const POP_URL = "https://pl29100923.profitablecpmratenetwork.com/b6/a0/2c/b6a02c6bd9ae359fd2d1a48ecfc4f720.js";
-      const KEY = 'adst_p_last';
-      const DAY = 86400000; // 24h in ms
-
-      function trigger() {
-        const last = localStorage.getItem(KEY);
-        if (!last || (Date.now() - parseInt(last) > DAY)) {
-          const s = document.createElement('script');
-          s.src = POP_URL;
-          document.body.appendChild(s);
-          localStorage.setItem(KEY, Date.now().toString());
-        }
-        document.removeEventListener('click', trigger);
-        document.removeEventListener('touchstart', trigger);
-      }
-
-      const last = localStorage.getItem(KEY);
-      if (!last || (Date.now() - parseInt(last) > DAY)) {
-        document.addEventListener('click', trigger);
-        document.addEventListener('touchstart', trigger);
-      }
-    })();
-  </script>
-  <!-- Optimized Adsterra Social Bar -->
-  <script>
-    setTimeout(function() {
-      const s = document.createElement('script');
-      s.src = "https://pl29154957.profitablecpmratenetwork.com/94/12/2d/94122da8a5f6856e50c578d4251a8e95.js";
-      document.body.appendChild(s);
-    }, Math.floor(Math.random() * 3001 + 5000)); // 5-8s delay
-  </script>
 </body>
 
 </html>

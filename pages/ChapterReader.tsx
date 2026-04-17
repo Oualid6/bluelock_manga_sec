@@ -14,16 +14,10 @@ const ChapterReader: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [showControls, setShowControls] = useState(true);
   const [readingMode, setReadingMode] = useState<'vertical' | 'horizontal'>('vertical');
-  const [showServers, setShowServers] = useState(false);
-  
-
-
-  // Use a number for parsing
   const currentNum = parseInt(chapterId || "0", 10);
 
   useEffect(() => {
     setLoading(true);
-    setShowServers(false);
     setTimeout(() => {
       const found = chapters.find(c => c.number === currentNum);
       if (found) {
@@ -31,9 +25,6 @@ const ChapterReader: React.FC = () => {
       }
       setLoading(false);
       window.scrollTo(0, 0);
-      
-      // Delay server buttons appearance
-      setTimeout(() => setShowServers(true), 2500);
     }, 500);
   }, [currentNum, chapters]);
 
@@ -162,30 +153,9 @@ const ChapterReader: React.FC = () => {
                   : "This chapter is still being uploaded. You can try reading it early on our partner server."}
               </p>
               <div className="flex flex-col gap-3">
-                {chapter.number === 344 ? (
-                  <a
-                    href="https://t.me/Mangalix"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-6 py-3 bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold rounded-lg transition-all"
-                  >
-                    <Send size={20} />
-                    Join Telegram
-                  </a>
-                ) : (
-                  <a
-                    href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
-                  >
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                    Read on Partner Server
-                  </a>
-                )}
                 <button
                   onClick={() => navigate('/manga')}
-                  className="px-6 py-3 bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-900 dark:text-white font-bold rounded-lg transition-all"
+                  className="px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all shadow-lg shadow-bb-blue/20"
                 >
                   Back to Chapter List
                 </button>
