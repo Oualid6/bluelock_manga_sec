@@ -23,7 +23,7 @@ const Home: React.FC = () => {
       />
 
       {/* Hero Section */}
-      <section className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-bb-dark py-20">
+      <section className="relative w-full h-[85vh] flex items-center justify-center overflow-hidden bg-bb-dark">
         <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
           <img
             src="/blue-lock.webp"
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
 
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
 
-          <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-4 drop-shadow-2xl tracking-tighter text-center">
+          <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-4 drop-shadow-2xl tracking-tighter text-center min-h-[1em]">
             BLUE <span className="text-bb-blue">LOCK MANGA</span>
           </h1>
 
