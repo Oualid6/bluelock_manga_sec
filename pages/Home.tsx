@@ -24,7 +24,7 @@ const Home: React.FC = () => {
 
       {/* Hero Section */}
       <section className="hero-placeholder relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-bb-dark py-20">
-        <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
+        <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none hidden md:block">
           <img
             src="/blue-lock.webp"
             alt=""
