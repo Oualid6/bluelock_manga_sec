@@ -1,5 +1,25 @@
 {
+    "cleanUrls": true,
+    "trailingSlash": false,
     "headers": [
+        {
+            "source": "/(.*)\\.(jpg|jpeg|png|webp|avif|gif|svg|ico|woff2|woff|ttf|otf)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
+        {
+            "source": "/assets/(.+)",
+            "headers": [
+                {
+                    "key": "Cache-Control",
+                    "value": "public, max-age=31536000, immutable"
+                }
+            ]
+        },
         {
             "source": "/(.*)",
             "headers": [
@@ -14,24 +34,10 @@
                 {
                     "key": "X-XSS-Protection",
                     "value": "1; mode=block"
-                }
-            ]
-        },
-        {
-            "source": "/assets/(.*)",
-            "headers": [
+                },
                 {
-                    "key": "Cache-Control",
-                    "value": "public, max-age=31536000, immutable"
-                }
-            ]
-        },
-        {
-            "source": "/(.*)\\.(jpg|jpeg|png|webp|svg|ico|woff2)",
-            "headers": [
-                {
-                    "key": "Cache-Control",
-                    "value": "public, max-age=31536000, must-revalidate"
+                    "key": "Referrer-Policy",
+                    "value": "no-referrer-when-downgrade"
                 }
             ]
         }
@@ -39,7 +45,7 @@
     "rewrites": [
         {
             "source": "/(.*)",
-            "destination": "/"
+            "destination": "/index.html"
         }
     ]
 }

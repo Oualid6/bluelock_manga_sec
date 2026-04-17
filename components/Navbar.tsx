@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
 
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-2 group">
-            <img src="/logo.png" alt="Blue Lock Manga" width="160" height="40" className="h-10 w-auto" />
+            <img src="/logo.png" alt="Blue Lock Manga" width="160" height="40" className="h-10 w-auto" fetchPriority="high" loading="eager" />
           </Link>
 
           {/* Desktop Nav */}
