@@ -25,13 +25,25 @@ const Home: React.FC = () => {
       {/* Hero Section */}
       <section className="hero-placeholder relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-bb-dark py-20">
         <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
+          {/* Mobile Background */}
+          <img
+            src="https://i.ibb.co/j9yJsXpB/blue-lock.webp"
+            alt=""
+            width="600"
+            height="1000"
+            className="w-full h-full object-cover md:hidden"
+            loading="eager"
+            fetchPriority="high"
+          />
+          {/* Desktop Background */}
           <img
             src="/blue-lock.webp"
             alt=""
             width="1920"
             height="1080"
+            className="w-full h-full object-cover hidden md:block"
+            loading="eager"
             fetchPriority="high"
-            className="w-full h-full object-cover"
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-bb-dark via-bb-dark/60 to-transparent z-0 pointer-events-none"></div>
