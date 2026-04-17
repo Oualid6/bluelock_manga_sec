@@ -19,16 +19,8 @@
 
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/favicon.png" />
-
-  <!-- DNS Prefetch & Preconnect for External Assets -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://images.mangafreak.me">
-
-  <!-- Preload Critical Assets -->
+  <!-- Preload the Main LCP Image -->
   <link rel="preload" href="/blue-lock.webp" as="image" type="image/webp" fetchpriority="high" />
-  <link rel="preload" href="/logo.png" as="image" type="image/png" />
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Oswald:wght@500;700&display=swap" as="style" />
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
@@ -39,21 +31,10 @@
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*; style-src 'self' 'unsafe-inline' https://*; font-src 'self' https://* data:; img-src 'self' data: https://*; connect-src 'self' https://*; frame-src 'self' https://*; object-src 'none'; base-uri 'self';">
   <title>Blue Lock Manga</title>
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Oswald:wght@500;700&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Oswald:wght@500;700&display=swap"
-      rel="stylesheet">
-  </noscript>
-
-  <style>
-    :root { color-scheme: dark; }
-    body { background-color: #121212; margin: 0; padding: 0; font-family: sans-serif; }
-    #root { min-height: 100vh; }
-    .shell-header { height: 64px; background: #000; border-bottom: 1px solid #333; position: fixed; top: 0; left: 0; right: 0; z-index: 100; }
-    .shell-hero { height: 85vh; width: 100%; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-  </style>
+    rel="stylesheet">
 
   <script type="importmap">
 {
@@ -75,17 +56,42 @@
       style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 
-  <div id="root">
-    <!-- Critical UI Shell to prevent CLS and improve FCP -->
-    <div class="shell-header" style="height: 64px; background: #000; border-bottom: 1px solid #333; display: flex; align-items: center; padding: 0 20px;">
-      <div style="width: 150px; height: 30px; background: #222; border-radius: 4px;"></div>
-    </div>
-    <div class="shell-hero" style="height: 85vh; background: #121212; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px;">
-      <div style="width: 80%; max-width: 600px; height: 60px; background: #222; border-radius: 8px; mb-4: 20px;"></div>
-      <div style="width: 60%; max-width: 400px; height: 30px; background: #222; border-radius: 4px; margin-top: 20px;"></div>
-    </div>
-  </div>
+  <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
+  <!-- Optimized Adsterra Popunder -->
+  <script>
+    (function() {
+      const POP_URL = "https://pl29100923.profitablecpmratenetwork.com/b6/a0/2c/b6a02c6bd9ae359fd2d1a48ecfc4f720.js";
+      const KEY = 'adst_p_last';
+      const DAY = 86400000; // 24h in ms
+
+      function trigger() {
+        const last = localStorage.getItem(KEY);
+        if (!last || (Date.now() - parseInt(last) > DAY)) {
+          const s = document.createElement('script');
+          s.src = POP_URL;
+          document.body.appendChild(s);
+          localStorage.setItem(KEY, Date.now().toString());
+        }
+        document.removeEventListener('click', trigger);
+        document.removeEventListener('touchstart', trigger);
+      }
+
+      const last = localStorage.getItem(KEY);
+      if (!last || (Date.now() - parseInt(last) > DAY)) {
+        document.addEventListener('click', trigger);
+        document.addEventListener('touchstart', trigger);
+      }
+    })();
+  </script>
+  <!-- Optimized Adsterra Social Bar -->
+  <script>
+    setTimeout(function() {
+      const s = document.createElement('script');
+      s.src = "https://pl29154957.profitablecpmratenetwork.com/94/12/2d/94122da8a5f6856e50c578d4251a8e95.js";
+      document.body.appendChild(s);
+    }, Math.floor(Math.random() * 3001 + 5000)); // 5-8s delay
+  </script>
 </body>
 
 </html>

@@ -30,7 +30,7 @@ const About: React.FC = () => {
                 <ul className="list-disc pl-6 space-y-2">
                     <li><strong>High Quality Scans:</strong> We prioritize clear, high-resolution images for the best visual experience.</li>
                     <li><strong>Fast Updates:</strong> New chapters are available as soon as they are released.</li>
-                    <li><strong>Ad-Free Experience:</strong> We strive to keep our interface clean and reader-focused.</li>
+                    <li><strong>Ad-Lite Experience:</strong> We strive to keep our interface clean and reader-focused.</li>
                     <li><strong>Community:</strong> Join thousands of other fans discussing theories and favorite moments.</li>
                 </ul>
 

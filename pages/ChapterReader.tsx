@@ -14,23 +14,27 @@ const ChapterReader: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [showControls, setShowControls] = useState(true);
   const [readingMode, setReadingMode] = useState<'vertical' | 'horizontal'>('vertical');
+  const [showServers, setShowServers] = useState(false);
+  
+
+
+  // Use a number for parsing
   const currentNum = parseInt(chapterId || "0", 10);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     setLoading(true);
-    
-    const found = chapters.find(c => c.number === currentNum);
-    if (found) {
-      setChapter(found);
-    }
-    
-    // Small delay only for visual transition if needed, but reducing to 0 for performance
-    const timer = setTimeout(() => {
+    setShowServers(false);
+    setTimeout(() => {
+      const found = chapters.find(c => c.number === currentNum);
+      if (found) {
+        setChapter(found);
+      }
       setLoading(false);
-    }, 100);
-    
-    return () => clearTimeout(timer);
+      window.scrollTo(0, 0);
+      
+      // Delay server buttons appearance
+      setTimeout(() => setShowServers(true), 2500);
+    }, 500);
   }, [currentNum, chapters]);
 
   // Hide controls on scroll down, show on scroll up
@@ -53,13 +57,8 @@ const ChapterReader: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#121212] flex flex-col pt-20 px-4">
-        <div className="max-w-4xl mx-auto w-full space-y-4">
-          <div className="h-10 w-48 bg-gray-800 animate-pulse rounded-lg mb-8"></div>
-          {[1, 2, 3].map(i => (
-            <div key={i} className="aspect-[2/3] w-full bg-gray-800/50 animate-pulse rounded-lg"></div>
-          ))}
-        </div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-bb-dark">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-bb-blue"></div>
       </div>
     );
   }
@@ -163,9 +162,30 @@ const ChapterReader: React.FC = () => {
                   : "This chapter is still being uploaded. You can try reading it early on our partner server."}
               </p>
               <div className="flex flex-col gap-3">
+                {chapter.number === 344 ? (
+                  <a
+                    href="https://t.me/Mangalix"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-6 py-3 bg-[#0088cc] hover:bg-[#0077b5] text-white font-bold rounded-lg transition-all"
+                  >
+                    <Send size={20} />
+                    Join Telegram
+                  </a>
+                ) : (
+                  <a
+                    href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
+                  >
+                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+                    Read on Partner Server
+                  </a>
+                )}
                 <button
                   onClick={() => navigate('/manga')}
-                  className="px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all shadow-lg shadow-bb-blue/20"
+                  className="px-6 py-3 bg-gray-200 dark:bg-white/5 hover:bg-gray-300 dark:hover:bg-white/10 text-gray-900 dark:text-white font-bold rounded-lg transition-all"
                 >
                   Back to Chapter List
                 </button>
@@ -173,25 +193,24 @@ const ChapterReader: React.FC = () => {
             </div>
           </div>
         ) : readingMode === 'vertical' ? (
-            <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
-              {chapter.pages.map((pageUrl, idx) => (
-                <div key={idx} className="relative w-full aspect-[2/3] bg-gray-100 dark:bg-gray-900">
-                  <img
-                    src={pageUrl}
-                    alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
-                    width="800"
-                    height="1200"
-                    className="absolute inset-0 w-full h-full block"
-                    loading={idx < 2 ? "eager" : "lazy"}
-                    decoding="async"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).parentElement!.style.display = 'none';
-                    }}
-                  />
-                </div>
-              ))}
-            </div>
+          <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
+            {chapter.pages.map((pageUrl, idx) => (
+              <img
+                key={idx}
+                src={pageUrl}
+                alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
+                width="800"
+                height="1200"
+                className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto"
+                loading="lazy"
+                decoding="async"
+                referrerPolicy="no-referrer"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                }}
+              />
+            ))}
+          </div>
         ) : (
           // Horizontal Layout
           <div className="h-full w-full flex overflow-x-auto snap-x snap-mandatory bg-black items-center">

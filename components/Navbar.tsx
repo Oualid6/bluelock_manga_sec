@@ -13,6 +13,7 @@ const Navbar: React.FC = () => {
     { name: 'Home', path: '/' },
     { name: 'All Chapters', path: '/manga' },
     { name: 'Characters', path: '/characters' },
+    { name: 'Explore More Manga', path: 'https://mangalix.com', isExternal: true },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -24,7 +25,7 @@ const Navbar: React.FC = () => {
 
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-2 group">
-            <img src="/logo.png" alt="Blue Lock Manga" width="200" height="40" className="h-10 w-auto" />
+            <img src="/logo.png" alt="Blue Lock Manga" className="h-10 w-auto" />
           </Link>
 
           {/* Desktop Nav */}

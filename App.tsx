@@ -42,25 +42,28 @@ const App: React.FC = () => {
       <ThemeProvider>
         <Router>
           {/* Helps scroll to top on navigation */}
-          {/* Global Layout Shell */}
-          <div className="flex flex-col min-h-screen font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 select-none">
-            <Navbar />
-            <main className="flex-grow">
-              <Suspense fallback={<LoadingSpinner />}>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/manga" element={<MangaList />} />
-                  <Route path="/characters" element={<Characters />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/terms" element={<Legal type="terms" />} />
-                  <Route path="/privacy" element={<Legal type="privacy" />} />
-                  <Route path="/dmca" element={<Legal type="dmca" />} />
-                  <Route path="/disclaimer" element={<Legal type="disclaimer" />} />
-                  <Route path="/chapter/:chapterId" element={<ChapterReader />} />
-                </Routes>
-              </Suspense>
-            </main>
-            <Footer />
+          <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen select-none">
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<LayoutWrapper><Home /></LayoutWrapper>} />
+                <Route path="/manga" element={<LayoutWrapper><MangaList /></LayoutWrapper>} />
+                <Route path="/characters" element={<LayoutWrapper><Characters /></LayoutWrapper>} />
+                <Route path="/about" element={<LayoutWrapper><About /></LayoutWrapper>} />
+                <Route path="/terms" element={<LayoutWrapper><Legal type="terms" /></LayoutWrapper>} />
+
+                <Route path="/privacy" element={<LayoutWrapper><Legal type="privacy" /></LayoutWrapper>} />
+                <Route path="/dmca" element={<LayoutWrapper><Legal type="dmca" /></LayoutWrapper>} />
+                <Route path="/disclaimer" element={<LayoutWrapper><Legal type="disclaimer" /></LayoutWrapper>} />
+
+                {/* Reader often needs less layout distraction, but keeping Nav for consistency. 
+                    Could make a dedicated ReaderLayout here. */}
+                <Route path="/chapter/:chapterId" element={
+                  <>
+                    <ChapterReader />
+                  </>
+                } />
+              </Routes>
+            </Suspense>
           </div>
         </Router>
       </ThemeProvider>

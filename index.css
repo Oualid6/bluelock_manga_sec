@@ -2,14 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  overflow-y: scroll;
-}
-
-.manga-cover-card {
-  aspect-ratio: 2 / 3;
-}
-
 /* Custom Scrollbar for Webkit */
 ::-webkit-scrollbar {
   width: 8px;

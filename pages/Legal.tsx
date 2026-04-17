@@ -23,7 +23,8 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
                             <h2 className="text-xl font-bold mt-6 mb-3">Cookies and Web Beacons</h2>
                             <p className="mb-4">Like any other website, Blue Lock Manga uses 'cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
 
-
+                            <h2 className="text-xl font-bold mt-6 mb-3">Google DoubleClick DART Cookie</h2>
+                            <p className="mb-4">Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href="https://policies.google.com/technologies/ads" className="text-bb-blue hover:underline" target="_blank" rel="noopener noreferrer">https://policies.google.com/technologies/ads</a></p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">CCPA Privacy Rights (Do Not Sell My Personal Information)</h2>
                             <p className="mb-4">Under the CCPA, among other rights, California consumers have the right to request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</p>
