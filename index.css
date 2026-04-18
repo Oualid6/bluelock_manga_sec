@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════ */
+/* FIX 4: Font fallback metrics to prevent CLS on load */
+/* ═══════════════════════════════════════════════════ */
+
+/* Use system fonts as fallback with adjusted metrics so text
+   doesn't reflow when Google Fonts Inter/Oswald finish loading */
+
 /* Custom Scrollbar for Webkit */
 ::-webkit-scrollbar {
   width: 8px;
@@ -17,4 +24,117 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-bb-blue;
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* FIX 4: Reserve space for hero card to prevent CLS  */
+/* ═══════════════════════════════════════════════════ */
+
+.manga-hero-card {
+  width: 100%;
+  min-height: 300px;
+  contain: layout style;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* FIX 5: MOBILE-ONLY SIMPLIFIED DESIGN (performance + UX)       */
+/* Removes GPU-expensive effects, simplifies visual design for   */
+/* faster paint, compositing, and lower CLS on mobile devices.   */
+/* ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+
+  /* ── Remove ALL expensive GPU effects on mobile ── */
+  * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    text-shadow: none !important;
+  }
+
+  /* Only kill animations/ transitions on non-essential elements.
+     Keep minimal transitions for menu open/close to feel smooth. */
+  *:not(nav):not(nav *):not([class*="transition-transform"]) {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0.01ms !important;
+    transition-duration: 0.05ms !important;
+  }
+
+  /* ── Remove box-shadow from decorative elements (keep on nav/buttons) ── */
+  section *:not(button):not(a):not(nav):not(nav *) {
+    box-shadow: none !important;
+  }
+
+  /* ── Simplify the hero manga card ── */
+  .manga-hero-card,
+  [class*="backdrop-blur"],
+  [class*="bg-black\/40"] {
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 12px !important;
+  }
+
+  /* ── Reserve space for hero card to prevent CLS ── */
+  .manga-hero-card {
+    width: 100%;
+    min-height: 240px;
+    contain: layout style;
+  }
+
+  /* ── Simpler navigation on mobile ── */
+  nav, header {
+    background: #0a0a0a !important;
+    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  }
+
+  /* ── Reduce font complexity for faster paint ── */
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  h1 { font-size: 1.75rem !important; }
+  h2 { font-size: 1.25rem !important; }
+  h3 { font-size: 1.1rem !important; }
+
+  /* ── Simpler manga grid cards ── */
+  .manga-card,
+  [class*="hover:-translate-y"] {
+    border-radius: 8px !important;
+    overflow: hidden;
+  }
+  [class*="hover:-translate-y"] {
+    transform: none !important;
+  }
+
+  /* ── Make buttons simpler and tappable (44px minimum) ── */
+  button, a[role="button"], .btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* ── Spacing tightened for mobile ── */
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* ── Disable hover effects (they don't apply on touch anyway) ── */
+  .hover\:scale-105:hover {
+    transform: none !important;
+  }
+  .hover\:-translate-y-1:hover {
+    transform: none !important;
+  }
+
+  /* ── Hero section simplified ── */
+  .hero-section,
+  section[class*="min-h-[85vh]"] {
+    min-height: 60vh !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
 }

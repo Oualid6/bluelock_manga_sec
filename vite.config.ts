@@ -12,6 +12,8 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: false,
       minify: 'esbuild',
+      cssCodeSplit: true,         // Split CSS per page — less CSS loaded per route
+      cssMinify: 'esbuild',      // Faster CSS minification
       rollupOptions: {
         output: {
           manualChunks: {

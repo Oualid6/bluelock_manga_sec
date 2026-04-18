@@ -95,7 +95,7 @@ const ChapterReader: React.FC = () => {
 
 
       {/* Sticky Top Controls */}
-      <div className={`fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur shadow-md transition-transform duration-300 z-50 ${showControls ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className={`fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 shadow-md transition-transform duration-300 z-50 ${showControls ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Link to="/manga" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
@@ -149,7 +149,7 @@ const ChapterReader: React.FC = () => {
       <div className={`flex-1 pt-16 ${readingMode === 'horizontal' ? 'h-[calc(100vh-64px)] overflow-hidden' : ''}`}>
         {chapter.pages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
-            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm max-w-md w-full shadow-2xl">
+            <div className="bg-white/5 p-8 rounded-2xl border border-white/10 max-w-md w-full shadow-2xl">
               {chapter.number === 344 && (
                 <h1 className="text-xl md:text-2xl font-heading font-bold text-bb-blue mb-2 text-center">
                   Blue Lock Manga Chapter 344
@@ -233,7 +233,7 @@ const ChapterReader: React.FC = () => {
                     if (parent) parent.style.display = 'none';
                   }}
                 />
-                <span className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-mono backdrop-blur-md">
+                <span className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-mono">
                   {idx + 1} / {chapter.pages.length}
                 </span>
               </div>

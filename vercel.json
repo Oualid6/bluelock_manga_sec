@@ -1,4 +1,6 @@
 {
+    "cleanUrls": true,
+    "trailingSlash": false,
     "headers": [
         {
             "source": "/assets/(.*)",
@@ -10,13 +12,36 @@
             ]
         },
         {
-            "source": "/(.*)\\.(jpg|jpeg|png|webp|svg|ico)",
+            "source": "/(.*)\\.(jpg|jpeg|png|webp|svg|ico|woff|woff2|ttf|eot)",
             "headers": [
                 {
                     "key": "Cache-Control",
-                    "value": "public, max-age=86400"
+                    "value": "public, max-age=2592000"
                 }
             ]
+        },
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                },
+                {
+                    "key": "X-Frame-Options",
+                    "value": "DENY"
+                },
+                {
+                    "key": "Referrer-Policy",
+                    "value": "no-referrer-when-downgrade"
+                }
+            ]
+        }
+    ],
+    "rewrites": [
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ]
 }

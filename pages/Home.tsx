@@ -27,10 +27,12 @@ const Home: React.FC = () => {
         <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
           <img
             src="/blue-lock.webp"
-            alt=""
+            alt="Blue Lock Manga background"
             width="1920"
             height="1080"
             fetchPriority="high"
+            loading="eager"
+            decoding="async"
             className="w-full h-full object-cover"
           />
         </div>
@@ -47,7 +49,7 @@ const Home: React.FC = () => {
           </p>
 
           {/* Info Card - Dark by default, Light/Dark supported if needed, but keeping Dark for Hero */}
-          <div className="w-full bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 mb-10 shadow-2xl">
+          <div className="manga-hero-card w-full bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 mb-10 shadow-2xl">
             <div className="flex flex-col lg:flex-row gap-8">
 
               {/* Left Column: Stats & Meta */}
@@ -134,7 +136,7 @@ const Home: React.FC = () => {
                 href="https://mangalix.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 border border-white/20 bg-white/5 backdrop-blur-sm text-lg font-bold rounded-lg text-white hover:bg-white hover:text-black transition-all"
+                className="inline-flex items-center justify-center px-8 py-4 border border-white/20 bg-white/5 text-lg font-bold rounded-lg text-white hover:bg-white hover:text-black transition-all"
               >
                 Explore More Manga
               </a>

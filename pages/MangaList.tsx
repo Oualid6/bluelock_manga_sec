@@ -48,7 +48,7 @@ const MangaList: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 -mt-8 relative z-20">
 
         {/* Controls Bar */}
-        <div className="bg-white dark:bg-[#1a1a1a] p-4 rounded-xl shadow-xl shadow-black/10 border border-gray-100 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 mb-10 backdrop-blur-md">
+        <div className="bg-white dark:bg-[#1a1a1a] p-4 rounded-xl shadow-xl shadow-black/10 border border-gray-100 dark:border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
 
           <div className="flex items-center gap-2 text-gray-500 dark:text-gray-400 font-medium px-2">
             <BookOpen size={20} className="text-bb-blue" />
