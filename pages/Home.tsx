@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Users, Star, Bookmark } from 'lucide-react';
+import { ArrowRight, BookOpen, Users, Star, Bookmark, Share2 } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { useManga } from '../context/MangaContext';
 import { ARCS } from '../constants';
@@ -107,6 +107,68 @@ const Home: React.FC = () => {
 
               {/* Right Column: Actions/Social Proof */}
               <div className="flex lg:flex-col justify-center items-center gap-8 min-w-[140px]">
+                
+                {/* Share Option */}
+                <div className="flex flex-col items-center w-full pb-6 border-b lg:border-b-0 lg:border-r border-white/10 lg:pr-6 lg:mb-0 mb-6 last:border-0">
+                  <span className="text-gray-500 text-[10px] font-bold uppercase tracking-[0.2em] mb-4 flex items-center gap-2">
+                    <Share2 className="w-3 h-3" /> Share Now
+                  </span>
+                  <div className="flex items-center gap-4">
+                    {[
+                      { 
+                        name: 'WhatsApp', 
+                        icon: (props: any) => (
+                          <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-4.821 4.754a5.97 5.97 0 0 1-3.058-.845l-.219-.13-2.273.595.605-2.216-.142-.227a5.961 5.961 0 0 1-.913-3.15c0-3.302 2.687-5.989 5.989-5.989 3.301 0 5.989 2.687 5.989 5.989 0 3.301-2.688 5.989-5.989 5.989m5.99-11.979C15.013 3.535 12.333 2.5 9.475 2.5 4.241 2.5 0 6.741 0 11.975c0 1.673.437 3.306 1.265 4.742L0 23.5l6.916-1.815c1.433.782 3.053 1.196 4.706 1.191l.004.004c5.234 0 9.475-4.24 9.475-9.474 0-2.537-.987-4.922-2.778-6.713" />
+                          </svg>
+                        ),
+                        url: `https://api.whatsapp.com/send?text=Read%20Blue%20Lock%20Manga%20Online%20in%20High%20Quality%21%20https%3A%2F%2Fbluelocken.com`,
+                        color: 'text-gray-400 hover:text-green-500'
+                      },
+                      { 
+                        name: 'X', 
+                        icon: (props: any) => (
+                          <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+                            <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932L18.901 1.153zM17.61 20.644h2.039L6.486 3.24H4.298L17.61 20.644z" />
+                          </svg>
+                        ),
+                        url: `https://twitter.com/intent/tweet?url=https%3A%2F%2Fbluelocken.com&text=Read%20Blue%20Lock%20Manga%20Online%20in%20High%20Quality%21`,
+                        color: 'text-gray-400 hover:text-white'
+                      },
+                      { 
+                        name: 'Facebook', 
+                        icon: (props: any) => (
+                          <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                          </svg>
+                        ),
+                        url: `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fbluelocken.com`,
+                        color: 'text-gray-400 hover:text-blue-600'
+                      },
+                      { 
+                        name: 'Reddit', 
+                        icon: (props: any) => (
+                          <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+                            <path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.362.73-.591 1.212-.591.92 0 1.665.746 1.665 1.665 0 .656-.378 1.22-.931 1.492.012.19.016.38.016.57 0 2.954-3.385 5.356-7.56 5.356s-7.56-2.402-7.56-5.356c0-.183.002-.366.012-.547-.577-.266-.968-.847-.968-1.515 0-.919.746-1.665 1.665-1.665.498 0 .937.22 1.243.565 1.18-.813 2.784-1.353 4.555-1.45L11.83 5.48a.253.253 0 0 1 .196-.3l2.843-.6c.075-.084.183-.136.31-.136zm-8.23 7.824a1.18 1.18 0 0 0-1.18 1.18c0 .652.529 1.18 1.18 1.18.652 0 1.18-.528 1.18-1.18a1.18 1.18 0 0 0-1.18-1.18zm6.44 0a1.18 1.18 0 0 0-1.18 1.18c0 .652.529 1.18 1.18 1.18.652 0 1.18-.528 1.18-1.18a1.18 1.18 0 0 0-1.18-1.18z" />
+                          </svg>
+                        ),
+                        url: `https://www.reddit.com/submit?url=https%3A%2F%2Fbluelocken.com&title=Read%20Blue%20Lock%20Manga%20Online%20in%20High%20Quality%21`,
+                        color: 'text-gray-400 hover:text-orange-600'
+                      }
+                    ].map(social => (
+                      <a 
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`transition-all duration-300 hover:scale-110 ${social.color}`}
+                        aria-label={`Share on ${social.name}`}
+                      >
+                        <social.icon className="w-5 h-5" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
 
                 <button
                   onClick={() => {
