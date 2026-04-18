@@ -46,6 +46,18 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Oswald:wght@500;700&display=swap" />
   </noscript>
 
+  <!-- Inline critical CSS: renders above-the-fold instantly while main CSS loads async -->
+  <style>
+    /* Critical: prevents FOUC — dark bg + font stack render immediately */
+    html, body { margin: 0; padding: 0; background: #121212; color: #f3f4f6; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; }
+    #root { min-height: 100vh; }
+    /* Reserve nav space to prevent CLS */
+    nav { height: 64px; background: #0a0a0a; position: sticky; top: 0; z-index: 50; }
+    /* Font display swap fallback */
+    .font-heading, h1, h2, h3 { font-family: 'Oswald', -apple-system, sans-serif; }
+  </style>
+
   <script type="importmap">
 {
   "imports": {

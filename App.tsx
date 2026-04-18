@@ -5,8 +5,11 @@ import { MangaProvider } from './context/MangaContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-// Lazy load pages for performance
-const Home = lazy(() => import('./pages/Home'));
+// Home is eagerly imported — it's the landing page and must load instantly
+// to avoid the JS chain: index → Home → SEOHead → icons (saves ~400ms TBT)
+import Home from './pages/Home';
+
+// Lazy load non-landing pages for performance
 const MangaList = lazy(() => import('./pages/MangaList'));
 const ChapterReader = lazy(() => import('./pages/ChapterReader'));
 const Characters = lazy(() => import('./pages/Characters'));
