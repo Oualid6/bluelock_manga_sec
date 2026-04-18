@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send, ArrowLeft } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
@@ -96,51 +96,57 @@ const ChapterReader: React.FC = () => {
 
       {/* Sticky Top Controls */}
       <div className={`fixed top-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 shadow-md transition-transform duration-300 z-50 ${showControls ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link to="/manga" className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors">
-              <ChevronLeft size={24} className="dark:text-white" />
+        <div className="max-w-7xl mx-auto px-2 md:px-4 h-16 flex items-center justify-between gap-2">
+          {/* Left: Library Back and Title */}
+          <div className="flex items-center gap-1 md:gap-3 min-w-0">
+            <Link to="/manga" className="p-1.5 md:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors flex-shrink-0" title="Back to Library">
+              <ArrowLeft size={22} className="dark:text-white md:w-6 md:h-6" />
             </Link>
-            <div className="flex flex-col">
-              <span className="text-xs text-bb-blue font-bold uppercase tracking-wider">Reading</span>
-              <h1 className="font-bold text-sm md:text-base dark:text-white truncate max-w-[150px] md:max-w-md">
+            <div className="flex flex-col min-w-0">
+              <span className="text-[10px] md:text-xs text-bb-blue font-bold uppercase tracking-wider hidden sm:block">Reading</span>
+              <h1 className="font-bold text-sm md:text-lg dark:text-white whitespace-nowrap">
                 Ch. {chapter.number}
               </h1>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 bg-gray-100 dark:bg-black/20 p-1 rounded-lg">
-            <button
-              onClick={() => setReadingMode('vertical')}
-              className={`p-2 rounded-md transition-all ${readingMode === 'vertical' ? 'bg-white dark:bg-bb-blue text-bb-blue dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white'}`}
-              title="Vertical Scroll"
-            >
-              <ArrowDown size={20} />
-            </button>
-            <button
-              onClick={() => setReadingMode('horizontal')}
-              className={`p-2 rounded-md transition-all ${readingMode === 'horizontal' ? 'bg-white dark:bg-bb-blue text-bb-blue dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white'}`}
-              title="Horizontal Slide"
-            >
-              <ArrowRight size={20} />
-            </button>
-          </div>
+          {/* Right: Controls (Toggle + Nav) */}
+          <div className="flex items-center gap-1 md:gap-4 flex-shrink-0">
+            {/* Mode Toggle */}
+            <div className="flex items-center gap-0.5 md:gap-1 bg-gray-100 dark:bg-black/20 p-1 rounded-lg">
+              <button
+                onClick={() => setReadingMode('vertical')}
+                className={`p-1.5 md:p-2 rounded-md transition-all ${readingMode === 'vertical' ? 'bg-white dark:bg-bb-blue text-bb-blue dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}
+                title="Vertical Scroll"
+              >
+                <ArrowDown size={18} className="md:w-5 md:h-5" />
+              </button>
+              <button
+                onClick={() => setReadingMode('horizontal')}
+                className={`p-1.5 md:p-2 rounded-md transition-all ${readingMode === 'horizontal' ? 'bg-white dark:bg-bb-blue text-bb-blue dark:text-white shadow-sm' : 'text-gray-500 dark:text-gray-400'}`}
+                title="Horizontal Slide"
+              >
+                <ArrowRight size={18} className="md:w-5 md:h-5" />
+              </button>
+            </div>
 
-          <div className="flex items-center gap-2">
-            <button
-              disabled={!prevChapter}
-              onClick={() => prevChapter && handleNav(prevChapter.number)}
-              className="p-2 disabled:opacity-30 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md dark:text-white transition-colors"
-            >
-              <ChevronLeft size={24} />
-            </button>
-            <button
-              disabled={!nextChapter}
-              onClick={() => nextChapter && handleNav(nextChapter.number)}
-              className="p-2 disabled:opacity-30 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md dark:text-white transition-colors"
-            >
-              <ChevronRight size={24} />
-            </button>
+            {/* Prev/Next Nav */}
+            <div className="flex items-center gap-1 md:gap-2">
+              <button
+                disabled={!prevChapter}
+                onClick={() => prevChapter && handleNav(prevChapter.number)}
+                className="p-1.5 md:p-2 disabled:opacity-30 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md dark:text-white transition-colors"
+              >
+                <ChevronLeft size={22} className="md:w-6 md:h-6" />
+              </button>
+              <button
+                disabled={!nextChapter}
+                onClick={() => nextChapter && handleNav(nextChapter.number)}
+                className="p-1.5 md:p-2 disabled:opacity-30 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md dark:text-white transition-colors"
+              >
+                <ChevronRight size={22} className="md:w-6 md:h-6" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

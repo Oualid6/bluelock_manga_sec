@@ -12,6 +12,9 @@ export default {
     darkMode: 'class',
     theme: {
         extend: {
+            screens: {
+                'xs': '400px',
+            },
             colors: {
                 'bb-blue': '#134a9f', // Blue Lock Blue (Cyan/Electric Blue)
                 'bb-light': '#E3F2FD',
