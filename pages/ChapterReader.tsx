@@ -253,7 +253,6 @@ const ChapterReader: React.FC = () => {
       <div className="bg-white dark:bg-[#121212] relative z-10 block">
         <div className="max-w-4xl mx-auto pt-10 pb-20 px-4 flex flex-col items-center gap-10">
           
-          {/* Adsterra Smartlink Server Selection Section REMOVED */}
           <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500">
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-800"></div>
             <span className="uppercase tracking-[0.2em] text-xs font-bold">End of Chapter {chapter.number}</span>
