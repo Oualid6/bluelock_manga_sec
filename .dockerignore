@@ -1,8 +1,12 @@
 node_modules
 dist
 .git
-.DS_Store
 .env
 .env.local
-Dockerfile
-nginx.conf
+README.md
+*.py
+vercel.json
+.dockerignore
+.gitignore
+.DS_Store
+*.log

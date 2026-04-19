@@ -32,7 +32,14 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       sourcemap: false,
-      minify: 'esbuild',
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+        },
+      },
+      chunkSizeWarningLimit: 500,
       cssCodeSplit: true,
       cssMinify: 'esbuild',
       modulePreload: {
@@ -43,8 +50,11 @@ export default defineConfig(({ mode }) => {
           manualChunks: {
             vendor: ['react', 'react-dom', 'react-router-dom'],
           },
+          // Content-hash filenames for cache-busting
+          chunkFileNames: 'assets/[name]-[hash].js',
+          entryFileNames: 'assets/[name]-[hash].js',
+          assetFileNames: 'assets/[name]-[hash].[ext]',
           // Merge tiny chunks (<1KB icons, SEOHead) into their parent
-          // to eliminate sequential loading chains
           experimentalMinChunkSize: 5000,
         },
       },
@@ -53,6 +63,11 @@ export default defineConfig(({ mode }) => {
       react(),
       asyncCssPlugin(),
     ],
+
+    // Pre-bundle these for faster dev starts and optimized production chunks
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'react-router-dom'],
+    },
     define: {
       'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
