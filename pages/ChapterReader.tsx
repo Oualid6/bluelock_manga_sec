@@ -156,19 +156,19 @@ const ChapterReader: React.FC = () => {
         {chapter.pages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 max-w-md w-full shadow-2xl">
-              {chapter.number === 344 && (
+              {chapter.number === 345 && (
                 <h1 className="text-xl md:text-2xl font-heading font-bold text-bb-blue mb-2 text-center">
-                  Blue Lock Manga Chapter 344
+                  Blue Lock Manga Chapter 345
                 </h1>
               )}
               <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Available Soon...</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                {chapter.number === 344 
+                {chapter.number === 345 
                   ? "Next chapter will be available first on our Telegram channel." 
                   : "This chapter is still being uploaded. You can try reading it early on our partner server."}
               </p>
               <div className="flex flex-col gap-3">
-                {chapter.number === 344 ? (
+                {chapter.number === 345 ? (
                   <a
                     href="https://t.me/Mangalix"
                     target="_blank"
