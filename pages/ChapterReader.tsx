@@ -5,6 +5,8 @@ import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
 import { Chapter } from '../types';
+import MidChapterAd from '../components/ads/MidChapterAd';
+import NativeBannerAd from '../components/ads/NativeBannerAd';
 
 const ChapterReader: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
@@ -201,48 +203,57 @@ const ChapterReader: React.FC = () => {
         ) : readingMode === 'vertical' ? (
           <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
             {chapter.pages.map((pageUrl, idx) => (
-              <img
-                key={idx}
-                src={pageUrl}
-                alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
-                width="800"
-                height="1200"
-                className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto"
-                loading="lazy"
-                decoding="async"
-                referrerPolicy="no-referrer"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).style.display = 'none';
-                }}
-              />
+              <React.Fragment key={idx}>
+                <img
+                  src={pageUrl}
+                  alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
+                  width="800"
+                  height="1200"
+                  className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto"
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+                {idx === 4 && <MidChapterAd />}
+              </React.Fragment>
             ))}
           </div>
         ) : (
           // Horizontal Layout
           <div className="h-full w-full flex overflow-x-auto snap-x snap-mandatory bg-black items-center">
             {chapter.pages.map((pageUrl, idx) => (
-              <div key={idx} className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
-                <img
-                  src={pageUrl}
-                  alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
-                  width="800"
-                  height="1200"
-                  className="max-h-full max-w-full object-contain shadow-2xl bg-gray-900 mx-auto"
-                  loading="lazy"
-                  decoding="async"
-                  referrerPolicy="no-referrer"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
-                    // Also hide the counter for this slide if image fails
-                    const parent = target.parentElement;
-                    if (parent) parent.style.display = 'none';
-                  }}
-                />
-                <span className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-mono">
-                  {idx + 1} / {chapter.pages.length}
-                </span>
-              </div>
+              <React.Fragment key={idx}>
+                <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
+                  <img
+                    src={pageUrl}
+                    alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
+                    width="800"
+                    height="1200"
+                    className="max-h-full max-w-full object-contain shadow-2xl bg-gray-900 mx-auto"
+                    loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      // Also hide the counter for this slide if image fails
+                      const parent = target.parentElement;
+                      if (parent) parent.style.display = 'none';
+                    }}
+                  />
+                  <span className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-mono">
+                    {idx + 1} / {chapter.pages.length}
+                  </span>
+                </div>
+                {idx === 4 && (
+                  <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
+                    <MidChapterAd />
+                  </div>
+                )}
+              </React.Fragment>
             ))}
           </div>
         )}
@@ -253,6 +264,8 @@ const ChapterReader: React.FC = () => {
       <div className="bg-white dark:bg-[#121212] relative z-10 block">
         <div className="max-w-4xl mx-auto pt-10 pb-20 px-4 flex flex-col items-center gap-10">
           
+          <NativeBannerAd />
+
           <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500">
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-800"></div>
             <span className="uppercase tracking-[0.2em] text-xs font-bold">End of Chapter {chapter.number}</span>
