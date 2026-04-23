@@ -8,8 +8,6 @@ import Footer from './components/Footer';
 // Home is eagerly imported — it's the landing page and must load instantly
 // to avoid the JS chain: index → Home → SEOHead → icons (saves ~400ms TBT)
 import Home from './pages/Home';
-import SocialBarAd from './components/ads/SocialBarAd';
-import HeaderBanner from './components/ads/HeaderBanner';
 
 // Lazy load non-landing pages for performance
 const MangaList = lazy(() => import('./pages/MangaList'));
@@ -23,8 +21,7 @@ const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <HeaderBanner />
-      <main className="flex-grow pb-[60px]">
+      <main className="flex-grow">
         {children}
       </main>
       <Footer />
@@ -47,7 +44,6 @@ const App: React.FC = () => {
     <MangaProvider>
       <ThemeProvider>
         <Router>
-          <SocialBarAd />
           {/* Helps scroll to top on navigation */}
           <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen select-none">
             <Suspense fallback={<LoadingSpinner />}>

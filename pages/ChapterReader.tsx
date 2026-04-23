@@ -5,8 +5,6 @@ import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
 import { Chapter } from '../types';
-import MidChapterAd from '../components/ads/MidChapterAd';
-import NativeBannerAd from '../components/ads/NativeBannerAd';
 
 const ChapterReader: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
@@ -170,7 +168,7 @@ const ChapterReader: React.FC = () => {
                   : "This chapter is still being uploaded. You can try reading it early on our partner server."}
               </p>
               <div className="flex flex-col gap-3">
-                {chapter.number === 345 ? (
+                {chapter.number === 345 && (
                   <a
                     href="https://t.me/Mangalix"
                     target="_blank"
@@ -179,16 +177,6 @@ const ChapterReader: React.FC = () => {
                   >
                     <Send size={20} />
                     Join Telegram
-                  </a>
-                ) : (
-                  <a
-                    href="https://landslidegraphsystems.com/dxzqn0f2j?key=840e4e3e762f3e7b9aa87185bcd79ac5"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue hover:bg-blue-600 text-white font-bold rounded-lg transition-all group shadow-lg shadow-bb-blue/20"
-                  >
-                    <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
-                    Read on Partner Server
                   </a>
                 )}
                 <button
@@ -217,7 +205,6 @@ const ChapterReader: React.FC = () => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
-                {idx === 4 && <MidChapterAd />}
               </React.Fragment>
             ))}
           </div>
@@ -248,11 +235,6 @@ const ChapterReader: React.FC = () => {
                     {idx + 1} / {chapter.pages.length}
                   </span>
                 </div>
-                {idx === 4 && (
-                  <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
-                    <MidChapterAd />
-                  </div>
-                )}
               </React.Fragment>
             ))}
           </div>
@@ -263,9 +245,6 @@ const ChapterReader: React.FC = () => {
       {/* Navigation Footer (Visible in all modes, pushed to bottom) */}
       <div className="bg-white dark:bg-[#121212] relative z-10 block">
         <div className="max-w-4xl mx-auto pt-10 pb-20 px-4 flex flex-col items-center gap-10">
-          
-          <NativeBannerAd />
-
           <div className="flex items-center gap-4 text-gray-400 dark:text-gray-500">
             <div className="h-px w-12 bg-gray-300 dark:bg-gray-800"></div>
             <span className="uppercase tracking-[0.2em] text-xs font-bold">End of Chapter {chapter.number}</span>
