@@ -5,8 +5,6 @@ import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
 import { Chapter } from '../types';
-import Banner728x90 from '../components/ads/Banner728x90';
-import Banner300x250 from '../components/ads/Banner300x250';
 
 const ChapterReader: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
@@ -192,78 +190,53 @@ const ChapterReader: React.FC = () => {
           </div>
         ) : readingMode === 'vertical' ? (
           <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
-            {/* Banner before first image */}
-            <Banner728x90 />
-            {chapter.pages.map((pageUrl, idx) => {
-              const middleIndex = Math.floor(chapter.pages.length / 2);
-              return (
-                <React.Fragment key={idx}>
+            {chapter.pages.map((pageUrl, idx) => (
+              <React.Fragment key={idx}>
+                <img
+                  src={pageUrl}
+                  alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
+                  width="800"
+                  height="1200"
+                  className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto"
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+              </React.Fragment>
+            ))}
+          </div>
+        ) : (
+          // Horizontal Layout
+          <div className="h-full w-full flex overflow-x-auto snap-x snap-mandatory bg-black items-center">
+            {chapter.pages.map((pageUrl, idx) => (
+              <React.Fragment key={idx}>
+                <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
                   <img
                     src={pageUrl}
                     alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
                     width="800"
                     height="1200"
-                    className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto"
+                    className="max-h-full max-w-full object-contain shadow-2xl bg-gray-900 mx-auto"
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      // Also hide the counter for this slide if image fails
+                      const parent = target.parentElement;
+                      if (parent) parent.style.display = 'none';
                     }}
                   />
-                  {/* Banner after middle image */}
-                  {idx === middleIndex && <Banner300x250 />}
-                </React.Fragment>
-              );
-            })}
-            {/* Banner after last image */}
-            <Banner728x90 />
-          </div>
-        ) : (
-          // Horizontal Layout
-          <div className="h-full w-full flex overflow-x-auto snap-x snap-mandatory bg-black items-center">
-            {/* Banner slide before first image */}
-            <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2">
-              <Banner728x90 />
-            </div>
-            {chapter.pages.map((pageUrl, idx) => {
-              const middleIndex = Math.floor(chapter.pages.length / 2);
-              return (
-                <React.Fragment key={idx}>
-                  <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
-                    <img
-                      src={pageUrl}
-                      alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
-                      width="800"
-                      height="1200"
-                      className="max-h-full max-w-full object-contain shadow-2xl bg-gray-900 mx-auto"
-                      loading="lazy"
-                      decoding="async"
-                      referrerPolicy="no-referrer"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        const parent = target.parentElement;
-                        if (parent) parent.style.display = 'none';
-                      }}
-                    />
-                    <span className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-mono">
-                      {idx + 1} / {chapter.pages.length}
-                    </span>
-                  </div>
-                  {/* Banner slide after middle image */}
-                  {idx === middleIndex && (
-                    <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2">
-                      <Banner300x250 />
-                    </div>
-                  )}
-                </React.Fragment>
-              );
-            })}
-            {/* Banner slide after last image */}
-            <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2">
-              <Banner728x90 />
-            </div>
+                  <span className="absolute bottom-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-mono">
+                    {idx + 1} / {chapter.pages.length}
+                  </span>
+                </div>
+              </React.Fragment>
+            ))}
           </div>
         )}
 
