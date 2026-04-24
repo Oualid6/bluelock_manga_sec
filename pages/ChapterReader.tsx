@@ -5,8 +5,6 @@ import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
 import { Chapter } from '../types';
-import ResponsiveBanner from '../components/ads/ResponsiveBanner';
-import Banner300x250 from '../components/ads/Banner300x250';
 
 const ChapterReader: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
@@ -192,7 +190,6 @@ const ChapterReader: React.FC = () => {
           </div>
         ) : readingMode === 'vertical' ? (
           <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
-            <ResponsiveBanner />
             {chapter.pages.map((pageUrl, idx) => (
               <React.Fragment key={idx}>
                 <img
@@ -208,12 +205,8 @@ const ChapterReader: React.FC = () => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
-                {idx === Math.floor(chapter.pages.length / 2) - 1 && (
-                  <Banner300x250 />
-                )}
               </React.Fragment>
             ))}
-            <ResponsiveBanner />
           </div>
         ) : (
           // Horizontal Layout
