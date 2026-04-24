@@ -4,6 +4,8 @@ import { ThemeProvider } from './context/ThemeContext';
 import { MangaProvider } from './context/MangaContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import ResponsiveBanner from './components/ads/ResponsiveBanner';
+import Banner300x250 from './components/ads/Banner300x250';
 
 // Home is eagerly imported — it's the landing page and must load instantly
 // to avoid the JS chain: index → Home → SEOHead → icons (saves ~400ms TBT)
@@ -21,9 +23,12 @@ const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
+      <ResponsiveBanner />
       <main className="flex-grow">
         {children}
       </main>
+      <Banner300x250 />
+      <ResponsiveBanner />
       <Footer />
     </div>
   );
