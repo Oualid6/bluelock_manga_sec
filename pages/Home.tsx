@@ -4,6 +4,7 @@ import { ArrowRight, BookOpen, Users, Star, Bookmark, Share2, Twitter, Facebook,
 import SEOHead from '../components/SEOHead';
 import { useManga } from '../context/MangaContext';
 import { ARCS } from '../constants';
+import ResponsiveBanner from '../components/ads/ResponsiveBanner';
 
 const Home: React.FC = () => {
   const { chapters } = useManga();
@@ -87,7 +88,9 @@ const Home: React.FC = () => {
             Read Blue Lock Manga Online In High Quality, All Chapters and Volumes in English With HD scans and No Sign-Up Required.
           </p>
 
-          {/* Info Card - Dark by default, Light/Dark supported if needed, but keeping Dark for Hero */}
+          <div className="mb-10">
+            <ResponsiveBanner />
+          </div>
           <div className="manga-hero-card w-full bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 mb-10 shadow-2xl">
             <div className="flex flex-col lg:flex-row gap-8">
 
