@@ -1,13 +1,13 @@
 import { Arc, Chapter, Character } from "./types";
 
-export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 345 }, (_, i) => {
+export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 346 }, (_, i) => {
   const number = i + 1;
   return {
     id: String(number),
     number: number,
     title: `Blue Lock Chapter ${number}`,
     releaseDate: new Date().toISOString(), // Mock date, normally would vary
-    pages: Array.from({ length: number === 345 ? 20 : 80 }, (_, p) =>
+    pages: number === 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) =>
       `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number}/blue_lock_${number}_${p + 1}.jpg`
     )
   };
@@ -102,7 +102,7 @@ export const ARCS: Arc[] = [
     title: "Neo Egoist League",
     description: "Blue Lock players join top European U-20 teams to prove their worth on the world stage.",
     chapterStart: 153,
-    chapterEnd: 345,
+    chapterEnd: 346,
     image: "https://picsum.photos/600/300?random=22"
   }
 ];
