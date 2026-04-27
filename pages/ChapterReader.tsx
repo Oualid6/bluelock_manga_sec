@@ -5,6 +5,7 @@ import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
 import { Chapter } from '../types';
+import ResponsiveBanner from '../components/ads/ResponsiveBanner';
 
 const ChapterReader: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
@@ -75,7 +76,7 @@ const ChapterReader: React.FC = () => {
   }
 
   return (
-    <div className="bg-gray-100 dark:bg-[#121212] min-h-screen flex flex-col">
+    <div className="bg-gray-100 dark:bg-[#121212] min-h-screen flex flex-col" style={{ paddingBottom: '60px' }}>
       <SEOHead
         title={`Blue Lock Manga Chapter ${chapter.number} - Read Online`}
         description={`Read Blue Lock Manga Chapter ${chapter.number}: ${chapter.title} online in high quality free. Official English scans available.`}
@@ -190,6 +191,7 @@ const ChapterReader: React.FC = () => {
           </div>
         ) : readingMode === 'vertical' ? (
           <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
+            <ResponsiveBanner />
             {chapter.pages.map((pageUrl, idx) => (
               <React.Fragment key={idx}>
                 <img
@@ -205,6 +207,9 @@ const ChapterReader: React.FC = () => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
+                {idx === Math.floor(chapter.pages.length / 2) - 1 && (
+                  <ResponsiveBanner />
+                )}
               </React.Fragment>
             ))}
           </div>
@@ -240,6 +245,11 @@ const ChapterReader: React.FC = () => {
           </div>
         )}
 
+      </div>
+
+      {/* Banner before end-of-chapter navigation */}
+      <div className="bg-white dark:bg-[#121212] pt-6">
+        <ResponsiveBanner />
       </div>
 
       {/* Navigation Footer (Visible in all modes, pushed to bottom) */}

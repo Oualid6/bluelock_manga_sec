@@ -4,6 +4,8 @@ import { ThemeProvider } from './context/ThemeContext';
 import { MangaProvider } from './context/MangaContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SocialBar from './components/ads/SocialBar';
+import ResponsiveBanner from './components/ads/ResponsiveBanner';
 
 // Home is eagerly imported — it's the landing page and must load instantly
 // to avoid the JS chain: index → Home → SEOHead → icons (saves ~400ms TBT)
@@ -19,11 +21,13 @@ const Legal = lazy(() => import('./pages/Legal'));
 // Wrapper to conditionally render layout based on path
 const LayoutWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" style={{ paddingBottom: '60px' }}>
       <Navbar />
+      <ResponsiveBanner />
       <main className="flex-grow">
         {children}
       </main>
+      <ResponsiveBanner />
       <Footer />
     </div>
   );
@@ -45,6 +49,7 @@ const App: React.FC = () => {
       <ThemeProvider>
         <Router>
           {/* Helps scroll to top on navigation */}
+          <SocialBar />
           <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen select-none">
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
