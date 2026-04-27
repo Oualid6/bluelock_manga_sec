@@ -191,7 +191,6 @@ const ChapterReader: React.FC = () => {
           </div>
         ) : readingMode === 'vertical' ? (
           <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
-            <ResponsiveBanner />
             {chapter.pages.map((pageUrl, idx) => (
               <React.Fragment key={idx}>
                 <img
@@ -207,6 +206,9 @@ const ChapterReader: React.FC = () => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
+                {idx === 0 && (
+                  <ResponsiveBanner />
+                )}
                 {idx === Math.floor(chapter.pages.length / 2) - 1 && (
                   <ResponsiveBanner />
                 )}
