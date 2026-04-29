@@ -209,9 +209,7 @@ const ChapterReader: React.FC = () => {
                 {idx === 0 && (
                   <ResponsiveBanner />
                 )}
-                {idx === Math.floor(chapter.pages.length / 2) - 1 && (
-                  <ResponsiveBanner />
-                )}
+
               </React.Fragment>
             ))}
           </div>
@@ -249,10 +247,7 @@ const ChapterReader: React.FC = () => {
 
       </div>
 
-      {/* Banner before end-of-chapter navigation */}
-      <div className="bg-white dark:bg-[#121212] pt-6">
-        <ResponsiveBanner />
-      </div>
+
 
       {/* Navigation Footer (Visible in all modes, pushed to bottom) */}
       <div className="bg-white dark:bg-[#121212] relative z-10 block">
