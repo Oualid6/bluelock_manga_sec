@@ -1,5 +1,5 @@
 {
-  "name": "blue-box-manga",
+  "name": "bluelock-manga",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,20 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/axios": "^0.9.36",
-    "@types/compression": "^1.8.1",
-    "@types/express": "^5.0.6",
-    "axios": "^1.15.0",
-    "compression": "^1.8.1",
-    "express": "^5.2.1",
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "react-router-dom": "^7.11.0",
-    "sharp": "^0.34.5"
+    "react-router-dom": "^7.11.0"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.23",
     "postcss": "^8.5.6",
