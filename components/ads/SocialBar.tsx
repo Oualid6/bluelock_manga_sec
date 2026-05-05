@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const SOCIAL_BAR_SRC = 'https://landslidegraphsystems.com/94/12/2d/94122da8a5f6856e50c578d4251a8e95.js';
+const SOCIAL_BAR_SRC = 'https://wholespankmelon.com/94/12/2d/94122da8a5f6856e50c578d4251a8e95.js';
 
 export default function SocialBar() {
   useEffect(() => {

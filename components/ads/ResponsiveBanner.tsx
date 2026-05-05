@@ -5,14 +5,14 @@ const DESKTOP_AD = {
   key: '907e49ba4d0f33f308658c004fcf8ff8',
   width: 728,
   height: 90,
-  invokeUrl: 'https://landslidegraphsystems.com/907e49ba4d0f33f308658c004fcf8ff8/invoke.js',
+  invokeUrl: 'https://wholespankmelon.com/907e49ba4d0f33f308658c004fcf8ff8/invoke.js',
 };
 
 const MOBILE_AD = {
   key: '691413d2b6980d8308513b7de3d9ea7c',
   width: 320,
   height: 50,
-  invokeUrl: 'https://landslidegraphsystems.com/691413d2b6980d8308513b7de3d9ea7c/invoke.js',
+  invokeUrl: 'https://wholespankmelon.com/691413d2b6980d8308513b7de3d9ea7c/invoke.js',
 };
 
 function getIsMobile() {
