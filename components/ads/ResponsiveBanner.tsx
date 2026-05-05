@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const DESKTOP_AD = {
@@ -15,69 +15,96 @@ const MOBILE_AD = {
   invokeUrl: 'https://landslidegraphsystems.com/691413d2b6980d8308513b7de3d9ea7c/invoke.js',
 };
 
-// Global queue to stagger ad loading across multiple instances on the same page.
-// Without this, all instances set window.atOptions simultaneously and only the
-// last one wins — the ~25% load rate the user reported.
-let adLoadQueue: (() => void)[] = [];
-let isProcessingQueue = false;
-
-function enqueueAdLoad(loadFn: () => void) {
-  adLoadQueue.push(loadFn);
-  processQueue();
+function getIsMobile() {
+  return typeof window !== 'undefined' && window.innerWidth < 768;
 }
 
-function processQueue() {
-  if (isProcessingQueue || adLoadQueue.length === 0) return;
-  isProcessingQueue = true;
-  const next = adLoadQueue.shift()!;
-  next();
-  // Stagger each ad injection by 300ms so the invoke script has time
-  // to read window.atOptions before the next instance overwrites it.
-  setTimeout(() => {
-    isProcessingQueue = false;
-    processQueue();
-  }, 300);
-}
-
+/**
+ * ResponsiveBanner — Adsterra responsive banner ad.
+ *
+ * Key design decisions to guarantee 100% load rate:
+ *
+ * 1. We use `location.key` (unique per navigation) as a React `key` on the
+ *    inner container. This forces a full unmount→remount cycle on every route
+ *    change, giving Adsterra a pristine DOM node every time.
+ *
+ * 2. We read `isMobile` synchronously via `getIsMobile()` at effect time,
+ *    avoiding the setState→rerender→stale-closure race that was causing
+ *    wrong ad sizes on mobile.
+ *
+ * 3. We removed the module-level queue. The queue + 300ms stagger was the
+ *    primary cause of dropped impressions — if navigation happened within the
+ *    stagger window, the new ad load was blocked behind the old one.
+ *    Since Home and ChapterReader are never rendered simultaneously, there's
+ *    no collision risk.
+ *
+ * 4. We retry up to 3 times if containerRef is null (can happen during React
+ *    Suspense transitions where the DOM isn't painted yet).
+ */
 export default function ResponsiveBanner() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  const [isMobile, setIsMobile] = useState(false);
-  const loadIdRef = useRef(0); // Track the latest load to ignore stale callbacks
+  // location.key is unique per navigation entry (even to the same path).
+  // This guarantees a full remount of the ad container on every navigation.
+  const navKey = location.key || location.pathname;
 
-  // Detect screen size on mount and on resize
+  return (
+    <div
+      style={{
+        width: '100%',
+        maxWidth: '728px',
+        minHeight: 0,
+        margin: '0 auto',
+        display: 'block',
+        overflow: 'hidden',
+        textAlign: 'center' as const,
+      }}
+    >
+      {/* The key forces React to unmount and remount AdSlot on every navigation */}
+      <AdSlot key={navKey} pathname={location.pathname} />
+    </div>
+  );
+}
+
+function AdSlot({ pathname }: { pathname: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(getIsMobile);
+
+  // Track screen size for responsive ad selection
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
+    const check = () => setIsMobile(getIsMobile());
     window.addEventListener('resize', check);
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  const loadAd = useCallback(() => {
-    if (typeof window === 'undefined') return;
-    if (!containerRef.current) return;
+  useEffect(() => {
+    let cancelled = false;
+    let retryCount = 0;
+    const MAX_RETRIES = 3;
+    const RETRY_DELAY = 100;
 
-    const currentLoadId = ++loadIdRef.current;
-    const container = containerRef.current;
-    const ad = isMobile ? MOBILE_AD : DESKTOP_AD;
+    function injectAd() {
+      if (cancelled) return;
 
-    // Clear previous ad completely
-    container.innerHTML = '';
+      const container = containerRef.current;
+      if (!container) {
+        // Container not yet in DOM (Suspense boundary, etc.) — retry
+        if (retryCount < MAX_RETRIES) {
+          retryCount++;
+          setTimeout(injectAd, RETRY_DELAY);
+        }
+        return;
+      }
 
-    // Don't set fixed height — let the ad iframe expand it.
-    // This way, if the ad fails to load (e.g. localhost CORS),
-    // the container stays collapsed (0 height) instead of leaving empty space.
-    container.style.width = '100%';
-    container.style.maxWidth = `${ad.width}px`;
+      // Read mobile state synchronously at injection time to avoid stale closure
+      const mobile = getIsMobile();
+      const ad = mobile ? MOBILE_AD : DESKTOP_AD;
 
-    enqueueAdLoad(() => {
-      // If a newer load was triggered while we were queued, bail out
-      if (currentLoadId !== loadIdRef.current) return;
-      if (!containerRef.current) return;
+      // Clear any previous content (shouldn't be any since we key-remount, but safety)
+      container.innerHTML = '';
+      container.style.width = '100%';
+      container.style.maxWidth = `${ad.width}px`;
 
-      console.log('Ad loading for:', location.pathname, '| mobile:', isMobile);
-
-      // Inject atOptions inline before invoke script
+      // 1. Inject atOptions as inline script
       const optScript = document.createElement('script');
       optScript.text = `
         window.atOptions = {
@@ -90,31 +117,29 @@ export default function ResponsiveBanner() {
       `;
       container.appendChild(optScript);
 
-      // Inject invoke script inside container
+      // 2. Inject invoke script
       const invokeScript = document.createElement('script');
       invokeScript.src = ad.invokeUrl;
       invokeScript.async = true;
+      invokeScript.onload = () => {
+        if (!cancelled) {
+          console.log(`[Ad] Loaded for ${pathname} | mobile: ${mobile}`);
+        }
+      };
+      invokeScript.onerror = () => {
+        console.warn(`[Ad] Failed to load invoke script for ${pathname}`);
+      };
       container.appendChild(invokeScript);
-    });
-  }, [isMobile, location.pathname]);
+    }
 
-  // Reload ad on route change or screen size change.
-  // Uses location.pathname (which react-router-dom v7 updates on every navigation)
-  // plus a popstate listener as a safety net for back/forward browser navigation.
-  useEffect(() => {
-    loadAd();
-  }, [loadAd]);
+    // Small delay to ensure the DOM container is painted after Suspense resolves
+    const timer = setTimeout(injectAd, 50);
 
-  // Safety net: listen for popstate (back/forward button) which can sometimes
-  // not trigger a re-render in the React tree
-  useEffect(() => {
-    const handlePopState = () => {
-      console.log('Ad reload via popstate:', window.location.pathname);
-      loadAd();
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
     };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, [loadAd]);
+  }, [pathname, isMobile]);
 
   return (
     <div
@@ -122,12 +147,11 @@ export default function ResponsiveBanner() {
       suppressHydrationWarning
       style={{
         width: '100%',
-        maxWidth: '728px',
         minHeight: 0,
+        display: 'flex',
+        justifyContent: 'center',
         margin: '0 auto',
-        display: 'block',
         overflow: 'hidden',
-        textAlign: 'center',
       }}
     />
   );

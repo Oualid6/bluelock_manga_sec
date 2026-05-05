@@ -2,6 +2,7 @@ import { Arc, Chapter, Character } from "./types";
 
 export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 346 }, (_, i) => {
   const number = i + 1;
+  const paddedChapter = String(number).padStart(3, '0');
   return {
     id: String(number),
     number: number,
@@ -9,7 +10,11 @@ export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 346 }, (_, i) => {
     releaseDate: new Date().toISOString(), // Mock date, normally would vary
     pages: number === 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) =>
       `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number}/blue_lock_${number}_${p + 1}.jpg`
-    )
+    ),
+    pagesEs: number === 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) => {
+      const paddedPage = String(p + 1).padStart(3, '0');
+      return `https://cdn.shadowmanga.es/mangas/s/solo-leveling/${paddedChapter}/${paddedPage}.webp`;
+    })
   };
 }).reverse(); // Latest chapters first
 

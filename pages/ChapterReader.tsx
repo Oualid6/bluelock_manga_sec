@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send, ArrowLeft } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Share2, AlignJustify, Columns, ArrowDown, ArrowRight, Send, ArrowLeft, ArrowUp } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useManga } from '../context/MangaContext';
@@ -15,7 +15,9 @@ const ChapterReader: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [showControls, setShowControls] = useState(true);
   const [readingMode, setReadingMode] = useState<'vertical' | 'horizontal'>('vertical');
+
   const [showServers, setShowServers] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   
 
 
@@ -48,12 +50,26 @@ const ChapterReader: React.FC = () => {
       } else {
         setShowControls(true);
       }
+      setShowScrollTop(currentScrollY > 600);
       lastScrollY.current = currentScrollY;
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Preload first 2 images for LCP optimization
+  useEffect(() => {
+    if (chapter) {
+      const pagesToLoad = chapter.pages;
+      pagesToLoad.slice(0, 2).forEach((url) => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = url;
+        document.head.appendChild(link);
+      });
+    }
+  }, [chapter]);
 
 
   if (loading) {
@@ -78,19 +94,45 @@ const ChapterReader: React.FC = () => {
   return (
     <div className="bg-gray-100 dark:bg-[#121212] min-h-screen flex flex-col" style={{ paddingBottom: '60px' }}>
       <SEOHead
-        title={`Blue Lock Manga Chapter ${chapter.number} - Read Online`}
-        description={`Read Blue Lock Manga Chapter ${chapter.number}: ${chapter.title} online in high quality free. Official English scans available.`}
-        schema={{
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": `Blue Lock Chapter ${chapter.number}`,
-          "image": chapter.pages[0],
-          "datePublished": chapter.releaseDate,
-          "author": {
-            "@type": "Person",
-            "name": "Muneyuki Kaneshiro"
+        title={`Blue Lock Chapter ${chapter.number}${chapter.title ? `: ${chapter.title}` : ''} - Read Online`}
+        description={`Read Blue Lock Manga Chapter ${chapter.number}${chapter.title ? `: ${chapter.title}` : ''} online in high quality free. Official English scans available.`}
+        canonicalUrl={`https://bluelock.com/chapter/${chapter.number}`}
+        schema={[
+          {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": `Blue Lock Chapter ${chapter.number}${chapter.title ? `: ${chapter.title}` : ''}`,
+            "image": chapter.pages[0],
+            "datePublished": chapter.releaseDate,
+            "author": {
+              "@type": "Person",
+              "name": "Muneyuki Kaneshiro"
+            }
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://bluelock.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Manga",
+                "item": "https://bluelock.com/manga"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": `Chapter ${chapter.number}`
+              }
+            ]
           }
-        }}
+        ]}
       />
 
 
@@ -113,6 +155,7 @@ const ChapterReader: React.FC = () => {
 
           {/* Right: Controls (Toggle + Nav) */}
           <div className="flex items-center gap-1 md:gap-4 flex-shrink-0">
+
             {/* Mode Toggle */}
             <div className="flex items-center gap-0.5 md:gap-1 bg-gray-100 dark:bg-black/20 p-1 rounded-lg">
               <button
@@ -156,6 +199,9 @@ const ChapterReader: React.FC = () => {
       <div className={`flex-1 pt-16 ${readingMode === 'horizontal' ? 'h-[calc(100vh-64px)] overflow-hidden' : ''}`}>
         {chapter.pages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
+            <div className="w-full max-w-3xl mb-8">
+              <ResponsiveBanner />
+            </div>
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 max-w-md w-full shadow-2xl">
               {chapter.number === 346 && (
                 <h1 className="text-xl md:text-2xl font-heading font-bold text-bb-blue mb-2 text-center">
@@ -190,18 +236,22 @@ const ChapterReader: React.FC = () => {
             </div>
           </div>
         ) : readingMode === 'vertical' ? (
-          <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen">
+          <div className="max-w-4xl mx-auto bg-white dark:bg-black shadow-2xl min-h-screen cursor-pointer" onClick={() => setShowControls(!showControls)}>
             {chapter.pages.map((pageUrl, idx) => (
               <React.Fragment key={idx}>
                 <img
                   src={pageUrl}
                   alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
+                  title={`Blue Lock Chapter ${chapter.number} - Page ${idx + 1}`}
                   width="800"
                   height="1200"
-                  className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto"
+                  className="w-full h-auto block bg-gray-100 dark:bg-gray-900 mx-auto transition-opacity duration-500 opacity-0"
                   loading="lazy"
                   decoding="async"
                   referrerPolicy="no-referrer"
+                  onLoad={(e) => {
+                    (e.target as HTMLImageElement).classList.remove('opacity-0');
+                  }}
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
@@ -215,19 +265,28 @@ const ChapterReader: React.FC = () => {
           </div>
         ) : (
           // Horizontal Layout
-          <div className="h-full w-full flex overflow-x-auto snap-x snap-mandatory bg-black items-center">
+          <div className="h-full w-full flex overflow-x-auto snap-x snap-mandatory bg-black items-center scroll-smooth" id="horizontal-reader" onClick={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const isRight = e.clientX > rect.width / 2;
+            const scrollAmount = rect.width;
+            e.currentTarget.scrollBy({ left: isRight ? scrollAmount : -scrollAmount, behavior: 'smooth' });
+          }}>
             {chapter.pages.map((pageUrl, idx) => (
               <React.Fragment key={idx}>
-                <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative">
+                <div className="w-full h-full flex-shrink-0 snap-center flex items-center justify-center p-2 relative cursor-pointer">
                   <img
                     src={pageUrl}
                     alt={`Blue Lock Chapter ${chapter.number} Page ${idx + 1}`}
+                    title={`Blue Lock Chapter ${chapter.number} - Page ${idx + 1}`}
                     width="800"
                     height="1200"
-                    className="max-h-full max-w-full object-contain shadow-2xl bg-gray-900 mx-auto"
+                    className="max-h-full max-w-full object-contain shadow-2xl bg-gray-900 mx-auto transition-opacity duration-500 opacity-0"
                     loading="lazy"
                     decoding="async"
                     referrerPolicy="no-referrer"
+                    onLoad={(e) => {
+                      (e.target as HTMLImageElement).classList.remove('opacity-0');
+                    }}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
@@ -315,6 +374,14 @@ const ChapterReader: React.FC = () => {
           </p>
         </div>
       </div>
+      {/* Scroll to Top Button */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className={`fixed bottom-6 right-6 p-3 bg-bb-blue text-white rounded-full shadow-lg transition-all duration-300 z-50 ${showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+        title="Back to Top"
+      >
+        <ArrowUp size={24} />
+      </button>
     </div>
   );
 };
