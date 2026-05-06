@@ -6,20 +6,16 @@ export default function SocialBar() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    // Remove any stale script tag so it re-executes on every mount
-    const old = document.querySelector(`script[src="${SOCIAL_BAR_SRC}"]`);
-    if (old) old.remove();
-
+    // Social Bar manages its own state internally.
+    // Just inject it once on app mount.
     const script = document.createElement('script');
     script.src = SOCIAL_BAR_SRC;
     script.async = true;
     script.type = 'text/javascript';
     document.body.appendChild(script);
 
-    return () => {
-      // Cleanup on unmount so the next mount can re-inject
-      script.remove();
-    };
+    // No cleanup on unmount because the script manages itself 
+    // and should persist across route changes.
   }, []);
 
   return null;

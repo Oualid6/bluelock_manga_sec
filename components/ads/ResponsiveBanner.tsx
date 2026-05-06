@@ -103,33 +103,52 @@ function AdSlot({ pathname }: { pathname: string }) {
       container.innerHTML = '';
       container.style.width = '100%';
       container.style.maxWidth = `${ad.width}px`;
+      container.style.height = `${ad.height}px`;
 
-      // 1. Inject atOptions as inline script
-      const optScript = document.createElement('script');
-      optScript.text = `
-        window.atOptions = {
-          key: '${ad.key}',
-          format: 'iframe',
-          height: ${ad.height},
-          width: ${ad.width},
-          params: {}
-        }
+      // Use an iframe to isolate the ad's global variables (window.atOptions)
+      // This allows multiple banners with the same key to coexist on the same page.
+      const html = `
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8">
+            <style>
+              body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: transparent; }
+              div { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
+            </style>
+          </head>
+          <body>
+            <div>
+              <script type="text/javascript">
+                window.atOptions = {
+                  key: '${ad.key}',
+                  format: 'iframe',
+                  height: ${ad.height},
+                  width: ${ad.width},
+                  params: {}
+                };
+              </script>
+              <script type="text/javascript" src="${ad.invokeUrl}"></script>
+            </div>
+          </body>
+        </html>
       `;
-      container.appendChild(optScript);
 
-      // 2. Inject invoke script
-      const invokeScript = document.createElement('script');
-      invokeScript.src = ad.invokeUrl;
-      invokeScript.async = true;
-      invokeScript.onload = () => {
+      const iframe = document.createElement('iframe');
+      iframe.srcdoc = html;
+      iframe.width = '100%';
+      iframe.height = `${ad.height}`;
+      iframe.style.border = 'none';
+      iframe.style.overflow = 'hidden';
+      iframe.scrolling = 'no';
+      
+      iframe.onload = () => {
         if (!cancelled) {
           console.log(`[Ad] Loaded for ${pathname} | mobile: ${mobile}`);
         }
       };
-      invokeScript.onerror = () => {
-        console.warn(`[Ad] Failed to load invoke script for ${pathname}`);
-      };
-      container.appendChild(invokeScript);
+
+      container.appendChild(iframe);
     }
 
     // Small delay to ensure the DOM container is painted after Suspense resolves
