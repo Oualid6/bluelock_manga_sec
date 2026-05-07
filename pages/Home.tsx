@@ -88,7 +88,7 @@ const Home: React.FC = () => {
             Read Blue Lock Manga Online In High Quality, All Chapters and Volumes in English With HD scans and No Sign-Up Required.
           </p>
 
-          <div className="mb-10">
+          <div className="mb-10 w-full">
             <ResponsiveBanner />
           </div>
           <div className="manga-hero-card w-full bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 mb-10 shadow-2xl">
