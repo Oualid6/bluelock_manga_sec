@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Users, Star, Bookmark, Share2, Twitter, Facebook, MessageCircle, X, Link as LinkIcon } from 'lucide-react';
+import { ArrowRight, BookOpen, Star, Bookmark, Share2, Twitter, Facebook, MessageCircle, X, Link as LinkIcon } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { useManga } from '../context/MangaContext';
-import { ARCS } from '../constants';
+import { useLanguage } from '../context/LanguageContext';
 import ResponsiveBanner from '../components/ads/ResponsiveBanner';
 
 const Home: React.FC = () => {
   const { chapters } = useManga();
-  const latestChapter = chapters[0];
+  const { lang, t } = useLanguage();
+  const displayChapters = lang === 'fr' ? chapters.filter(c => c.number <= 343) : chapters;
+  const latestChapter = displayChapters[0];
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const shareData = {
@@ -54,12 +56,12 @@ const Home: React.FC = () => {
       <SEOHead
         title="Blue Lock Manga - Read Online High Quality"
         description="Read Blue Lock Manga online in high quality. The best place for Blue Lock chapters, character info, and latest updates. All chapters available."
-        canonicalUrl="https://bluelocken.com/en"
+        canonicalUrl={`https://bluelocken.com/${lang}`}
         schema={{
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Blue Lock Manga",
-          "url": "https://bluelocken.com/en",
+          "url": `https://bluelocken.com/${lang}`,
         }}
       />
 
@@ -82,11 +84,11 @@ const Home: React.FC = () => {
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
 
           <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-4 drop-shadow-2xl tracking-tighter text-center">
-            BLUE <span className="text-bb-blue">LOCK MANGA</span>
+            {t.hero.titlePrefix} <span className="text-bb-blue">{t.hero.titleHighlight}</span>
           </h1>
 
           <p className="text-gray-300 text-lg md:text-xl max-w-3xl text-center mb-10 font-light leading-relaxed">
-            Read Blue Lock Manga Online In High Quality, All Chapters and Volumes in English With HD scans and No Sign-Up Required.
+            {t.hero.subtitle}
           </p>
 
           <div className="mb-10 w-full">
@@ -110,29 +112,29 @@ const Home: React.FC = () => {
 
                 {/* Info Fields */}
                 <div className="space-y-1">
-                  <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">Rank</span>
-                  <span className="text-white font-medium">1st, 20M views</span>
+                  <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">{t.home.rank}</span>
+                  <span className="text-white font-medium">{t.home.stats.rankValue}</span>
                 </div>
                 <div className="space-y-1">
-                  <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">Release</span>
+                  <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">{t.home.release}</span>
                   <span className="text-white font-medium">2018</span>
                 </div>
                 <div className="space-y-1">
-                  <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">Status</span>
-                  <span className="text-green-400 font-bold">Ongoing</span>
+                  <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">{t.home.status}</span>
+                  <span className="text-green-400 font-bold">{t.home.stats.statusValue}</span>
                 </div>
                 <div className="space-y-1">
-                  <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">Type</span>
-                  <span className="text-white font-medium">Shounen, Sports, Thriller</span>
+                  <span className="text-gray-500 text-xs font-bold uppercase tracking-wider block">{t.home.type}</span>
+                  <span className="text-white font-medium">{t.home.stats.typeValue}</span>
                 </div>
 
                 <div className="col-span-2 sm:col-span-4 flex flex-col gap-3 mt-2">
                   <div className="flex flex-wrap gap-2 items-center border-t border-white/5 pt-3">
-                    <span className="text-gray-500 text-xs font-bold uppercase tracking-wider mr-2">Author(s):</span>
+                    <span className="text-gray-500 text-xs font-bold uppercase tracking-wider mr-2">{t.home.author}</span>
                     <span className="text-white hover:text-bb-blue cursor-pointer transition-colors">Muneyuki Kaneshiro</span>
                   </div>
                   <div className="flex flex-wrap gap-2 items-center border-t border-white/5 pt-3">
-                    <span className="text-gray-500 text-xs font-bold uppercase tracking-wider mr-2">Genre(s):</span>
+                    <span className="text-gray-500 text-xs font-bold uppercase tracking-wider mr-2">{t.home.genre}</span>
                     {['Sports', 'Thriller', 'Psychological', 'Shonen', 'Drama'].map(g => (
                       <span key={g} className="text-xs text-gray-400 hover:text-white transition-colors cursor-pointer">
                         {g},
@@ -140,9 +142,9 @@ const Home: React.FC = () => {
                     ))}
                   </div>
                   <div className="flex flex-col gap-2 items-start border-t border-white/5 pt-3">
-                    <span className="text-gray-500 text-xs font-bold uppercase tracking-wider">Synopsis:</span>
+                    <span className="text-gray-500 text-xs font-bold uppercase tracking-wider">{t.home.synopsis}</span>
                     <p className="text-sm text-gray-300 leading-relaxed">
-                      <strong className="text-white">Yoichi Isagi</strong>, a high school striker, is invited to a controversial project called <strong className="text-white">Blue Lock</strong>, designed to create the world's best egoist striker. 300 strikers compete against each other in a battle for survival.
+                      {t.home.stats.synopsisValue}
                     </p>
                   </div>
                 </div>
@@ -178,12 +180,12 @@ const Home: React.FC = () => {
           </div>
 
           {latestChapter && (
-            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
               <Link
-                to={`/chapter/${latestChapter.number}`}
+                to={lang === 'fr' ? `/fr/chapter/${latestChapter.number}` : `/chapter/${latestChapter.number}`}
                 className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-lg text-white bg-bb-blue hover:bg-blue-700 shadow-lg shadow-blue-900/20 transition-all hover:scale-105"
               >
-                Read Chapter {latestChapter.number}
+                {t.hero.readChapter} {latestChapter.number}
               </Link>
               <a
                 href="https://mangalix.com"
@@ -191,7 +193,7 @@ const Home: React.FC = () => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 border border-white/20 bg-white/5 text-lg font-bold rounded-lg text-white hover:bg-white hover:text-black transition-all"
               >
-                Explore More Manga
+                {t.hero.exploreMore}
               </a>
             </div>
           )}
@@ -205,22 +207,22 @@ const Home: React.FC = () => {
         <section className="mb-16">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <BookOpen className="text-bb-blue" /> Latest Releases
+              <BookOpen className="text-bb-blue" /> {t.home.latestReleases}
             </h2>
-            <Link to="/manga" className="text-bb-blue hover:underline flex items-center gap-1">
-              View All <ArrowRight size={16} />
+            <Link to={`/${lang}/manga`} className="text-bb-blue hover:underline flex items-center gap-1">
+              {t.home.viewAll} <ArrowRight size={16} />
             </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {chapters.slice(0, 12).map((chapter) => (
+            {displayChapters.slice(0, 12).map((chapter) => (
               <Link
                 key={chapter.id}
-                to={`/chapter/${chapter.number}`}
+                to={lang === 'fr' ? `/fr/chapter/${chapter.number}` : `/chapter/${chapter.number}`}
                 className="group relative flex flex-col justify-between h-full bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-200 dark:border-white/10 p-5 hover:border-bb-blue/50 hover:bg-gray-50 dark:hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-bb-blue/10"
               >
                 <div className="flex flex-col gap-2">
                   <span className="text-xs font-bold text-bb-blue uppercase tracking-wider">
-                    Chapter {chapter.number}
+                    {t.home.chapter} {chapter.number}
                   </span>
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white leading-tight group-hover:text-bb-blue transition-colors line-clamp-2">
                     {chapter.title}
@@ -228,7 +230,7 @@ const Home: React.FC = () => {
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between">
-                  <span className="text-xs text-gray-500 dark:text-gray-400 font-medium group-hover:text-gray-900 dark:group-hover:text-white transition-colors">Read Now</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 font-medium group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{t.home.readNow}</span>
                   <ArrowRight className="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-bb-blue group-hover:translate-x-1 transition-all" />
                 </div>
               </Link>
@@ -238,26 +240,18 @@ const Home: React.FC = () => {
 
         <section className="mb-16">
           <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-gray-200 dark:border-white/10 shadow-sm">
-            <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-6">About Blue Lock</h2>
+            <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-6">{t.home.aboutTitle}</h2>
             <div className="prose prose-lg dark:prose-invert text-gray-700 dark:text-gray-300 max-w-none space-y-4">
-              <p>
-                <strong className="text-gray-900 dark:text-white">Blue Lock</strong> (Japanese: ブルーロック), is a Japanese sports manga series written by <strong className="text-gray-900 dark:text-white">Muneyuki Kaneshiro</strong> and illustrated by Yusuke Nomura. It has been serialized in Kodansha's <em>Weekly Shōnen Magazine</em> since August 2018. The story follows <strong className="text-gray-900 dark:text-white">Yoichi Isagi</strong> and other strikers in a facility called Blue Lock.
-              </p>
+              <p>{t.home.about.p1}</p>
 
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Sports and Survival</h3>
-              <p>
-                Unlike traditional sports manga, <strong className="text-bb-blue">Blue Lock</strong> introduces a battle royale element where strikers must outscore each other to survive and become the best. It focuses on egoism and individual skill rather than teamwork.
-              </p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">{t.home.about.h2}</h3>
+              <p>{t.home.about.p2}</p>
 
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Key Characters</h3>
-              <p>
-                The series features intense characters including <strong className="text-gray-900 dark:text-white">Yoichi Isagi</strong>, the eccentric <strong className="text-gray-900 dark:text-white">Meguru Bachira</strong>, and the disciplined <strong className="text-gray-900 dark:text-white">Rensuke Kunigami</strong>.
-              </p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">{t.home.about.h3}</h3>
+              <p>{t.home.about.p3}</p>
 
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">Why Read Blue Lock?</h3>
-              <p>
-                <strong className="text-gray-900 dark:text-white">Blue Lock</strong> offers a unique take on football, blending high-stakes drama with psychological thriller elements. The art is explosive, and the matches are intense.
-              </p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-6 mb-3">{t.home.about.h4}</h3>
+              <p>{t.home.about.p4}</p>
             </div>
           </div>
         </section>
@@ -267,36 +261,28 @@ const Home: React.FC = () => {
         <section className="mb-16">
           <div className="flex items-center gap-2 mb-8">
             <BookOpen className="text-bb-blue" />
-            <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white">{t.home.faqTitle}</h2>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
             <div className="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Why Read Blue Lock Manga on this Site?</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                Experience <strong>Blue Lock manga</strong> like never before with high-quality scans and regularly updated chapters. Dive into the intense storyline without delays.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">{t.home.faq.q1}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{t.home.faq.a1}</p>
             </div>
 
             <div className="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Differences between Blue Lock Manga and Anime?</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                The <strong>Blue Lock manga</strong> offers intense and detailed art that the anime sometimes simplifies. The aura and ego effects are more visceral in the manga.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">{t.home.faq.q2}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{t.home.faq.a2}</p>
             </div>
 
             <div className="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Is the Blue Lock Manga Finished?</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                No, the <strong>Blue Lock manga</strong> is currently ongoing. New chapters are released in Weekly Shonen Magazine.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">{t.home.faq.q3}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{t.home.faq.a3}</p>
             </div>
 
             <div className="bg-white dark:bg-[#1a1a1a] p-6 rounded-xl border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow">
-              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Where should I start reading?</h3>
-              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                If you are new to the series, start with <Link to="/chapter/1" className="text-bb-blue hover:underline">Chapter 1</Link>. The story builds progressively, so starting from the beginning is highly recommended to fully appreciate the character development and relationships.
-              </p>
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-3">{t.home.faq.q4}</h3>
+              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{t.home.faq.a4}</p>
             </div>
           </div>
         </section>
@@ -304,26 +290,18 @@ const Home: React.FC = () => {
         {/* Improved SEO Content Section */}
         <section className="mb-12">
           <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-gray-200 dark:border-white/10 shadow-sm">
-            <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-6">Read Blue Lock Manga Online Free</h2>
+            <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-6">{t.home.readOnlineTitle}</h2>
             <div className="prose prose-lg dark:prose-invert text-gray-700 dark:text-gray-300 max-w-none space-y-4">
-              <p>
-                Welcome to <strong>Bluelocken.com</strong>, the premier destination for fans to <strong className="text-bb-blue">Read Blue Lock Manga</strong> online. We provide high-quality scans of the latest chapters as soon as they are released in Japan. Join millions of fans worldwide in following the journey of Yoichi Isagi as he aims to become the world's greatest striker.
-              </p>
+              <p>{t.home.seo.p1}</p>
 
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">What is the "Blue Lock"?</h3>
-              <p>
-                The Blue Lock is a controversial training facility created by Jinpachi Ego. Following Japan's defeat in the 2018 World Cup, the Japanese Football Union initiated this project to cultivate a striker with a massive ego who can lead Japan to World Cup glory. Three hundred high school forwards are imprisoned in this facility, competing in a battle royale where only one will emerge as the chosen striker, while the careers of the losers will be ended forever.
-              </p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">{t.home.seo.h2}</h3>
+              <p>{t.home.seo.p2}</p>
 
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">The Neo Egoist League</h3>
-              <p>
-                The story has evolved into the exciting <strong>Neo Egoist League</strong> arc, where the Blue Lock survivors join forces with Europe's top U-20 clubs. Witness Isagi evolve as he faces off against world-class talents like Michael Kaiser and relights his rivalry with Rin Itoshi.
-              </p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">{t.home.seo.h3}</h3>
+              <p>{t.home.seo.p3}</p>
 
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">Why is Blue Lock Manga So Popular?</h3>
-              <p>
-                Written by <strong className="text-gray-900 dark:text-white">Muneyuki Kaneshiro</strong>, <em>Blue Lock</em> deconstructs the traditional team-spirit trope of sports manga. It champions individualism and "ego" as necessary traits for success. Combined with Yusuke Nomura's dynamic art style, which depicts "aura" and intensity like no other, it has become a global phenomenon.
-              </p>
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mt-8 mb-4">{t.home.seo.h4}</h3>
+              <p>{t.home.seo.p4}</p>
             </div>
           </div>
         </section>

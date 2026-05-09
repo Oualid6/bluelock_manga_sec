@@ -5,6 +5,7 @@ export interface Chapter {
   releaseDate: string;
   pages: string[];
   pagesEs?: string[];
+  pagesFr?: string[];
 }
 
 export interface Character {

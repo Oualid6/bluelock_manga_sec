@@ -143,9 +143,7 @@ function AdSlot({ pathname }: { pathname: string }) {
       iframe.scrolling = 'no';
       
       iframe.onload = () => {
-        if (!cancelled) {
-          console.log(`[Ad] Loaded for ${pathname} | mobile: ${mobile}`);
-        }
+        // iframe loaded
       };
 
       container.appendChild(iframe);

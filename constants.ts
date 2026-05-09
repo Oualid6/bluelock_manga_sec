@@ -14,6 +14,9 @@ export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 346 }, (_, i) => {
     pagesEs: number === 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) => {
       const paddedPage = String(p + 1).padStart(3, '0');
       return `https://cdn.shadowmanga.es/mangas/s/solo-leveling/${paddedChapter}/${paddedPage}.webp`;
+    }),
+    pagesFr: number > 342 ? [] : Array.from({ length: 20 }, (_, p) => {
+      return `https://s22.anime-sama.me/s1/scans/Blue%20Lock/${number}/${p + 1}.${number > 1 ? 'webp' : 'jpg'}`;
     })
   };
 }).reverse(); // Latest chapters first

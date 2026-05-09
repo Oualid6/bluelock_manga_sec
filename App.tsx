@@ -5,6 +5,7 @@ import { MangaProvider } from './context/MangaContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import SocialBar from './components/ads/SocialBar';
+import { LanguageProvider } from './context/LanguageContext';
 
 // Home is eagerly imported — it's the landing page and must load instantly
 // to avoid the JS chain: index → Home → SEOHead → icons (saves ~400ms TBT)
@@ -49,26 +50,34 @@ const App: React.FC = () => {
           <SocialBar />
           <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen select-none">
             <Suspense fallback={<LoadingSpinner />}>
-              <Routes>
-                <Route path="/" element={<Navigate to="/en" replace />} />
-                <Route path="/en" element={<LayoutWrapper><Home /></LayoutWrapper>} />
-                <Route path="/manga" element={<LayoutWrapper><MangaList /></LayoutWrapper>} />
-                <Route path="/characters" element={<LayoutWrapper><Characters /></LayoutWrapper>} />
-                <Route path="/about" element={<LayoutWrapper><About /></LayoutWrapper>} />
-                <Route path="/terms" element={<LayoutWrapper><Legal type="terms" /></LayoutWrapper>} />
+              <LanguageProvider>
+                <Routes>
+                  <Route path="/" element={<Navigate to="/en" replace />} />
+                  <Route path="/:lang" element={<LayoutWrapper><Home /></LayoutWrapper>} />
+                  <Route path="/:lang/manga" element={<LayoutWrapper><MangaList /></LayoutWrapper>} />
+                  <Route path="/:lang/characters" element={<LayoutWrapper><Characters /></LayoutWrapper>} />
+                  <Route path="/:lang/about" element={<LayoutWrapper><About /></LayoutWrapper>} />
+                  <Route path="/:lang/terms" element={<LayoutWrapper><Legal type="terms" /></LayoutWrapper>} />
 
-                <Route path="/privacy" element={<LayoutWrapper><Legal type="privacy" /></LayoutWrapper>} />
-                <Route path="/dmca" element={<LayoutWrapper><Legal type="dmca" /></LayoutWrapper>} />
-                <Route path="/disclaimer" element={<LayoutWrapper><Legal type="disclaimer" /></LayoutWrapper>} />
+                  <Route path="/:lang/privacy" element={<LayoutWrapper><Legal type="privacy" /></LayoutWrapper>} />
+                  <Route path="/:lang/dmca" element={<LayoutWrapper><Legal type="dmca" /></LayoutWrapper>} />
+                  <Route path="/:lang/disclaimer" element={<LayoutWrapper><Legal type="disclaimer" /></LayoutWrapper>} />
 
-                {/* Reader often needs less layout distraction, but keeping Nav for consistency. 
-                    Could make a dedicated ReaderLayout here. */}
-                <Route path="/chapter/:chapterId" element={
-                  <>
-                    <ChapterReader />
-                  </>
-                } />
-              </Routes>
+                  {/* Reader often needs less layout distraction, but keeping Nav for consistency. 
+                      Could make a dedicated ReaderLayout here. */}
+                  <Route path="/chapter/:chapterId" element={
+                    <>
+                      <ChapterReader />
+                    </>
+                  } />
+                  <Route path="/:lang/chapter/:chapterId" element={
+                    <>
+                      <ChapterReader />
+                    </>
+                  } />
+                  <Route path="*" element={<Navigate to="/en" replace />} />
+                </Routes>
+              </LanguageProvider>
             </Suspense>
           </div>
         </Router>

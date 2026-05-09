@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 import { Menu, X, Moon, Sun, Search } from 'lucide-react';
 
 const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const { lang, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   type NavLink = { name: string; path: string; isExternal?: boolean };
   const navLinks: NavLink[] = [
-    { name: 'Home', path: '/en' },
-    { name: 'All Chapters', path: '/manga' },
-    { name: 'Characters', path: '/characters' },
-    { name: 'Explore More Manga', path: 'https://mangalix.com', isExternal: true },
+    { name: t.nav.home, path: `/${lang}` },
+    { name: t.nav.allChapters, path: `/${lang}/manga` },
+    { name: t.nav.characters, path: `/${lang}/characters` },
+    { name: t.nav.explore, path: 'https://mangalix.com', isExternal: true },
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  const switchLanguage = (newLang: 'en' | 'fr') => {
+    if (newLang === lang) return;
+    const pathParts = location.pathname.split('/');
+    pathParts[1] = newLang;
+    navigate(pathParts.join('/'));
+  };
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-black/95 border-b border-gray-800 transition-colors duration-200">
@@ -24,7 +34,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <Link to="/en" className="flex-shrink-0 flex items-center gap-2 group">
+          <Link to={`/${lang}`} className="flex-shrink-0 flex items-center gap-2 group">
             <img src="/logo.webp" alt="Blue Lock Manga" width="80" height="15" className="h-10 w-auto" loading="eager" />
           </Link>
 
@@ -60,6 +70,20 @@ const Navbar: React.FC = () => {
 
           {/* Right Actions */}
           <div className="hidden md:flex items-center gap-4">
+            <div className="flex bg-gray-900 rounded-full border border-gray-800 p-0.5">
+              <button
+                onClick={() => switchLanguage('en')}
+                className={`px-3 py-1 text-xs font-bold rounded-full transition-colors ${lang === 'en' ? 'bg-bb-blue text-white' : 'text-gray-400 hover:text-white'}`}
+              >
+                EN
+              </button>
+              <button
+                onClick={() => switchLanguage('fr')}
+                className={`px-3 py-1 text-xs font-bold rounded-full transition-colors ${lang === 'fr' ? 'bg-bb-blue text-white' : 'text-gray-400 hover:text-white'}`}
+              >
+                FR
+              </button>
+            </div>
             <button
               onClick={toggleTheme}
               className="p-2 rounded-full text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
@@ -67,7 +91,7 @@ const Navbar: React.FC = () => {
             >
               {theme === 'dark' ? <Sun size={24} strokeWidth={2.5} /> : <Moon size={24} strokeWidth={2.5} />}
             </button>
-            <Link to="/manga" className="p-2 text-gray-400 hover:text-bb-blue" aria-label="Search">
+            <Link to={`/${lang}/manga`} className="p-2 text-gray-400 hover:text-bb-blue" aria-label="Search">
               <Search size={24} strokeWidth={2.5} />
             </Link>
           </div>
@@ -115,6 +139,23 @@ const Navbar: React.FC = () => {
                 </Link>
               )
             ))}
+            <div className="flex justify-between items-center px-3 py-2 border-b border-gray-800">
+              <span className="text-gray-400 text-sm font-medium">Language</span>
+              <div className="flex bg-gray-900 rounded-full border border-gray-800 p-0.5">
+                <button
+                  onClick={() => switchLanguage('en')}
+                  className={`px-3 py-1 text-xs font-bold rounded-full transition-colors ${lang === 'en' ? 'bg-bb-blue text-white' : 'text-gray-400 hover:text-white'}`}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => switchLanguage('fr')}
+                  className={`px-3 py-1 text-xs font-bold rounded-full transition-colors ${lang === 'fr' ? 'bg-bb-blue text-white' : 'text-gray-400 hover:text-white'}`}
+                >
+                  FR
+                </button>
+              </div>
+            </div>
             <button
               onClick={() => {
                 toggleTheme();
@@ -122,7 +163,7 @@ const Navbar: React.FC = () => {
               }}
               className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-bb-blue"
             >
-              Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode
+              {t.nav.switchTo} {theme === 'dark' ? 'Light' : 'Dark'} Mode
             </button>
           </div>
         </div>
