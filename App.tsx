@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { MangaProvider } from './context/MangaContext';
 import Navbar from './components/Navbar';
@@ -50,7 +50,8 @@ const App: React.FC = () => {
           <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen select-none">
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
-                <Route path="/" element={<LayoutWrapper><Home /></LayoutWrapper>} />
+                <Route path="/" element={<Navigate to="/en" replace />} />
+                <Route path="/en" element={<LayoutWrapper><Home /></LayoutWrapper>} />
                 <Route path="/manga" element={<LayoutWrapper><MangaList /></LayoutWrapper>} />
                 <Route path="/characters" element={<LayoutWrapper><Characters /></LayoutWrapper>} />
                 <Route path="/about" element={<LayoutWrapper><About /></LayoutWrapper>} />

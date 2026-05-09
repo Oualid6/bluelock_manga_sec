@@ -54,11 +54,12 @@ const Home: React.FC = () => {
       <SEOHead
         title="Blue Lock Manga - Read Online High Quality"
         description="Read Blue Lock Manga online in high quality. The best place for Blue Lock chapters, character info, and latest updates. All chapters available."
+        canonicalUrl="https://bluelocken.com/en"
         schema={{
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "Blue Lock Manga",
-          "url": "https://bluelocken.com",
+          "url": "https://bluelocken.com/en",
         }}
       />
 

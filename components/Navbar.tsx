@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
 
   type NavLink = { name: string; path: string; isExternal?: boolean };
   const navLinks: NavLink[] = [
-    { name: 'Home', path: '/' },
+    { name: 'Home', path: '/en' },
     { name: 'All Chapters', path: '/manga' },
     { name: 'Characters', path: '/characters' },
     { name: 'Explore More Manga', path: 'https://mangalix.com', isExternal: true },
@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0 flex items-center gap-2 group">
+          <Link to="/en" className="flex-shrink-0 flex items-center gap-2 group">
             <img src="/logo.webp" alt="Blue Lock Manga" width="80" height="15" className="h-10 w-auto" loading="eager" />
           </Link>
 
