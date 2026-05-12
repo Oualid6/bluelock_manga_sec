@@ -5561,6 +5561,14 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://bluelocken.com/chapter/347</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bluelocken.com/chapter/347" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://bluelocken.com/chapter/347" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bluelocken.com/chapter/347" />
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
     <loc>https://bluelocken.com/en/manga/tokyo-ghoul</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://bluelocken.com/en/manga/tokyo-ghoul" />
     <xhtml:link rel="alternate" hreflang="fr" href="https://bluelocken.com/fr/manga/tokyo-ghoul" />
