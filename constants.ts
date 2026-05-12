@@ -8,7 +8,7 @@ export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 346 }, (_, i) => {
     number: number,
     title: `Blue Lock Chapter ${number}`,
     releaseDate: new Date().toISOString(), // Mock date, normally would vary
-    pages: number === 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) =>
+    pages: Array.from({ length: number === 346 ? 8 : (number === 345 ? 20 : 80) }, (_, p) =>
       `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number}/blue_lock_${number}_${p + 1}.jpg`
     ),
     pagesEs: number === 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) => {
