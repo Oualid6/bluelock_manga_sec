@@ -1,6 +1,7 @@
 import { Arc, Chapter, Character } from "./types";
 
-export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 347 }, (_, i) => {
+// Generate integer chapters 1-347
+const integerChapters: Chapter[] = Array.from({ length: 347 }, (_, i) => {
   const number = i + 1;
   const paddedChapter = String(number).padStart(3, '0');
   return {
@@ -19,7 +20,23 @@ export const MOCK_CHAPTERS: Chapter[] = Array.from({ length: 347 }, (_, i) => {
       return `https://s22.anime-sama.me/s1/scans/Blue%20Lock/${number}/${p + 1}.${number > 1 ? 'webp' : 'jpg'}`;
     })
   };
-}).reverse(); // Latest chapters first
+});
+
+// Chapter 346.2 (Part 2) — 12 pages from MangaFreak
+const chapter346_2: Chapter = {
+  id: '346.2',
+  number: 346.2,
+  title: 'Blue Lock Chapter 346.2',
+  releaseDate: '2026-05-19T00:00:00.000Z',
+  pages: Array.from({ length: 12 }, (_, p) =>
+    `https://images.mangafreak.me/mangas/blue_lock/blue_lock_346b/blue_lock_346b_${p + 1}.jpg`
+  ),
+  pagesEs: [],
+  pagesFr: []
+};
+
+export const MOCK_CHAPTERS: Chapter[] = [...integerChapters, chapter346_2]
+  .sort((a, b) => b.number - a.number); // Latest chapters first
 
 export const CHARACTERS: Character[] = [
   {
@@ -110,7 +127,7 @@ export const ARCS: Arc[] = [
     title: "Neo Egoist League",
     description: "Blue Lock players join top European U-20 teams to prove their worth on the world stage.",
     chapterStart: 153,
-    chapterEnd: 347,
+    chapterEnd: 347, // includes 346.2 (Part 2)
     image: "https://picsum.photos/600/300?random=22"
   }
 ];

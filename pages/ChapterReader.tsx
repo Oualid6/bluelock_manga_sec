@@ -19,7 +19,7 @@ const ChapterReader: React.FC = () => {
 
   const [showScrollTop, setShowScrollTop] = useState(false);
   // Use a number for parsing
-  const currentNum = parseInt(chapterId || "0", 10);
+  const currentNum = parseFloat(chapterId || "0");
 
   useEffect(() => {
     setLoading(true);
@@ -78,13 +78,16 @@ const ChapterReader: React.FC = () => {
     return <div className="p-10 text-center dark:text-white">Chapter not found.</div>;
   }
 
-  const prevChapter = chapters.find(c => c.number === currentNum - 1);
-  const nextChapter = (lang === 'fr' && currentNum >= 343) ? undefined : chapters.find(c => c.number === currentNum + 1);
+  // Find adjacent chapters using sorted array position (supports sub-chapters like 346.2)
+  const sortedChapters = [...chapters].sort((a, b) => a.number - b.number);
+  const currentIndex = sortedChapters.findIndex(c => c.number === currentNum);
+  const prevChapter = currentIndex > 0 ? sortedChapters[currentIndex - 1] : undefined;
+  const nextChapter = (lang === 'fr' && currentNum >= 343) ? undefined : (currentIndex < sortedChapters.length - 1 ? sortedChapters[currentIndex + 1] : undefined);
 
   const displayPages = lang === 'fr' ? (chapter.pagesFr || []) : chapter.pages;
 
   const handleNav = (num: number) => {
-    if (num) navigate(lang === 'fr' ? `/fr/chapter/${num}` : `/chapter/${num}`);
+    if (num !== undefined) navigate(lang === 'fr' ? `/fr/chapter/${num}` : `/chapter/${num}`);
   }
 
   return (
