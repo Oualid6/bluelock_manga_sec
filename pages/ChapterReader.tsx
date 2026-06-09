@@ -202,19 +202,19 @@ const ChapterReader: React.FC = () => {
               <ResponsiveBanner />
             </div>
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 max-w-md w-full shadow-2xl">
-              {((lang === 'fr' && chapter.number >= 343) || (lang !== 'fr' && chapter.number >= 349)) && (
+              {((lang === 'fr' && chapter.number >= 343) || (lang !== 'fr' && chapter.number >= 350)) && (
                 <h1 className="text-xl md:text-2xl font-heading font-bold text-bb-blue mb-2 text-center">
                   Blue Lock Manga {t.reader.chapter} {chapter.number}
                 </h1>
               )}
               <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">{t.reader.availableSoon}</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                {((lang === 'fr' && chapter.number >= 343) || (lang !== 'fr' && chapter.number >= 349)) 
+                {((lang === 'fr' && chapter.number >= 343) || (lang !== 'fr' && chapter.number >= 350)) 
                   ? t.reader.nextChapterSoon
                   : "This chapter is still being uploaded. You can try reading it early on our partner server."}
               </p>
               <div className="flex flex-col gap-3">
-                {((lang === 'fr' && chapter.number >= 343) || (lang !== 'fr' && chapter.number >= 349)) && (
+                {((lang === 'fr' && chapter.number >= 343) || (lang !== 'fr' && chapter.number >= 350)) && (
                   <a
                     href="https://t.me/Mangalix"
                     target="_blank"
