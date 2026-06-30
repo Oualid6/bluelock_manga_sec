@@ -1,7 +1,7 @@
 import { Arc, Chapter, Character } from "./types";
 
-// Generate integer chapters 1-352
-const integerChapters: Chapter[] = Array.from({ length: 352 }, (_, i) => {
+// Generate integer chapters 1-353
+const integerChapters: Chapter[] = Array.from({ length: 353 }, (_, i) => {
   const number = i + 1;
   const paddedChapter = String(number).padStart(3, '0');
   return {
@@ -9,7 +9,7 @@ const integerChapters: Chapter[] = Array.from({ length: 352 }, (_, i) => {
     number: number,
     title: `Blue Lock Chapter ${number}`,
     releaseDate: new Date().toISOString(), // Mock date, normally would vary
-    pages: number === 352 ? [] : Array.from({ length: number === 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 346 ? 8 : (number === 345 ? 20 : 80)))) }, (_, p) =>
+    pages: number === 353 ? [] : Array.from({ length: number >= 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 346 ? 8 : (number === 345 ? 20 : 80)))) }, (_, p) =>
       `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number}/blue_lock_${number}_${p + 1}.jpg`
     ),
     pagesEs: number >= 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) => {
@@ -127,7 +127,7 @@ export const ARCS: Arc[] = [
     title: "Neo Egoist League",
     description: "Blue Lock players join top European U-20 teams to prove their worth on the world stage.",
     chapterStart: 153,
-    chapterEnd: 352, // includes 346.2 (Part 2)
+    chapterEnd: 353, // includes 346.2 (Part 2)
     image: "https://picsum.photos/600/300?random=22"
   }
 ];
