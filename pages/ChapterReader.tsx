@@ -5,7 +5,6 @@ import SEOHead from '../components/SEOHead';
 import { useManga } from '../context/MangaContext';
 import { useLanguage } from '../context/LanguageContext';
 import { Chapter } from '../types';
-import ResponsiveBanner from '../components/ads/ResponsiveBanner';
 
 const ChapterReader: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
@@ -221,9 +220,6 @@ const ChapterReader: React.FC = () => {
       <div className={`flex-1 pt-16 relative ${readingMode === 'horizontal' ? 'h-[calc(100vh-64px)] overflow-hidden' : ''} ${isLocked ? 'blur-[8px] pointer-events-none select-none h-screen overflow-hidden' : ''}`}>
         {displayPages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
-            <div className="w-full max-w-3xl mb-8">
-              <ResponsiveBanner />
-            </div>
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 max-w-md w-full shadow-2xl">
               {((lang === 'fr' && chapter.number >= 343) || (lang !== 'fr' && chapter.number >= 354)) && (
                 <h1 className="text-xl md:text-2xl font-heading font-bold text-bb-blue mb-2 text-center">
@@ -278,9 +274,6 @@ const ChapterReader: React.FC = () => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
-                {idx === 0 && (
-                  <ResponsiveBanner />
-                )}
 
               </React.Fragment>
             ))}
