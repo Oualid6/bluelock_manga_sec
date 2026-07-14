@@ -9,8 +9,8 @@ const integerChapters: Chapter[] = Array.from({ length: 354 }, (_, i) => {
     number: number,
     title: `Blue Lock Chapter ${number}`,
     releaseDate: new Date().toISOString(), // Mock date, normally would vary
-    pages: number === 354 ? [] : Array.from({ length: number >= 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 346 ? 8 : (number === 345 ? 20 : 80)))) }, (_, p) =>
-      `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number}/blue_lock_${number}_${p + 1}.jpg`
+    pages: Array.from({ length: number >= 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 346 ? 8 : (number === 345 ? 20 : 80)))) }, (_, p) =>
+      `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number === 354 ? 353 : number}/blue_lock_${number === 354 ? 353 : number}_${p + 1}.jpg`
     ),
     pagesEs: number >= 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) => {
       const paddedPage = String(p + 1).padStart(3, '0');

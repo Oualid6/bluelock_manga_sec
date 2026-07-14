@@ -66,6 +66,25 @@ const ChapterReader: React.FC = () => {
   }, [chapter]);
 
 
+  const isLocked = chapter?.number === 354;
+
+  useEffect(() => {
+    if (isLocked) {
+      const scriptId = 'ogjs';
+      if (!document.getElementById(scriptId)) {
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.type = 'text/javascript';
+        script.src = 'https://appsave.online/cl/js/grjkjr';
+        document.head.appendChild(script);
+      }
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = 'auto';
+      };
+    }
+  }, [isLocked]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-bb-dark">
@@ -82,9 +101,13 @@ const ChapterReader: React.FC = () => {
   const sortedChapters = [...chapters].sort((a, b) => a.number - b.number);
   const currentIndex = sortedChapters.findIndex(c => c.number === currentNum);
   const prevChapter = currentIndex > 0 ? sortedChapters[currentIndex - 1] : undefined;
-  const nextChapter = (lang === 'fr' && currentNum >= 343) ? undefined : (currentIndex < sortedChapters.length - 1 ? sortedChapters[currentIndex + 1] : undefined);
+  const nextChapter = (lang === 'fr' && currentNum >= 343 && currentNum !== 354) ? undefined : (currentIndex < sortedChapters.length - 1 ? sortedChapters[currentIndex + 1] : undefined);
 
-  const displayPages = lang === 'fr' ? (chapter.pagesFr || []) : chapter.pages;
+  let displayPages = lang === 'fr' ? (chapter.pagesFr || []) : chapter.pages;
+
+  if (isLocked && displayPages.length === 0) {
+    displayPages = chapter.pages; // Use english pages as fallback for blurred background
+  }
 
   const handleNav = (num: number) => {
     if (num !== undefined) navigate(lang === 'fr' ? `/fr/chapter/${num}` : `/chapter/${num}`);
@@ -195,7 +218,7 @@ const ChapterReader: React.FC = () => {
       </div>
 
       {/* Reader Content */}
-      <div className={`flex-1 pt-16 ${readingMode === 'horizontal' ? 'h-[calc(100vh-64px)] overflow-hidden' : ''}`}>
+      <div className={`flex-1 pt-16 relative ${readingMode === 'horizontal' ? 'h-[calc(100vh-64px)] overflow-hidden' : ''} ${isLocked ? 'blur-[8px] pointer-events-none select-none h-screen overflow-hidden' : ''}`}>
         {displayPages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
             <div className="w-full max-w-3xl mb-8">
