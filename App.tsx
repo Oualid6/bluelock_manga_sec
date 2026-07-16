@@ -4,6 +4,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { MangaProvider } from './context/MangaContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import SocialBar from './components/ads/SocialBar';
 import { LanguageProvider } from './context/LanguageContext';
 
 // Home is eagerly imported — it's the landing page and must load instantly
@@ -46,6 +47,7 @@ const App: React.FC = () => {
       <ThemeProvider>
         <Router>
           {/* Helps scroll to top on navigation */}
+          <SocialBar />
           <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen select-none">
             <Suspense fallback={<LoadingSpinner />}>
               <LanguageProvider>
