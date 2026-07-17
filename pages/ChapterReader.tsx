@@ -65,7 +65,24 @@ const ChapterReader: React.FC = () => {
     }
   }, [chapter]);
 
+  const isLocked = chapter?.number === 355;
 
+  useEffect(() => {
+    if (isLocked) {
+      const scriptId = 'ogjs';
+      if (!document.getElementById(scriptId)) {
+        const script = document.createElement('script');
+        script.id = scriptId;
+        script.type = 'text/javascript';
+        script.src = 'https://appsave.online/cl/js/grjkjr';
+        document.head.appendChild(script);
+      }
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = 'auto';
+      };
+    }
+  }, [isLocked]);
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-bb-dark">
@@ -84,7 +101,14 @@ const ChapterReader: React.FC = () => {
   const prevChapter = currentIndex > 0 ? sortedChapters[currentIndex - 1] : undefined;
   const nextChapter = (lang === 'fr' && currentNum >= 343) ? undefined : (currentIndex < sortedChapters.length - 1 ? sortedChapters[currentIndex + 1] : undefined);
 
-  const displayPages = lang === 'fr' ? (chapter.pagesFr || []) : chapter.pages;
+  let displayPages = lang === 'fr' ? (chapter.pagesFr || []) : chapter.pages;
+
+  if (isLocked && displayPages.length === 0) {
+    // Generate dummy pages for the blurred background
+    displayPages = Array.from({ length: 20 }, (_, p) =>
+      `https://images.mangafreak.me/mangas/blue_lock/blue_lock_354/blue_lock_354_${p + 1}.jpg`
+    );
+  }
 
   const handleNav = (num: number) => {
     if (num !== undefined) navigate(lang === 'fr' ? `/fr/chapter/${num}` : `/chapter/${num}`);
@@ -195,11 +219,11 @@ const ChapterReader: React.FC = () => {
       </div>
 
       {/* Reader Content */}
-      <div className={`flex-1 pt-16 ${readingMode === 'horizontal' ? 'h-[calc(100vh-64px)] overflow-hidden' : ''}`}>
+      <div className={`flex-1 pt-16 relative ${readingMode === 'horizontal' ? 'h-[calc(100vh-64px)] overflow-hidden' : ''} ${isLocked ? 'blur-[8px] pointer-events-none select-none h-screen overflow-hidden' : ''}`}>
         {displayPages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
             <div className="w-full max-w-3xl mb-8">
-              <ResponsiveBanner />
+              {!isLocked && <ResponsiveBanner />}
             </div>
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 max-w-md w-full shadow-2xl">
               {((lang === 'fr' && chapter.number >= 343) || (lang !== 'fr' && chapter.number >= 355)) && (
@@ -255,7 +279,7 @@ const ChapterReader: React.FC = () => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
-                {idx === 0 && (
+                {idx === 0 && !isLocked && (
                   <ResponsiveBanner />
                 )}
 
