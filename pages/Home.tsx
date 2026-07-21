@@ -4,7 +4,6 @@ import { ArrowRight, BookOpen, Star, Bookmark, Share2, Twitter, Facebook, Messag
 import SEOHead from '../components/SEOHead';
 import { useManga } from '../context/MangaContext';
 import { useLanguage } from '../context/LanguageContext';
-import ResponsiveBanner from '../components/ads/ResponsiveBanner';
 
 const Home: React.FC = () => {
   const { chapters } = useManga();
@@ -91,9 +90,6 @@ const Home: React.FC = () => {
             {t.hero.subtitle}
           </p>
 
-          <div className="mb-10 w-full">
-            <ResponsiveBanner />
-          </div>
           <div className="manga-hero-card w-full bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 md:p-8 mb-10 shadow-2xl">
             <div className="flex flex-col lg:flex-row gap-8">
 
