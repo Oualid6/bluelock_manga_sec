@@ -5,12 +5,13 @@ import { ArrowRight } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Characters: React.FC = () => {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <SEOHead
         title="Blue Lock Manga Characters - Database"
         description="Detailed profiles of Blue Lock Manga characters including Yoichi Isagi, Meguru Bachira, Rensuke Kunigami and more."
+        canonicalUrl={`https://bluelocken.com/${lang}/characters`}
       />
 
       <div className="text-center mb-16">

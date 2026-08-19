@@ -36,10 +36,7 @@ const LoadingSpinner = () => (
   </div>
 );
 
-import { useContentProtection } from './hooks/useContentProtection';
-
 const App: React.FC = () => {
-  useContentProtection();
 
   return (
     <MangaProvider>

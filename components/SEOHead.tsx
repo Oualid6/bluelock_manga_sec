@@ -20,14 +20,16 @@ const SEOHead: React.FC<SEOHeadProps> = ({ title, description, schema, canonical
     metaDescription.setAttribute('content', description);
 
     // Add Canonical Tag
+    let linkCanonical = document.querySelector('link[rel="canonical"]');
     if (canonicalUrl) {
-      let linkCanonical = document.querySelector('link[rel="canonical"]');
       if (!linkCanonical) {
         linkCanonical = document.createElement('link');
         linkCanonical.setAttribute('rel', 'canonical');
         document.head.appendChild(linkCanonical);
       }
       linkCanonical.setAttribute('href', canonicalUrl);
+    } else if (linkCanonical) {
+      linkCanonical.remove();
     }
 
     // Add Schema.org JSON-LD

@@ -23,9 +23,26 @@ const Navbar: React.FC = () => {
 
   const switchLanguage = (newLang: 'en' | 'fr') => {
     if (newLang === lang) return;
-    const pathParts = location.pathname.split('/');
-    pathParts[1] = newLang;
-    navigate(pathParts.join('/'));
+    const pathParts = location.pathname.split('/').filter(Boolean);
+    
+    // If it's a chapter route like /chapter/1 (no lang prefix) or /en/chapter/1
+    if (pathParts[0] === 'chapter') {
+        navigate(newLang === 'fr' ? `/fr/${pathParts.join('/')}` : `/${pathParts.join('/')}`);
+        return;
+    } else if (pathParts[1] === 'chapter') {
+        // e.g. ['en', 'chapter', '1']
+        pathParts[0] = newLang;
+        navigate(newLang === 'fr' ? `/${pathParts.join('/')}` : `/chapter/${pathParts.slice(1).join('/')}`);
+        return;
+    }
+
+    // Default replacement for /en/manga, /fr/characters, etc.
+    if (pathParts.length > 0) {
+        pathParts[0] = newLang;
+    } else {
+        pathParts.push(newLang);
+    }
+    navigate(`/${pathParts.join('/')}`);
   };
 
   return (

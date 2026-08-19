@@ -17,14 +17,6 @@ export interface Character {
   grade: string;
 }
 
-export interface Arc {
-  id: string;
-  title: string;
-  description: string;
-  chapterStart: number;
-  chapterEnd: number;
-  image: string;
-}
 
 export interface SEOMeta {
   title: string;

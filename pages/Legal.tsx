@@ -1,5 +1,6 @@
 import React from 'react';
 import SEOHead from '../components/SEOHead';
+import { useLanguage } from '../context/LanguageContext';
 
 type LegalType = 'privacy' | 'dmca' | 'disclaimer' | 'terms';
 
@@ -8,6 +9,7 @@ interface LegalProps {
 }
 
 const Legal: React.FC<LegalProps> = ({ type }) => {
+    const { lang } = useLanguage();
     const getContent = () => {
         switch (type) {
             case 'privacy':
@@ -107,7 +109,11 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-16 min-h-screen">
-            <SEOHead title={`${title} - Blue Lock Manga`} description={`Read our ${title}.`} />
+            <SEOHead 
+                title={`${title} - Blue Lock Manga`} 
+                description={`Read our ${title}.`} 
+                canonicalUrl={`https://bluelocken.com/${lang}/${type}`}
+            />
             <h1 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-4">{title}</h1>
             <div className="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">
                 {content}

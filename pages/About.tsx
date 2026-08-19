@@ -1,12 +1,15 @@
 import React from 'react';
 import SEOHead from '../components/SEOHead';
+import { useLanguage } from '../context/LanguageContext';
 
 const About: React.FC = () => {
+    const { lang } = useLanguage();
     return (
         <div className="max-w-4xl mx-auto px-4 py-16 min-h-screen">
             <SEOHead
                 title="About Us - Blue Lock Manga"
                 description="Learn more about Blue Lock Manga, our mission, and why we are the best place to read Blue Lock online."
+                canonicalUrl={`https://bluelocken.com/${lang}/about`}
             />
 
             <h1 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-4">

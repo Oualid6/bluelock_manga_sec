@@ -1,4 +1,4 @@
-import { Arc, Chapter, Character } from "./types";
+import { Chapter, Character } from "./types";
 
 // Generate integer chapters 1-355
 const integerChapters: Chapter[] = Array.from({ length: 355 }, (_, i) => {
@@ -105,31 +105,6 @@ export const CHARACTERS: Character[] = [
   }
 ];
 
-export const ARCS: Arc[] = [
-  {
-    id: "selection",
-    title: "First Selection",
-    description: "The 300 strikers are divided into teams and must compete in a round-robin tournament to survive.",
-    chapterStart: 1,
-    chapterEnd: 38,
-    image: "https://picsum.photos/600/300?random=20"
-  },
-  {
-    id: "second-selection",
-    title: "Second Selection",
-    description: "Players form teams of three and steal teammates from losing teams to advance.",
-    chapterStart: 39,
-    chapterEnd: 87,
-    image: "https://picsum.photos/600/300?random=21"
-  },
-  {
-    id: "neo-egoist",
-    title: "Neo Egoist League",
-    description: "Blue Lock players join top European U-20 teams to prove their worth on the world stage.",
-    chapterStart: 153,
-    chapterEnd: 355, // includes 346.2 (Part 2)
-    image: "https://picsum.photos/600/300?random=22"
-  }
-];
+
 
 
