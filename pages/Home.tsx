@@ -8,7 +8,7 @@ import { useLanguage } from '../context/LanguageContext';
 const Home: React.FC = () => {
   const { chapters } = useManga();
   const { lang, t } = useLanguage();
-  const displayChapters = lang === 'fr' ? chapters.filter(c => c.number <= 343) : chapters;
+  const displayChapters = lang === 'fr' ? chapters.filter(c => c.number <= 343) : (lang === 'es' ? chapters.filter(c => c.number <= 345) : chapters);
   const latestChapter = displayChapters[0];
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
@@ -68,7 +68,7 @@ const Home: React.FC = () => {
       <section className="relative w-full min-h-[85vh] flex items-center justify-center overflow-hidden bg-bb-dark py-20">
         <div className="absolute inset-0 z-0 opacity-30 select-none pointer-events-none">
           <img
-            src="/blue-lock.webp"
+            src="/imagebackgournd.webp"
             alt="Blue Lock Manga background"
             width="1920"
             height="1080"
@@ -82,8 +82,17 @@ const Home: React.FC = () => {
 
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
 
-          <h1 className="text-5xl md:text-8xl font-heading font-bold text-white mb-4 drop-shadow-2xl tracking-tighter text-center">
-            {t.hero.titlePrefix} <span className="text-bb-blue">{t.hero.titleHighlight}</span>
+          <h1 className="mb-6 flex justify-center items-center">
+            <img
+              src="/logo.webp"
+              alt="Blue Lock Manga"
+              width="450"
+              height="120"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
+              className="h-16 sm:h-24 md:h-32 lg:h-36 w-auto max-w-[85vw] sm:max-w-xl object-contain drop-shadow-[0_10px_25px_rgba(0,0,0,0.8)]"
+            />
           </h1>
 
           <p className="text-gray-300 text-lg md:text-xl max-w-3xl text-center mb-10 font-light leading-relaxed">
@@ -176,21 +185,13 @@ const Home: React.FC = () => {
           </div>
 
           {latestChapter && (
-          <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
               <Link
-                to={lang === 'fr' ? `/fr/chapter/${latestChapter.number}` : `/chapter/${latestChapter.number}`}
+                to={lang === 'en' ? `/chapter/${latestChapter.number}` : `/${lang}/chapter/${latestChapter.number}`}
                 className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-lg text-white bg-bb-blue hover:bg-blue-700 shadow-lg shadow-blue-900/20 transition-all hover:scale-105"
               >
                 {t.hero.readChapter} {latestChapter.number}
               </Link>
-              <a
-                href="https://mangalix.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 border border-white/20 bg-white/5 text-lg font-bold rounded-lg text-white hover:bg-white hover:text-black transition-all"
-              >
-                {t.hero.exploreMore}
-              </a>
             </div>
           )}
         </div>
@@ -213,7 +214,7 @@ const Home: React.FC = () => {
             {displayChapters.slice(0, 12).map((chapter) => (
               <Link
                 key={chapter.id}
-                to={lang === 'fr' ? `/fr/chapter/${chapter.number}` : `/chapter/${chapter.number}`}
+                to={lang === 'en' ? `/chapter/${chapter.number}` : `/${lang}/chapter/${chapter.number}`}
                 className="group relative flex flex-col justify-between h-full bg-white dark:bg-[#1a1a1a] rounded-lg border border-gray-200 dark:border-white/10 p-5 hover:border-bb-blue/50 hover:bg-gray-50 dark:hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-bb-blue/10"
               >
                 <div className="flex flex-col gap-2">

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
-import { Menu, X, Moon, Sun, Search } from 'lucide-react';
+import { Menu, X, Search, Send } from 'lucide-react';
 
 const Navbar: React.FC = () => {
-  const { theme, toggleTheme } = useTheme();
   const { lang, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -16,27 +14,26 @@ const Navbar: React.FC = () => {
     { name: t.nav.home, path: `/${lang}` },
     { name: t.nav.allChapters, path: `/${lang}/manga` },
     { name: t.nav.characters, path: `/${lang}/characters` },
-    { name: t.nav.explore, path: 'https://mangalix.com', isExternal: true },
+    { name: 'Telegram', path: 'https://t.me/ManganexChannel', isExternal: true },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
-  const switchLanguage = (newLang: 'en' | 'fr') => {
+  const switchLanguage = (newLang: 'en' | 'fr' | 'es') => {
     if (newLang === lang) return;
     const pathParts = location.pathname.split('/').filter(Boolean);
     
-    // If it's a chapter route like /chapter/1 (no lang prefix) or /en/chapter/1
+    // If it's a chapter route like /chapter/1 (no lang prefix) or /en/chapter/1 or /fr/chapter/1 or /es/chapter/1
     if (pathParts[0] === 'chapter') {
-        navigate(newLang === 'fr' ? `/fr/${pathParts.join('/')}` : `/${pathParts.join('/')}`);
+        navigate(newLang === 'en' ? `/chapter/${pathParts.slice(1).join('/')}` : `/${newLang}/${pathParts.join('/')}`);
         return;
     } else if (pathParts[1] === 'chapter') {
-        // e.g. ['en', 'chapter', '1']
         pathParts[0] = newLang;
-        navigate(newLang === 'fr' ? `/${pathParts.join('/')}` : `/chapter/${pathParts.slice(1).join('/')}`);
+        navigate(newLang === 'en' ? `/chapter/${pathParts.slice(1).join('/')}` : `/${pathParts.join('/')}`);
         return;
     }
 
-    // Default replacement for /en/manga, /fr/characters, etc.
+    // Default replacement for /en/manga, /fr/characters, /es/manga, etc.
     if (pathParts.length > 0) {
         pathParts[0] = newLang;
     } else {
@@ -65,8 +62,9 @@ const Navbar: React.FC = () => {
                     href={link.path}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-2 rounded-md text-base font-bold tracking-wide transition-colors text-gray-300 hover:text-bb-blue hover:bg-white/5"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-md text-base font-bold tracking-wide transition-colors text-gray-300 hover:text-bb-blue hover:bg-white/5"
                   >
+                    <Send size={16} className="text-[#0088cc]" />
                     {link.name}
                   </a>
                 ) : (
@@ -100,14 +98,13 @@ const Navbar: React.FC = () => {
               >
                 FR
               </button>
+              <button
+                onClick={() => switchLanguage('es')}
+                className={`px-3 py-1 text-xs font-bold rounded-full transition-colors ${lang === 'es' ? 'bg-bb-blue text-white' : 'text-gray-400 hover:text-white'}`}
+              >
+                ES
+              </button>
             </div>
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full text-gray-400 hover:bg-gray-800 hover:text-white transition-colors"
-              aria-label="Toggle Theme"
-            >
-              {theme === 'dark' ? <Sun size={24} strokeWidth={2.5} /> : <Moon size={24} strokeWidth={2.5} />}
-            </button>
             <Link to={`/${lang}/manga`} className="p-2 text-gray-400 hover:text-bb-blue" aria-label="Search">
               <Search size={24} strokeWidth={2.5} />
             </Link>
@@ -138,8 +135,9 @@ const Navbar: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setIsOpen(false)}
-                  className="block px-3 py-2 rounded-md text-base font-bold tracking-wide text-gray-700 dark:text-gray-300 hover:text-bb-blue"
+                  className="flex items-center gap-2 px-3 py-2 rounded-md text-base font-bold tracking-wide text-gray-700 dark:text-gray-300 hover:text-bb-blue"
                 >
+                  <Send size={16} className="text-[#0088cc]" />
                   {link.name}
                 </a>
               ) : (
@@ -171,17 +169,14 @@ const Navbar: React.FC = () => {
                 >
                   FR
                 </button>
+                <button
+                  onClick={() => switchLanguage('es')}
+                  className={`px-3 py-1 text-xs font-bold rounded-full transition-colors ${lang === 'es' ? 'bg-bb-blue text-white' : 'text-gray-400 hover:text-white'}`}
+                >
+                  ES
+                </button>
               </div>
             </div>
-            <button
-              onClick={() => {
-                toggleTheme();
-                setIsOpen(false);
-              }}
-              className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-bb-blue"
-            >
-              {t.nav.switchTo} {theme === 'dark' ? 'Light' : 'Dark'} Mode
-            </button>
           </div>
         </div>
       )}

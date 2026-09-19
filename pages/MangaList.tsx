@@ -13,7 +13,7 @@ const MangaList: React.FC = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
 
   const filteredChapters = React.useMemo(() => {
-    const displayChapters = lang === 'fr' ? chapters.filter(c => c.number <= 343) : chapters;
+    const displayChapters = lang === 'fr' ? chapters.filter(c => c.number <= 343) : (lang === 'es' ? chapters.filter(c => c.number <= 345) : chapters);
     return displayChapters.filter(ch =>
       ch.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       ch.number.toString().includes(searchTerm)
@@ -85,7 +85,7 @@ const MangaList: React.FC = () => {
           {filteredChapters.map((chapter) => (
             <Link
               key={chapter.id}
-              to={lang === 'fr' ? `/fr/chapter/${chapter.number}` : `/chapter/${chapter.number}`}
+              to={lang === 'en' ? `/chapter/${chapter.number}` : `/${lang}/chapter/${chapter.number}`}
               className="group relative flex flex-col justify-between h-32 bg-white dark:bg-[#1a1a1a] rounded-xl border border-gray-100 dark:border-white/5 p-5 hover:border-bb-blue/50 hover:bg-gray-50 dark:hover:bg-[#222] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-bb-blue/5 overflow-hidden"
             >
               {/* Decor */}

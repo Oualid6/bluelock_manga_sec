@@ -2,16 +2,13 @@ export const en = {
   nav: {
     home: "Home",
     allChapters: "All Chapters",
-    characters: "Characters",
-    explore: "Explore More Manga",
-    switchTo: "Switch to"
+    characters: "Characters"
   },
   hero: {
     titlePrefix: "BLUE ",
     titleHighlight: "LOCK MANGA",
-    subtitle: "Read Blue Lock Manga Online In High Quality, All Chapters and Volumes in English With HD scans and No Sign-Up Required.",
-    readChapter: "Read Chapter",
-    exploreMore: "Explore More Manga"
+    subtitle: "Immerse yourself in the relentless world of Blue Lock manga online. Track Yoichi Isagi's evolution through every match with crisp HD scans and fast chapter releases.",
+    readChapter: "Read Chapter"
   },
   home: {
     latestReleases: "Latest Releases",
@@ -37,39 +34,39 @@ export const en = {
       rankValue: "1st, 20M views",
       statusValue: "Ongoing",
       typeValue: "Shounen, Sports, Thriller",
-      synopsisValue: "Yoichi Isagi, a high school striker, is invited to a controversial project called Blue Lock, designed to create the world's best egoist striker. 300 strikers compete against each other in a battle for survival."
+      synopsisValue: "After a disappointing World Cup exit, Japan launches the radical Blue Lock program to forge a revolutionary striker. High school forward Yoichi Isagi enters an elite facility where 300 ambitious strikers must out-play and out-think each other in a ruthless survival competition."
     },
     about: {
-      p1: "Blue Lock (Japanese: ブルーロック), is a Japanese sports manga series written by Muneyuki Kaneshiro and illustrated by Yusuke Nomura. It has been serialized in Kodansha's Weekly Shōnen Magazine since August 2018. The story follows Yoichi Isagi and other strikers in a facility called Blue Lock.",
-      h2: "Sports and Survival",
-      p2: "Unlike traditional sports manga, Blue Lock introduces a battle royale element where strikers must outscore each other to survive and become the best. It focuses on egoism and individual skill rather than teamwork.",
-      h3: "Key Characters",
-      p3: "The series features intense characters including Yoichi Isagi, the eccentric Meguru Bachira, and the disciplined Rensuke Kunigami.",
-      h4: "Why Read Blue Lock?",
-      p4: "Blue Lock offers a unique take on football, blending high-stakes drama with psychological thriller elements. The art is explosive, and the matches are intense."
+      p1: "Created by author Muneyuki Kaneshiro and artist Yusuke Nomura, Blue Lock (ブルーロック) revolutionized sports manga upon its debut in Weekly Shōnen Magazine in 2018. The series turns football into an explosive battle of wits, individual talent, and unyielding ambition.",
+      h2: "High-Stakes Football Meets Battle Royale",
+      p2: "Diverging from classic sports stories centered on team harmony, Blue Lock redefines football around fierce egoism. Strikers must ruthlessly devour their opponents' skill sets, master spatial awareness, and evolve their individual weapons to survive elimination.",
+      h3: "Unforgettable Players & Evolving Weapons",
+      p3: "From Yoichi Isagi's spatial vision and Meguru Bachira's unpredictable dribbling to Rensuke Kunigami's raw physical force, every chapter highlights unique playstyles and psychological growth on the pitch.",
+      h4: "Why Readers Love Blue Lock Manga",
+      p4: "With dynamic action paneling, dramatic aura effects, and unpredictable match twists, reading Blue Lock manga delivers an unparalleled adrenaline rush for sports manga fans."
     },
     faq: {
-      q1: "Why Read Blue Lock Manga on this Site?",
-      a1: "Experience Blue Lock manga like never before with high-quality scans and regularly updated chapters. Dive into the intense storyline without delays.",
-      q2: "Differences between Blue Lock Manga and Anime?",
-      a2: "The Blue Lock manga offers intense and detailed art that the anime sometimes simplifies. The aura and ego effects are more visceral in the manga.",
-      q3: "Is the Blue Lock Manga Finished?",
-      a3: "No, the Blue Lock manga is currently ongoing. New chapters are released in Weekly Shonen Magazine.",
-      q4: "Where should I start reading?",
-      a4: "If you are new to the series, start with Chapter 1. The story builds progressively, so starting from the beginning is highly recommended to fully appreciate the character development and relationships."
+      q1: "Why read Blue Lock manga on this site?",
+      a1: "Our platform offers a streamlined, fast-loading reader designed specifically for manga fans. Enjoy crisp image quality, responsive navigation, and instant access to the latest Blue Lock manga updates without intrusive pop-ups.",
+      q2: "How does the Blue Lock manga compare to the anime adaptation?",
+      a2: "While the anime captures key narrative beats, the original Blue Lock manga showcases Yusuke Nomura's intricate line art, intense character expressions, and striking visual metaphors that fully convey each player's ego.",
+      q3: "Is the Blue Lock manga series still ongoing?",
+      a3: "Yes! Blue Lock is an active weekly series published in Weekly Shōnen Magazine. New chapters drop regularly as the story enters pivotal match arcs.",
+      q4: "Which chapter should I start reading from?",
+      a4: "Starting at Chapter 1 allows you to experience Isagi's entire mental transformation from the beginning. Anime viewers looking to continue where the anime left off can jump straight into the corresponding manga arc."
     },
     seo: {
-      p1: "Welcome to Bluelocken.com, the premier destination for fans to Read Blue Lock Manga online. We provide high-quality scans of the latest chapters as soon as they are released in Japan. Join millions of fans worldwide in following the journey of Yoichi Isagi as he aims to become the world's greatest striker.",
-      h2: "What is the \"Blue Lock\"?",
-      p2: "The Blue Lock is a controversial training facility created by Jinpachi Ego. Following Japan's defeat in the 2018 World Cup, the Japanese Football Union initiated this project to cultivate a striker with a massive ego who can lead Japan to World Cup glory. Three hundred high school forwards are imprisoned in this facility, competing in a battle royale where only one will emerge as the chosen striker, while the careers of the losers will be ended forever.",
-      h3: "The Neo Egoist League",
-      p3: "The story has evolved into the exciting Neo Egoist League arc, where the Blue Lock survivors join forces with Europe's top U-20 clubs. Witness Isagi evolve as he faces off against world-class talents like Michael Kaiser and relights his rivalry with Rin Itoshi.",
-      h4: "Why is Blue Lock Manga So Popular?",
-      p4: "Written by Muneyuki Kaneshiro, Blue Lock deconstructs the traditional team-spirit trope of sports manga. It champions individualism and \"ego\" as necessary traits for success. Combined with Yusuke Nomura's dynamic art style, which depicts \"aura\" and intensity like no other, it has become a global phenomenon."
+      p1: "Welcome to your dedicated reader hub for Blue Lock manga online. Follow the high-stakes journey of 300 gifted strikers competing under Jinpachi Ego's intense regimen. We make it easy to follow every chapter release, arc breakdown, and character development in high clarity.",
+      h2: "Inside the Blue Lock Experiment",
+      p2: "Conceived by visionary strategist Jinpachi Ego, the Blue Lock facility isolates Japan's top high school strikers in a high-tech training gauntlet. The objective is ruthless: eliminate 299 competitors to produce one single, unstoppable striker capable of carrying the national team to global glory.",
+      h3: "The Evolution of the Neo Egoist League",
+      p3: "The narrative ascends to new heights in the Neo Egoist League, placing Blue Lock talents alongside Europe's elite youth clubs. Watch Yoichi Isagi harness Metavision to match global icons like Michael Kaiser while reigniting his intense rivalry with Rin Itoshi.",
+      h4: "What Makes Blue Lock a Masterpiece?",
+      p4: "By merging psychological thriller mechanics with elite sports strategy, writer Muneyuki Kaneshiro crafts an engaging tale about personal growth, self-realization, and overcoming limits. Every match tests the boundary between teamwork and pure individual dominance."
     }
   },
   footer: {
-    description: "Your premiere destination for reading Blue Lock manga online. High quality scans, fast loading, and the latest chapter updates.",
+    description: "Your clean, dedicated source to read Blue Lock manga online with high-definition scans and quick chapter updates.",
     disclaimer: "Fan Project. Not affiliated with Muneyuki Kaneshiro or Kodansha.",
     explore: "Explore",
     startReading: "Start Reading",
@@ -84,15 +81,15 @@ export const en = {
   },
   mangaList: {
     title: "All Chapters",
-    subtitle: "Read all chapters of Blue Lock manga online in high quality.",
+    subtitle: "Explore the complete directory of Blue Lock manga chapters in order.",
     searchPlaceholder: "Search chapters (e.g., 250 or 'isagi')",
     chapter: "Chapter",
     readNow: "Read Now",
     noResults: "No chapters found.",
     tryDifferentSearch: "Try adjusting your search terms.",
     completeCollection: "COMPLETE COLLECTION",
-    libraryTitle: "Blue Lock Manga Library",
-    libraryDesc: "Read every chapter of the Blue Lock Manga by Muneyuki Kaneshiro. From the very beginning to the latest release.",
+    libraryTitle: "Blue Lock Chapter Vault",
+    libraryDesc: "Browse every released chapter of the Blue Lock manga series. Follow the complete story progression from the first selection to the current high-stakes matches.",
     chaptersCount: "Chapters",
     newest: "Newest",
     oldest: "Oldest"
@@ -122,8 +119,8 @@ export const en = {
     latestChapter: "Latest Chapter"
   },
   characters: {
-    title: "Blue Lock Manga Characters",
-    subtitle: "Comprehensive database of every character in the Blue Lock manga. Learn about their sports, abilities, and relationships.",
+    title: "Blue Lock Manga Characters & Profiles",
+    subtitle: "Discover detailed profiles, player positions, weapons, and storylines for the key strikers competing in the Blue Lock project.",
     searchPlaceholder: "Search characters...",
     readFullProfile: "Read Full Profile",
     roles: {
@@ -135,35 +132,35 @@ export const en = {
     list: {
       "isagi": {
         name: "Yoichi Isagi",
-        description: "The main protagonist. A striker who aims to become the world's best egoist striker."
+        description: "The central striker of Blue Lock. Uses spatial awareness and adaptability to devour rivals and become the ultimate egoist striker."
       },
       "bachira": {
         name: "Meguru Bachira",
-        description: "A whimsical striker who plays following his instinct. He seeks a 'monster' to play with."
+        description: "An intuitive striker guided by his inner 'monster', known for explosive dribbling and creative playmaking."
       },
       "kunigami": {
         name: "Rensuke Kunigami",
-        description: "A passionate striker with a strong sense of justice and powerful left-legged shot."
+        description: "A powerhouse forward with an unshakeable moral compass and a deadly left-footed strike."
       },
       "chigiri": {
         name: "Hyoma Chigiri",
-        description: "A speedster who overcomes his fear of injury to run freely on the field again."
+        description: "A prodigious sprinter who broke past his fear of re-injury to unleash unmatched top-speed bursts on the wing."
       },
       "nagi": {
         name: "Seishiro Nagi",
-        description: "A prodigy with exceptional ball control who plays football half-heartedly until he finds a challenge."
+        description: "An effortlessly talented prodigy whose extraordinary ball-trapping skills awaken his dormant passion for victory."
       },
       "reo": {
         name: "Reo Mikage",
-        description: "A wealthy heir who is Nagi's partner. He is an all-rounder capable of copying plays."
+        description: "A versatile midfielder and tactician capable of copying high-level plays to complement his strategic mindset."
       },
       "barou": {
         name: "Shoei Barou",
-        description: "The 'King' of the field. A selfish player with a powerful physique and devastating shot."
+        description: "The self-proclaimed 'King' of the pitch who dominates matches with physical dominance and powerful curved shots."
       },
       "rin": {
         name: "Rin Itoshi",
-        description: "The top player in Blue Lock. Sae Itoshi's younger brother, who plays with cold, calculated precision."
+        description: "The top-ranked striker in Blue Lock who controls the field with cold, calculating precision and ruthless efficiency."
       }
     }
   }

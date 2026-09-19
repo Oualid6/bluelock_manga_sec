@@ -1,7 +1,7 @@
 import { Chapter, Character } from "./types";
 
-// Generate integer chapters 1-358
-const integerChapters: Chapter[] = Array.from({ length: 358 }, (_, i) => {
+// Generate integer chapters 1-361
+const integerChapters: Chapter[] = Array.from({ length: 361 }, (_, i) => {
   const number = i + 1;
   const paddedChapter = String(number).padStart(3, '0');
   return {
@@ -9,7 +9,7 @@ const integerChapters: Chapter[] = Array.from({ length: 358 }, (_, i) => {
     number: number,
     title: `Blue Lock Chapter ${number}`,
     releaseDate: new Date().toISOString(), // Mock date, normally would vary
-    pages: number === 358 ? [] : Array.from({ length: number >= 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 346 ? 8 : (number === 345 ? 20 : 80)))) }, (_, p) =>
+    pages: number === 361 ? [] : Array.from({ length: number >= 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 346 ? 8 : (number === 345 ? 20 : 80)))) }, (_, p) =>
       `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number}/blue_lock_${number}_${p + 1}.jpg`
     ),
     pagesEs: number >= 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) => {
@@ -44,7 +44,7 @@ export const CHARACTERS: Character[] = [
     name: "Yoichi Isagi",
     role: "Protagonist",
     grade: "Forward",
-    description: "The main protagonist. A striker who aims to become the world's best egoist striker.",
+    description: "The central striker of Blue Lock. Uses spatial awareness and adaptability to devour rivals and become the ultimate egoist striker.",
     image: "https://picsum.photos/400/600?random=10"
   },
   {
@@ -52,7 +52,7 @@ export const CHARACTERS: Character[] = [
     name: "Meguru Bachira",
     role: "Main Character",
     grade: "Forward",
-    description: "A whimsical striker who plays following his instinct. He seeks a 'monster' to play with.",
+    description: "An intuitive striker guided by his inner 'monster', known for explosive dribbling and creative playmaking.",
     image: "https://picsum.photos/400/600?random=11"
   },
   {
@@ -60,7 +60,7 @@ export const CHARACTERS: Character[] = [
     name: "Rensuke Kunigami",
     role: "Rival",
     grade: "Forward",
-    description: "A passionate striker with a strong sense of justice and powerful left-legged shot.",
+    description: "A powerhouse forward with an unshakeable moral compass and a deadly left-footed strike.",
     image: "https://picsum.photos/400/600?random=12"
   },
   {
@@ -68,7 +68,7 @@ export const CHARACTERS: Character[] = [
     name: "Hyoma Chigiri",
     role: "Rival",
     grade: "Forward",
-    description: "A speedster who overcomes his fear of injury to run freely on the field again.",
+    description: "A prodigious sprinter who broke past his fear of re-injury to unleash unmatched top-speed bursts on the wing.",
     image: "https://picsum.photos/400/600?random=13"
   },
   {
@@ -76,7 +76,7 @@ export const CHARACTERS: Character[] = [
     name: "Seishiro Nagi",
     role: "Rival",
     grade: "Forward",
-    description: "A prodigy with exceptional ball control who plays football half-heartedly until he finds a challenge.",
+    description: "An effortlessly talented prodigy whose extraordinary ball-trapping skills awaken his dormant passion for victory.",
     image: "https://picsum.photos/400/600?random=14"
   },
   {
@@ -84,7 +84,7 @@ export const CHARACTERS: Character[] = [
     name: "Reo Mikage",
     role: "Rival",
     grade: "Midfielder",
-    description: "A wealthy heir who is Nagi's partner. He is an all-rounder capable of copying plays.",
+    description: "A versatile midfielder and tactician capable of copying high-level plays to complement his strategic mindset.",
     image: "https://picsum.photos/400/600?random=15"
   },
   {
@@ -92,7 +92,7 @@ export const CHARACTERS: Character[] = [
     name: "Shoei Barou",
     role: "Villain",
     grade: "Forward",
-    description: "The 'King' of the field. A selfish player with a powerful physique and devastating shot.",
+    description: "The self-proclaimed 'King' of the pitch who dominates matches with physical dominance and powerful curved shots.",
     image: "https://picsum.photos/400/600?random=16"
   },
   {
@@ -100,7 +100,7 @@ export const CHARACTERS: Character[] = [
     name: "Rin Itoshi",
     role: "Rival",
     grade: "Forward",
-    description: "The top player in Blue Lock. Sae Itoshi's younger brother, who plays with cold, calculated precision.",
+    description: "The top-ranked striker in Blue Lock who controls the field with cold, calculating precision and ruthless efficiency.",
     image: "https://picsum.photos/400/600?random=17"
   }
 ];
