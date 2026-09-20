@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-const GA_MEASUREMENT_ID = 'G-GEBJWTWKZQ';
+const GA_MEASUREMENT_ID = 'G-GBEBWTWKZQ';
 
 // Component to track page views on client-side route changes
 const AnalyticsTracker: React.FC = () => {
@@ -25,8 +25,9 @@ const AnalyticsTracker: React.FC = () => {
       isFirstRender.current = false;
       return;
     }
-    if (typeof window.gtag === 'function') {
-      window.gtag('config', GA_MEASUREMENT_ID, {
+    const gtag = window.gtag || (window as any).gtag;
+    if (typeof gtag === 'function') {
+      gtag('config', GA_MEASUREMENT_ID, {
         page_path: location.pathname + location.search,
         page_location: window.location.href,
       });
