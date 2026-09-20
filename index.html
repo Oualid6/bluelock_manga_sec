@@ -7,6 +7,7 @@
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
     gtag('js', new Date());
 
     gtag('config', 'G-GEBJWTWKZQ');
@@ -15,17 +16,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Blue Lock Manga Online - Read Latest Chapters & Updates</title>
-
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-MDJHQSK2');</script>
-  <!-- End Google Tag Manager -->
 
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/favicon.png" />
@@ -36,7 +26,7 @@
     content="Blue Lock Manga, read Blue Lock manga online, Blue Lock chapters, latest Blue Lock chapters, Yoichi Isagi, Muneyuki Kaneshiro, sports manga, Shonen" />
   <meta name="referrer" content="no-referrer" />
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://* http://*; style-src 'self' 'unsafe-inline' https://* http://*; font-src 'self' https://* http://* data:; img-src 'self' data: https://* http://*; connect-src 'self' https://* http://*; frame-src 'self' https://* http://*; object-src 'none'; base-uri 'self';">
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.google-analytics.com https://* http://*; style-src 'self' 'unsafe-inline' https://* http://*; font-src 'self' https://* http://* data:; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://* http://*; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://* http://*; frame-src 'self' https://* http://*; object-src 'none'; base-uri 'self';">
 
   <!-- FIX 3: Preload the hero LCP image EARLY in <head> -->
   <link rel="preload" href="/imagebackgournd.webp" as="image" type="image/webp" fetchpriority="high" />
@@ -82,11 +72,6 @@
 </head>
 
 <body class="bg-[#121212] text-gray-100 transition-colors duration-200">
-
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MDJHQSK2" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
   <div id="root"></div>
   <script type="module" src="/index.tsx"></script>
