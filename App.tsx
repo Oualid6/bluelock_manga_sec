@@ -1,10 +1,40 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { MangaProvider } from './context/MangaContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { LanguageProvider } from './context/LanguageContext';
+
+declare global {
+  interface Window {
+    dataLayer: any[];
+    gtag?: (...args: any[]) => void;
+  }
+}
+
+const GA_MEASUREMENT_ID = 'G-GEBJWTWKZQ';
+
+// Component to track page views on client-side route changes
+const AnalyticsTracker: React.FC = () => {
+  const location = useLocation();
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (typeof window.gtag === 'function') {
+      window.gtag('config', GA_MEASUREMENT_ID, {
+        page_path: location.pathname + location.search,
+        page_location: window.location.href,
+      });
+    }
+  }, [location]);
+
+  return null;
+};
 
 // Home is eagerly imported — it's the landing page and must load instantly
 // to avoid the JS chain: index → Home → SEOHead → icons (saves ~400ms TBT)
@@ -42,6 +72,7 @@ const App: React.FC = () => {
     <MangaProvider>
       <ThemeProvider>
         <Router>
+          <AnalyticsTracker />
           {/* Helps scroll to top on navigation */}
           <div className="font-sans antialiased text-gray-100 bg-[#121212] transition-colors duration-200 min-h-screen select-none">
             <Suspense fallback={<LoadingSpinner />}>
