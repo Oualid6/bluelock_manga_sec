@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
                 <li><Link to={`/${lang}/terms`} className="hover:text-bb-blue transition-colors">{t.footer.terms}</Link></li>
                 <li><Link to={`/${lang}/dmca`} className="hover:text-bb-blue transition-colors">{t.footer.dmca}</Link></li>
                 <li><Link to={`/${lang}/disclaimer`} className="hover:text-bb-blue transition-colors">Disclaimer</Link></li>
-                <li><a href="mailto:Support@bluelocken.com" className="hover:text-bb-blue transition-colors">{t.footer.contact}</a></li>
+                <li><a href="mailto:Support@bluelockhub.com" className="hover:text-bb-blue transition-colors">{t.footer.contact}</a></li>
               </ul>
             </div>
           </div>

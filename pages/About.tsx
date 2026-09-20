@@ -12,7 +12,7 @@ const About: React.FC = () => {
             <SEOHead
                 title={isFr ? "À Propos - Blue Lock Manga" : (isEs ? "Sobre Nosotros - Blue Lock Manga" : "About Us - Blue Lock Manga")}
                 description={isFr ? "Découvrez notre plateforme dédiée aux passionnés du manga Blue Lock, nos engagements de lecture et notre communauté." : (isEs ? "Descubre nuestra plataforma dedicada a los fans del manga Blue Lock, nuestro compromiso de lectura y nuestra comunidad." : "Learn about our dedicated reader platform built for fans to follow Blue Lock manga chapters and story updates.")}
-                canonicalUrl={`https://bluelocken.com/${lang}/about`}
+                canonicalUrl={`https://bluelockhub.com/${lang}/about`}
             />
 
             <h1 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-4">
@@ -85,11 +85,11 @@ const About: React.FC = () => {
                 </h2>
                 <p>
                     {isFr ? (
-                        <>Une question, un retour ou une suggestion ? Notre équipe reste à votre écoute :<br />Email : <a href="mailto:Support@bluelocken.com" className="text-bb-blue hover:underline">Support@bluelocken.com</a></>
+                        <>Une question, un retour ou une suggestion ? Notre équipe reste à votre écoute :<br />Email : <a href="mailto:Support@bluelockhub.com" className="text-bb-blue hover:underline">Support@bluelockhub.com</a></>
                     ) : isEs ? (
-                        <>¿Tienes sugerencias, preguntas o comentarios? Estaremos encantados de ayudarte:<br />Correo: <a href="mailto:Support@bluelocken.com" className="text-bb-blue hover:underline">Support@bluelocken.com</a></>
+                        <>¿Tienes sugerencias, preguntas o comentarios? Estaremos encantados de ayudarte:<br />Correo: <a href="mailto:Support@bluelockhub.com" className="text-bb-blue hover:underline">Support@bluelockhub.com</a></>
                     ) : (
-                        <>Have suggestions, technical feedback, or questions? We're always eager to improve :<br />Email: <a href="mailto:Support@bluelocken.com" className="text-bb-blue hover:underline">Support@bluelocken.com</a></>
+                        <>Have suggestions, technical feedback, or questions? We're always eager to improve :<br />Email: <a href="mailto:Support@bluelockhub.com" className="text-bb-blue hover:underline">Support@bluelockhub.com</a></>
                     )}
                 </p>
 

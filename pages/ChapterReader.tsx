@@ -96,7 +96,7 @@ const ChapterReader: React.FC = () => {
       <SEOHead
         title={`Blue Lock ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} - Read Online`}
         description={`Read Blue Lock Manga ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} online in high quality free. Official English scans available.`}
-        canonicalUrl={`https://bluelocken.com${lang === 'en' ? '' : `/${lang}`}/chapter/${chapter.number}`}
+        canonicalUrl={`https://bluelockhub.com${lang === 'en' ? '' : `/${lang}`}/chapter/${chapter.number}`}
         schema={[
           {
             "@context": "https://schema.org",
@@ -117,13 +117,13 @@ const ChapterReader: React.FC = () => {
                 "@type": "ListItem",
                 "position": 1,
                 "name": t.reader.home,
-                "item": `https://bluelocken.com/${lang}`
+                "item": `https://bluelockhub.com/${lang}`
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Manga",
-                "item": `https://bluelocken.com/${lang}/manga`
+                "item": `https://bluelockhub.com/${lang}/manga`
               },
               {
                 "@type": "ListItem",

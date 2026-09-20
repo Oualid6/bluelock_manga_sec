@@ -55,7 +55,7 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
                                 <li>A statement that the information in the notification is accurate, and under penalty of perjury, that the complaining party is authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</li>
                             </ul>
 
-                            <p className="mb-4">Please submit your info to: <strong>Support@bluelocken.com</strong></p>
+                            <p className="mb-4">Please submit your info to: <strong>Support@bluelockhub.com</strong></p>
                             <p className="mb-4">UNDER FEDERAL LAW, IF YOU KNOWINGLY MISREPRESENT THAT ONLINE MATERIAL IS INFRINGING, YOU MAY BE SUBJECT TO CRIMINAL PROSECUTION FOR PERJURY AND CIVIL PENALTIES, INCLUDING MONETARY DAMAGES, COURT COSTS, AND ATTORNEYS' FEES.</p>
                         </>
                     )
@@ -65,7 +65,7 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
                     title: "Disclaimer",
                     content: (
                         <>
-                            <p className="mb-4">If you require any more information or have any questions about our site's disclaimer, please feel free to contact us by email at Support@bluelocken.com.</p>
+                            <p className="mb-4">If you require any more information or have any questions about our site's disclaimer, please feel free to contact us by email at Support@bluelockhub.com.</p>
 
                             <h2 className="text-xl font-bold mt-6 mb-3">Fair Use Notice</h2>
                             <p className="mb-4">This website may contain copyrighted material the use of which has not always been specifically authorized by the copyright owner. We are making such material available in an effort to advance understanding of anime, manga, and cultural topics. We believe this constitutes a 'fair use' of any such copyrighted material as provided for in section 107 of the US Copyright Law.</p>
@@ -112,7 +112,7 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
             <SEOHead 
                 title={`${title} - Blue Lock Manga`} 
                 description={`Read our ${title}.`} 
-                canonicalUrl={`https://bluelocken.com/${lang}/${type}`}
+                canonicalUrl={`https://bluelockhub.com/${lang}/${type}`}
             />
             <h1 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-4">{title}</h1>
             <div className="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">

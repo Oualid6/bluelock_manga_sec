@@ -11,7 +11,7 @@ const Characters: React.FC = () => {
       <SEOHead
         title="Blue Lock Manga Characters - Database"
         description="Detailed profiles of Blue Lock Manga characters including Yoichi Isagi, Meguru Bachira, Rensuke Kunigami and more."
-        canonicalUrl={`https://bluelocken.com/${lang}/characters`}
+        canonicalUrl={`https://bluelockhub.com/${lang}/characters`}
       />
 
       <div className="text-center mb-16">
