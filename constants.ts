@@ -1,7 +1,7 @@
 import { Chapter, Character } from "./types";
 
-// Generate integer chapters 1-362
-const integerChapters: Chapter[] = Array.from({ length: 362 }, (_, i) => {
+// Generate integer chapters 1-363
+const integerChapters: Chapter[] = Array.from({ length: 363 }, (_, i) => {
   const number = i + 1;
   const paddedChapter = String(number).padStart(3, '0');
   return {
@@ -9,7 +9,7 @@ const integerChapters: Chapter[] = Array.from({ length: 362 }, (_, i) => {
     number: number,
     title: number === 361 ? 'Blue Lock Chapter 361: Self-Abnegation' : `Blue Lock Chapter ${number}`,
     releaseDate: new Date().toISOString(), // Mock date, normally would vary
-    pages: number === 362 ? [] : Array.from({ length: number >= 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 346 ? 8 : (number === 345 ? 20 : 80)))) }, (_, p) =>
+    pages: number === 363 ? [] : Array.from({ length: number >= 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 346 ? 8 : (number === 345 ? 20 : 80)))) }, (_, p) =>
       `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number}/blue_lock_${number}_${p + 1}.jpg`
     ),
     pagesEs: number >= 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) => {
