@@ -1,15 +1,19 @@
 import { Chapter, Character } from "./types";
 
-// Generate integer chapters 1-363
-const integerChapters: Chapter[] = Array.from({ length: 363 }, (_, i) => {
+// Generate integer chapters 1-365
+const integerChapters: Chapter[] = Array.from({ length: 365 }, (_, i) => {
   const number = i + 1;
   const paddedChapter = String(number).padStart(3, '0');
   return {
     id: String(number),
     number: number,
-    title: number === 361 ? 'Blue Lock Chapter 361: Self-Abnegation' : `Blue Lock Chapter ${number}`,
+    title: number === 361 ? 'Blue Lock Chapter 361: Self-Abnegation' :
+           number === 362 ? 'Blue Lock Chapter 362: Obsession' :
+           number === 363 ? 'Blue Lock Chapter 363: Taboo Game' :
+           number === 364 ? 'Blue Lock Chapter 364: One-Point Gamble' :
+           `Blue Lock Chapter ${number}`,
     releaseDate: new Date().toISOString(), // Mock date, normally would vary
-    pages: number === 363 ? [] : Array.from({ length: number >= 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 346 ? 8 : (number === 345 ? 20 : 80)))) }, (_, p) =>
+    pages: number === 365 ? [] : Array.from({ length: (number === 364 || number === 346) ? 8 : (number >= 351 ? 20 : (number >= 350 ? 23 : (number >= 347 ? 20 : (number === 345 ? 20 : 80)))) }, (_, p) =>
       `https://images.mangafreak.me/mangas/blue_lock/blue_lock_${number}/blue_lock_${number}_${p + 1}.jpg`
     ),
     pagesEs: number >= 346 ? [] : Array.from({ length: number === 345 ? 20 : 80 }, (_, p) => {
@@ -35,7 +39,20 @@ const chapter346_2: Chapter = {
   pagesFr: []
 };
 
-export const MOCK_CHAPTERS: Chapter[] = [...integerChapters, chapter346_2]
+// Chapter 364.2 (Part 2) — 12 pages from MangaFreak
+const chapter364_2: Chapter = {
+  id: '364.2',
+  number: 364.2,
+  title: 'Blue Lock Chapter 364.2',
+  releaseDate: '2026-10-09T00:00:00.000Z',
+  pages: Array.from({ length: 12 }, (_, p) =>
+    `https://images.mangafreak.me/mangas/blue_lock/blue_lock_364b/blue_lock_364b_${p + 1}.jpg`
+  ),
+  pagesEs: [],
+  pagesFr: []
+};
+
+export const MOCK_CHAPTERS: Chapter[] = [...integerChapters, chapter346_2, chapter364_2]
   .sort((a, b) => b.number - a.number); // Latest chapters first
 
 export const CHARACTERS: Character[] = [
