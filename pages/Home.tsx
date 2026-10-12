@@ -56,6 +56,12 @@ const Home: React.FC = () => {
         title="Blue Lock Manga - Read Online High Quality"
         description="Read Blue Lock Manga online in high quality. The best place for Blue Lock chapters, character info, and latest updates. All chapters available."
         canonicalUrl={`https://bluelockhub.com/${lang}`}
+        hreflangAlternates={[
+          { lang: 'en', href: 'https://bluelockhub.com/en' },
+          { lang: 'fr', href: 'https://bluelockhub.com/fr' },
+          { lang: 'es', href: 'https://bluelockhub.com/es' },
+          { lang: 'x-default', href: 'https://bluelockhub.com/en' }
+        ]}
         schema={{
           "@context": "https://schema.org",
           "@type": "WebSite",
@@ -83,6 +89,7 @@ const Home: React.FC = () => {
         <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
 
           <h1 className="mb-6 flex justify-center items-center">
+            <span className="sr-only">Blue Lock Manga Online</span>
             <img
               src="/logo.webp"
               alt="Blue Lock Manga"

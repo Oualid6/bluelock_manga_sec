@@ -12,6 +12,12 @@ const Characters: React.FC = () => {
         title="Blue Lock Manga Characters - Database"
         description="Detailed profiles of Blue Lock Manga characters including Yoichi Isagi, Meguru Bachira, Rensuke Kunigami and more."
         canonicalUrl={`https://bluelockhub.com/${lang}/characters`}
+        hreflangAlternates={[
+          { lang: 'en', href: 'https://bluelockhub.com/en/characters' },
+          { lang: 'fr', href: 'https://bluelockhub.com/fr/characters' },
+          { lang: 'es', href: 'https://bluelockhub.com/es/characters' },
+          { lang: 'x-default', href: 'https://bluelockhub.com/en/characters' }
+        ]}
       />
 
       <div className="text-center mb-16">

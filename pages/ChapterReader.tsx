@@ -6,6 +6,8 @@ import { useManga } from '../context/MangaContext';
 import { useLanguage } from '../context/LanguageContext';
 import { Chapter } from '../types';
 
+import NotFound from './NotFound';
+
 const ChapterReader: React.FC = () => {
   const { chapterId } = useParams<{ chapterId: string }>();
   const navigate = useNavigate();
@@ -64,7 +66,6 @@ const ChapterReader: React.FC = () => {
     }
   }, [chapter, lang]);
 
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-bb-dark">
@@ -74,22 +75,35 @@ const ChapterReader: React.FC = () => {
   }
 
   if (!chapter) {
-    return <div className="p-10 text-center dark:text-white">Chapter not found.</div>;
+    return <NotFound chapterNotFound chapterNumber={currentNum} />;
   }
 
-  // Find adjacent chapters using sorted array position (supports sub-chapters like 346.2)
-  const sortedChapters = [...chapters].sort((a, b) => a.number - b.number);
-  const currentIndex = sortedChapters.findIndex(c => c.number === currentNum);
-  const prevChapter = currentIndex > 0 ? sortedChapters[currentIndex - 1] : undefined;
-  const nextChapter = ((lang === 'fr' && currentNum >= 343) || (lang === 'es' && currentNum >= 345)) ? undefined : (currentIndex < sortedChapters.length - 1 ? sortedChapters[currentIndex + 1] : undefined);
+  // Filter available chapters to ONLY those with real pages in the current language
+  // This guarantees crawlable navigation never links to empty or nonexistent chapters
+  const availableChapters = [...chapters]
+    .filter(c => {
+      if (lang === 'fr') return c.pagesFr && c.pagesFr.length > 0;
+      if (lang === 'es') return c.pagesEs && c.pagesEs.length > 0;
+      return c.pages && c.pages.length > 0;
+    })
+    .sort((a, b) => a.number - b.number);
+
+  const currentIndex = availableChapters.findIndex(c => c.number === currentNum);
+  const prevChapter = currentIndex > 0 ? availableChapters[currentIndex - 1] : undefined;
+  const nextChapter = (currentIndex >= 0 && currentIndex < availableChapters.length - 1) ? availableChapters[currentIndex + 1] : undefined;
+
+  const prevUrl = prevChapter ? (lang === 'en' ? `/chapter/${prevChapter.number}` : `/${lang}/chapter/${prevChapter.number}`) : undefined;
+  const nextUrl = nextChapter ? (lang === 'en' ? `/chapter/${nextChapter.number}` : `/${lang}/chapter/${nextChapter.number}`) : undefined;
 
   let displayPages = lang === 'fr' ? (chapter.pagesFr || []) : (lang === 'es' ? (chapter.pagesEs || []) : chapter.pages);
 
-
-
-  const handleNav = (num: number) => {
-    if (num !== undefined) navigate(lang === 'en' ? `/chapter/${num}` : `/${lang}/chapter/${num}`);
-  }
+  // Compute hreflang alternates only for languages where this specific chapter actually has pages
+  const hreflangAlternates = [
+    ...(chapter.pages && chapter.pages.length > 0 ? [{ lang: 'en', href: `https://bluelockhub.com/chapter/${chapter.number}` }] : []),
+    ...(chapter.pagesFr && chapter.pagesFr.length > 0 ? [{ lang: 'fr', href: `https://bluelockhub.com/fr/chapter/${chapter.number}` }] : []),
+    ...(chapter.pagesEs && chapter.pagesEs.length > 0 ? [{ lang: 'es', href: `https://bluelockhub.com/es/chapter/${chapter.number}` }] : []),
+    ...(chapter.pages && chapter.pages.length > 0 ? [{ lang: 'x-default', href: `https://bluelockhub.com/chapter/${chapter.number}` }] : [])
+  ];
 
   return (
     <div className="bg-gray-100 dark:bg-[#121212] min-h-screen flex flex-col" style={{ paddingBottom: '60px' }}>
@@ -97,6 +111,8 @@ const ChapterReader: React.FC = () => {
         title={`Blue Lock ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} - Read Online`}
         description={`Read Blue Lock Manga ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} online in high quality free. Official English scans available.`}
         canonicalUrl={`https://bluelockhub.com${lang === 'en' ? '' : `/${lang}`}/chapter/${chapter.number}`}
+        noindex={displayPages.length === 0}
+        hreflangAlternates={hreflangAlternates}
         schema={[
           {
             "@context": "https://schema.org",
@@ -176,20 +192,32 @@ const ChapterReader: React.FC = () => {
 
             {/* Prev/Next Nav */}
             <div className="flex items-center gap-1 md:gap-2">
-              <button
-                disabled={!prevChapter}
-                onClick={() => prevChapter && handleNav(prevChapter.number)}
-                className="p-1.5 md:p-2 disabled:opacity-30 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md dark:text-white transition-colors"
-              >
-                <ChevronLeft size={22} className="md:w-6 md:h-6" />
-              </button>
-              <button
-                disabled={!nextChapter}
-                onClick={() => nextChapter && handleNav(nextChapter.number)}
-                className="p-1.5 md:p-2 disabled:opacity-30 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md dark:text-white transition-colors"
-              >
-                <ChevronRight size={22} className="md:w-6 md:h-6" />
-              </button>
+              {prevChapter && prevUrl ? (
+                <Link
+                  to={prevUrl}
+                  className="p-1.5 md:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md dark:text-white transition-colors block"
+                  title={`${t.reader.prev} ${t.reader.chapter} ${prevChapter.number}`}
+                >
+                  <ChevronLeft size={22} className="md:w-6 md:h-6" />
+                </Link>
+              ) : (
+                <span className="p-1.5 md:p-2 opacity-30 rounded-md dark:text-white cursor-not-allowed">
+                  <ChevronLeft size={22} className="md:w-6 md:h-6" />
+                </span>
+              )}
+              {nextChapter && nextUrl ? (
+                <Link
+                  to={nextUrl}
+                  className="p-1.5 md:p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md dark:text-white transition-colors block"
+                  title={`${t.reader.next} ${t.reader.chapter} ${nextChapter.number}`}
+                >
+                  <ChevronRight size={22} className="md:w-6 md:h-6" />
+                </Link>
+              ) : (
+                <span className="p-1.5 md:p-2 opacity-30 rounded-md dark:text-white cursor-not-allowed">
+                  <ChevronRight size={22} className="md:w-6 md:h-6" />
+                </span>
+              )}
             </div>
           </div>
         </div>
@@ -313,10 +341,10 @@ const ChapterReader: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-xl">
-            {prevChapter ? (
-              <button
-                onClick={() => handleNav(prevChapter.number)}
-                className="group relative overflow-hidden rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 p-6 text-left hover:border-gray-300 dark:hover:border-white/20 transition-all hover:shadow-xl hover:-translate-y-1"
+            {prevChapter && prevUrl ? (
+              <Link
+                to={prevUrl}
+                className="group relative overflow-hidden rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 p-6 text-left hover:border-gray-300 dark:hover:border-white/20 transition-all hover:shadow-xl hover:-translate-y-1 block"
               >
                 <div className="relative z-10 flex items-center justify-between">
                   <div>
@@ -327,13 +355,13 @@ const ChapterReader: React.FC = () => {
                     <ChevronLeft size={20} />
                   </div>
                 </div>
-              </button>
+              </Link>
             ) : <div />}
 
-            {nextChapter ? (
-              <button
-                onClick={() => handleNav(nextChapter.number)}
-                className="group relative overflow-hidden rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 p-6 text-right hover:border-bb-blue/50 dark:hover:border-bb-blue/50 transition-all hover:shadow-xl hover:shadow-bb-blue/10 hover:-translate-y-1"
+            {nextChapter && nextUrl ? (
+              <Link
+                to={nextUrl}
+                className="group relative overflow-hidden rounded-2xl bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 p-6 text-right hover:border-bb-blue/50 dark:hover:border-bb-blue/50 transition-all hover:shadow-xl hover:shadow-bb-blue/10 hover:-translate-y-1 block"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent to-bb-blue/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 <div className="relative z-10 flex items-center justify-between flex-row-reverse">
@@ -345,11 +373,11 @@ const ChapterReader: React.FC = () => {
                     <ChevronRight size={20} />
                   </div>
                 </div>
-              </button>
+              </Link>
             ) : (
-              <button disabled className="rounded-2xl bg-gray-100 dark:bg-white/5 border border-transparent p-6 text-center cursor-not-allowed opacity-50">
+              <div className="rounded-2xl bg-gray-100 dark:bg-white/5 border border-transparent p-6 text-center opacity-50">
                 <span className="font-bold text-gray-500">{t.reader.latestChapter}</span>
-              </button>
+              </div>
             )}
           </div>
         </div>

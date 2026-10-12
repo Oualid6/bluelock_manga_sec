@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Home } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 interface BreadcrumbItem {
     label: string;
@@ -12,6 +13,7 @@ interface BreadcrumbsProps {
 }
 
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
+    const { lang } = useLanguage();
     const schema = {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -44,7 +46,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
 
     return (
         <nav className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-6 font-medium overflow-x-auto whitespace-nowrap pb-2 md:pb-0">
-            <Link to="/en" className="flex items-center hover:text-bb-blue transition-colors flex-shrink-0">
+            <Link to={`/${lang}`} className="flex items-center hover:text-bb-blue transition-colors flex-shrink-0">
                 <Home size={16} />
             </Link>
 

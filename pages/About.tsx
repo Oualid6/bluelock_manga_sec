@@ -13,6 +13,12 @@ const About: React.FC = () => {
                 title={isFr ? "À Propos - Blue Lock Manga" : (isEs ? "Sobre Nosotros - Blue Lock Manga" : "About Us - Blue Lock Manga")}
                 description={isFr ? "Découvrez notre plateforme dédiée aux passionnés du manga Blue Lock, nos engagements de lecture et notre communauté." : (isEs ? "Descubre nuestra plataforma dedicada a los fans del manga Blue Lock, nuestro compromiso de lectura y nuestra comunidad." : "Learn about our dedicated reader platform built for fans to follow Blue Lock manga chapters and story updates.")}
                 canonicalUrl={`https://bluelockhub.com/${lang}/about`}
+                hreflangAlternates={[
+                    { lang: 'en', href: 'https://bluelockhub.com/en/about' },
+                    { lang: 'fr', href: 'https://bluelockhub.com/fr/about' },
+                    { lang: 'es', href: 'https://bluelockhub.com/es/about' },
+                    { lang: 'x-default', href: 'https://bluelockhub.com/en/about' }
+                ]}
             />
 
             <h1 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-4">

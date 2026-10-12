@@ -1,16 +1,30 @@
 import React, { useEffect } from 'react';
 import { SEOMeta } from '../types';
 
-interface SEOHeadProps extends SEOMeta {
-  canonicalUrl?: string;
+export interface HreflangAlternate {
+  lang: string;
+  href: string;
 }
 
-const SEOHead: React.FC<SEOHeadProps> = ({ title, description, schema, canonicalUrl }) => {
+interface SEOHeadProps extends SEOMeta {
+  canonicalUrl?: string;
+  noindex?: boolean;
+  hreflangAlternates?: HreflangAlternate[];
+}
+
+const SEOHead: React.FC<SEOHeadProps> = ({
+  title,
+  description,
+  schema,
+  canonicalUrl,
+  noindex,
+  hreflangAlternates,
+}) => {
   useEffect(() => {
-    // Update Title
+    // 1. Update Title
     document.title = title.includes('Blue Lock Manga') ? title : `${title} | Blue Lock Manga`;
 
-    // Update Meta Description
+    // 2. Update Meta Description
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
       metaDescription = document.createElement('meta');
@@ -19,7 +33,20 @@ const SEOHead: React.FC<SEOHeadProps> = ({ title, description, schema, canonical
     }
     metaDescription.setAttribute('content', description);
 
-    // Add Canonical Tag
+    // 3. Update Robots Meta Tag
+    let metaRobots = document.querySelector('meta[name="robots"]');
+    if (noindex) {
+      if (!metaRobots) {
+        metaRobots = document.createElement('meta');
+        metaRobots.setAttribute('name', 'robots');
+        document.head.appendChild(metaRobots);
+      }
+      metaRobots.setAttribute('content', 'noindex, follow');
+    } else if (metaRobots) {
+      metaRobots.setAttribute('content', 'index, follow');
+    }
+
+    // 4. Update Canonical Tag
     let linkCanonical = document.querySelector('link[rel="canonical"]');
     if (canonicalUrl) {
       if (!linkCanonical) {
@@ -32,7 +59,24 @@ const SEOHead: React.FC<SEOHeadProps> = ({ title, description, schema, canonical
       linkCanonical.remove();
     }
 
-    // Add Schema.org JSON-LD
+    // 5. Update Hreflang Alternate Links
+    // Remove old dynamic alternates
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => {
+      // keep sitemap or other alternates if non-hreflang
+      el.remove();
+    });
+
+    if (hreflangAlternates && hreflangAlternates.length > 0) {
+      hreflangAlternates.forEach((alt) => {
+        const link = document.createElement('link');
+        link.setAttribute('rel', 'alternate');
+        link.setAttribute('hreflang', alt.lang);
+        link.setAttribute('href', alt.href);
+        document.head.appendChild(link);
+      });
+    }
+
+    // 6. Add Schema.org JSON-LD
     if (schema) {
       let scriptSchema = document.querySelector('#structured-data');
       if (!scriptSchema) {
@@ -44,7 +88,10 @@ const SEOHead: React.FC<SEOHeadProps> = ({ title, description, schema, canonical
       scriptSchema.textContent = JSON.stringify(schema);
     }
 
-  }, [title, description, schema, canonicalUrl]);
+    return () => {
+      // cleanup on route change
+    };
+  }, [title, description, schema, canonicalUrl, noindex, hreflangAlternates]);
 
   return null;
 };

@@ -28,6 +28,12 @@ const MangaList: React.FC = () => {
         title="Blue Lock Manga Library - All Chapters"
         description="Browse the complete collection of Blue Lock manga chapters. Read online in high quality."
         canonicalUrl={`https://bluelockhub.com/${lang}/manga`}
+        hreflangAlternates={[
+          { lang: 'en', href: 'https://bluelockhub.com/en/manga' },
+          { lang: 'fr', href: 'https://bluelockhub.com/fr/manga' },
+          { lang: 'es', href: 'https://bluelockhub.com/es/manga' },
+          { lang: 'x-default', href: 'https://bluelockhub.com/en/manga' }
+        ]}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">

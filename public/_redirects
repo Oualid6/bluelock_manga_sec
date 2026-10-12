@@ -1,1 +1,17 @@
-/*    /index.html   200
+# 1. Root Homepage Server-level 301 Permanent Redirect to English Homepage
+/                   /en                   301!
+
+# 2. Legacy Non-Language Routes Server-level 301 Permanent Redirects
+/manga              /en/manga             301!
+/characters         /en/characters        301!
+/about              /en/about             301!
+/terms              /en/terms             301!
+/privacy            /en/privacy           301!
+/dmca               /en/dmca              301!
+/disclaimer         /en/disclaimer        301!
+
+# 3. Canonical Chapter Redirect: /en/chapter/* -> /chapter/:splat
+/en/chapter/*       /chapter/:splat       301!
+
+# 4. SPA Catch-all Fallback
+/*                  /index.html           200

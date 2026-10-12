@@ -113,6 +113,12 @@ const Legal: React.FC<LegalProps> = ({ type }) => {
                 title={`${title} - Blue Lock Manga`} 
                 description={`Read our ${title}.`} 
                 canonicalUrl={`https://bluelockhub.com/${lang}/${type}`}
+                hreflangAlternates={[
+                    { lang: 'en', href: `https://bluelockhub.com/en/${type}` },
+                    { lang: 'fr', href: `https://bluelockhub.com/fr/${type}` },
+                    { lang: 'es', href: `https://bluelockhub.com/es/${type}` },
+                    { lang: 'x-default', href: `https://bluelockhub.com/en/${type}` }
+                ]}
             />
             <h1 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-4">{title}</h1>
             <div className="prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300">

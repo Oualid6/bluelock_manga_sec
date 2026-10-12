@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
               <h4 className="font-bold text-gray-900 dark:text-white mb-4 text-sm uppercase tracking-wider">{t.footer.explore}</h4>
               <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
                 <li><Link to={`/${lang}/manga`} className="hover:text-bb-blue transition-colors">{t.nav.allChapters}</Link></li>
-                <li><Link to={`/${lang}/chapter/1`} className="hover:text-bb-blue transition-colors">{t.footer.startReading}</Link></li>
+                <li><Link to={lang === 'en' ? '/chapter/1' : `/${lang}/chapter/1`} className="hover:text-bb-blue transition-colors">{t.footer.startReading}</Link></li>
                 <li><Link to={`/${lang}/characters`} className="hover:text-bb-blue transition-colors">{t.nav.characters}</Link></li>
                 <li><Link to={`/${lang}/about`} className="hover:text-bb-blue transition-colors">{t.footer.aboutUs}</Link></li>
               </ul>
