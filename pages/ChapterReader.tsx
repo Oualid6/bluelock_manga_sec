@@ -97,58 +97,104 @@ const ChapterReader: React.FC = () => {
 
   let displayPages = lang === 'fr' ? (chapter.pagesFr || []) : (lang === 'es' ? (chapter.pagesEs || []) : chapter.pages);
 
+  // True if this chapter is a genuine "coming soon" (no pages in ANY language yet)
+  const isComingSoon = chapter.pages.length === 0 && (!chapter.pagesFr || chapter.pagesFr.length === 0) && (!chapter.pagesEs || chapter.pagesEs.length === 0);
+
+  // noindex: only suppress chapters that have content in some language but not the current one
+  // Genuine coming-soon pages (ch. 366+) are always indexable
+  const shouldNoindex = !isComingSoon && displayPages.length === 0;
+
   // Compute hreflang alternates only for languages where this specific chapter actually has pages
-  const hreflangAlternates = [
-    ...(chapter.pages && chapter.pages.length > 0 ? [{ lang: 'en', href: `https://bluelockhub.com/chapter/${chapter.number}` }] : []),
-    ...(chapter.pagesFr && chapter.pagesFr.length > 0 ? [{ lang: 'fr', href: `https://bluelockhub.com/fr/chapter/${chapter.number}` }] : []),
-    ...(chapter.pagesEs && chapter.pagesEs.length > 0 ? [{ lang: 'es', href: `https://bluelockhub.com/es/chapter/${chapter.number}` }] : []),
-    ...(chapter.pages && chapter.pages.length > 0 ? [{ lang: 'x-default', href: `https://bluelockhub.com/chapter/${chapter.number}` }] : [])
-  ];
+  // For coming-soon chapters, point x-default at the English canonical
+  const hreflangAlternates = isComingSoon
+    ? [{ lang: 'en', href: `https://bluelockhub.com/chapter/${chapter.number}` }, { lang: 'x-default', href: `https://bluelockhub.com/chapter/${chapter.number}` }]
+    : [
+        ...(chapter.pages && chapter.pages.length > 0 ? [{ lang: 'en', href: `https://bluelockhub.com/chapter/${chapter.number}` }] : []),
+        ...(chapter.pagesFr && chapter.pagesFr.length > 0 ? [{ lang: 'fr', href: `https://bluelockhub.com/fr/chapter/${chapter.number}` }] : []),
+        ...(chapter.pagesEs && chapter.pagesEs.length > 0 ? [{ lang: 'es', href: `https://bluelockhub.com/es/chapter/${chapter.number}` }] : []),
+        ...(chapter.pages && chapter.pages.length > 0 ? [{ lang: 'x-default', href: `https://bluelockhub.com/chapter/${chapter.number}` }] : [])
+      ];
+
+  // SEO strings — coming-soon chapters get a dedicated title / description
+  const seoTitle = isComingSoon
+    ? `Blue Lock ${t.reader.chapter} ${chapter.number} – Coming Soon`
+    : `Blue Lock ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} - Read Online`;
+
+  const seoDescription = isComingSoon
+    ? `Blue Lock ${t.reader.chapter} ${chapter.number} is coming soon! This chapter page is being prepared and the latest scans will be available here as soon as the chapter is released. Stay tuned and check back soon!`
+    : `Read Blue Lock Manga ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} online in high quality free. Official English scans available.`;
 
   return (
     <div className="bg-gray-100 dark:bg-[#121212] min-h-screen flex flex-col" style={{ paddingBottom: '60px' }}>
       <SEOHead
-        title={`Blue Lock ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} - Read Online`}
-        description={`Read Blue Lock Manga ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} online in high quality free. Official English scans available.`}
+        title={seoTitle}
+        description={seoDescription}
         canonicalUrl={`https://bluelockhub.com${lang === 'en' ? '' : `/${lang}`}/chapter/${chapter.number}`}
-        noindex={displayPages.length === 0}
+        noindex={shouldNoindex}
         hreflangAlternates={hreflangAlternates}
-        schema={[
-          {
-            "@context": "https://schema.org",
-            "@type": "Article",
-            "headline": `Blue Lock ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''}`,
-            "image": displayPages[0] || "",
-            "datePublished": chapter.releaseDate,
-            "author": {
-              "@type": "Person",
-              "name": "Muneyuki Kaneshiro"
-            }
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
+        schema={isComingSoon
+          ? [
               {
-                "@type": "ListItem",
-                "position": 1,
-                "name": t.reader.home,
-                "item": `https://bluelockhub.com/${lang}`
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Manga",
-                "item": `https://bluelockhub.com/${lang}/manga`
-              },
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "name": `${t.reader.chapter} ${chapter.number}`
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": t.reader.home,
+                    "item": `https://bluelockhub.com/${lang}`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Manga",
+                    "item": `https://bluelockhub.com/${lang}/manga`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": `${t.reader.chapter} ${chapter.number} – Coming Soon`
+                  }
+                ]
               }
             ]
-          }
-        ]}
+          : [
+              {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": `Blue Lock ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''}`,
+                "image": displayPages[0] || "",
+                "datePublished": chapter.releaseDate,
+                "author": {
+                  "@type": "Person",
+                  "name": "Muneyuki Kaneshiro"
+                }
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                  {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": t.reader.home,
+                    "item": `https://bluelockhub.com/${lang}`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Manga",
+                    "item": `https://bluelockhub.com/${lang}/manga`
+                  },
+                  {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": `${t.reader.chapter} ${chapter.number}`
+                  }
+                ]
+              }
+            ]
+        }
       />
 
 
@@ -228,19 +274,34 @@ const ChapterReader: React.FC = () => {
         {displayPages.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 px-4 text-center bg-transparent">
             <div className="bg-white/5 p-8 rounded-2xl border border-white/10 max-w-md w-full shadow-2xl">
-              {((lang === 'fr' && chapter.number >= 343) || (lang === 'es' && chapter.number >= 345) || (lang === 'en' && chapter.number >= 365)) && (
-                <h1 className="text-xl md:text-2xl font-heading font-bold text-bb-blue mb-2 text-center">
-                  Blue Lock Manga {t.reader.chapter} {chapter.number}
-                </h1>
+              {/* Coming-soon chapters (ch. 366+) get a proper H1 for SEO */}
+              {isComingSoon ? (
+                <>
+                  <h1 className="text-xl md:text-2xl font-heading font-bold text-bb-blue mb-2 text-center">
+                    Blue Lock {t.reader.chapter} {chapter.number}
+                  </h1>
+                  <h2 className="text-2xl font-heading font-bold text-gray-900 dark:text-white mb-4">Coming Soon</h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-6">
+                    Blue Lock {t.reader.chapter} {chapter.number} is coming soon! This chapter page is being prepared and the latest scans will be available here as soon as the chapter is released. Stay tuned and check back soon!
+                  </p>
+                </>
+              ) : (
+                <>
+                  {((lang === 'fr' && chapter.number >= 343) || (lang === 'es' && chapter.number >= 345)) && (
+                    <h1 className="text-xl md:text-2xl font-heading font-bold text-bb-blue mb-2 text-center">
+                      Blue Lock Manga {t.reader.chapter} {chapter.number}
+                    </h1>
+                  )}
+                  <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Available soon ...</h2>
+                  <p className="text-gray-600 dark:text-gray-400 mb-6">
+                    {((lang === 'fr' && chapter.number >= 343) || (lang === 'es' && chapter.number >= 345))
+                      ? "Next chapter will be available first on our Telegram channel."
+                      : "This chapter is still being uploaded. You can try reading it early on our partner server."}
+                  </p>
+                </>
               )}
-              <h2 className="text-3xl font-heading font-bold text-gray-900 dark:text-white mb-4">Available soon ...</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
-                {((lang === 'fr' && chapter.number >= 343) || (lang === 'es' && chapter.number >= 345) || (lang === 'en' && chapter.number >= 365)) 
-                  ? "Next chapter will be available first on our Telegram channel."
-                  : "This chapter is still being uploaded. You can try reading it early on our partner server."}
-              </p>
               <div className="flex flex-col gap-3">
-                {((lang === 'fr' && chapter.number >= 343) || (lang === 'es' && chapter.number >= 345) || (lang === 'en' && chapter.number >= 365)) && (
+                {((lang === 'fr' && chapter.number >= 343) || (lang === 'es' && chapter.number >= 345) || isComingSoon) && (
                   <a
                     href="https://t.me/ManganexChannel"
                     target="_blank"
@@ -250,6 +311,15 @@ const ChapterReader: React.FC = () => {
                     <Send size={20} />
                     Telegram
                   </a>
+                )}
+                {prevChapter && prevUrl && (
+                  <Link
+                    to={prevUrl}
+                    className="flex items-center justify-center gap-2 px-6 py-3 bg-bb-blue/10 hover:bg-bb-blue/20 text-bb-blue font-bold rounded-lg transition-all border border-bb-blue/20"
+                  >
+                    <ChevronLeft size={18} />
+                    {t.reader.chapter} {prevChapter.number}
+                  </Link>
                 )}
                 <button
                   onClick={() => navigate(`/${lang}/manga`)}

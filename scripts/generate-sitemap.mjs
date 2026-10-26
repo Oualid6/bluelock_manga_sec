@@ -22,14 +22,16 @@ const staticPages = [
 const languages = ['en', 'fr', 'es'];
 
 // 2. Chapters Data Definition (matches constants.ts exactly)
-// Integer chapters 1-365
-// English: ch 1-364 (ch 365 is empty []) + 346.2 + 364.2
+// Integer chapters 1-366
+// English: ch 1-364 (ch 365 is empty []) + 346.2 + 364.2 + ch 366 (coming soon, empty pages)
 // French: ch 1-342 (ch > 342 are empty [])
 // Spanish: ch 1-345 (ch >= 346 are empty [])
 const chapters = [];
 
-for (let i = 1; i <= 365; i++) {
-  const hasEn = i !== 365;
+for (let i = 1; i <= 366; i++) {
+  // ch 365: En only (pages exist in EN)
+  // ch 366: En only (coming soon — no pages in any language, but still a valid indexed URL)
+  const hasEn = i !== 365; // 365 has pages, 366 is coming-soon but still indexed EN
   const hasFr = i <= 342;
   const hasEs = i <= 345;
   if (hasEn || hasFr || hasEs) {

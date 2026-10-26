@@ -9646,4 +9646,11 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://bluelockhub.com/chapter/366</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bluelockhub.com/chapter/366" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bluelockhub.com/chapter/366" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
