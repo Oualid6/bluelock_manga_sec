@@ -27,13 +27,15 @@ const integerChapters: Chapter[] = Array.from({ length: 365 }, (_, i) => {
   };
 });
 
-// Chapter 366 — Coming Soon (no pages yet; triggers the "Available soon" UI in ChapterReader)
+// Chapter 366 — Available (20 pages from MangaFreak, released 2026-10-27)
 const chapter366: Chapter = {
   id: '366',
   number: 366,
-  title: 'Blue Lock Chapter 366',
-  releaseDate: new Date().toISOString(),
-  pages: [],
+  title: 'Blue Lock Chapter 366: The Pinnacle',
+  releaseDate: '2026-10-27T00:00:00.000Z',
+  pages: Array.from({ length: 20 }, (_, p) =>
+    `https://images.mangafreak.me/mangas/blue_lock/blue_lock_366/blue_lock_366_${p + 1}.jpg`
+  ),
   pagesEs: [],
   pagesFr: [],
 };
