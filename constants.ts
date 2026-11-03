@@ -47,7 +47,7 @@ const chapter367: Chapter = {
   title: 'Blue Lock Chapter 367',
   releaseDate: '2026-11-03T00:00:00.000Z',
   pages: Array.from({ length: 20 }, (_, p) =>
-    `https://images.mangafreak.me/mangas/blue_lock/blue_lock_367/blue_lock_367_${String(p + 1).padStart(2, '0')}.jpg`
+    `https://images.mangafreak.me/downloads/blue_lock_367_${String(p + 1).padStart(2, '0')}.jpg`
   ),
   pagesEs: [],
   pagesFr: [],
