@@ -79,12 +79,12 @@ const ChapterReader: React.FC = () => {
   }
 
   // Filter available chapters to ONLY those with real pages in the current language
-  // This guarantees crawlable navigation never links to empty or nonexistent chapters
+  // For English, also include coming-soon chapters so neighboring navigation links correctly
   const availableChapters = [...chapters]
     .filter(c => {
       if (lang === 'fr') return c.pagesFr && c.pagesFr.length > 0;
       if (lang === 'es') return c.pagesEs && c.pagesEs.length > 0;
-      return c.pages && c.pages.length > 0;
+      return (c.pages && c.pages.length > 0) || (c.pages.length === 0 && (!c.pagesFr || c.pagesFr.length === 0) && (!c.pagesEs || c.pagesEs.length === 0));
     })
     .sort((a, b) => a.number - b.number);
 
@@ -121,7 +121,7 @@ const ChapterReader: React.FC = () => {
     : `Blue Lock ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} - Read Online`;
 
   const seoDescription = isComingSoon
-    ? `Blue Lock ${t.reader.chapter} ${chapter.number} is coming soon! This chapter page is being prepared and the latest scans will be available here as soon as the chapter is released. Stay tuned and check back soon!`
+    ? `Blue Lock ${t.reader.chapter} ${chapter.number} is coming soon! This chapter page is being prepared, and the latest updates will be available here as soon as the chapter is released. Stay tuned and check back soon!`
     : `Read Blue Lock Manga ${t.reader.chapter} ${chapter.number}${chapter.title ? `: ${chapter.title.replace('Chapter', t.reader.chapter)}` : ''} online in high quality free. Official English scans available.`;
 
   return (
@@ -209,9 +209,15 @@ const ChapterReader: React.FC = () => {
             </Link>
             <div className="flex flex-col min-w-0">
               <span className="text-[10px] md:text-xs text-bb-blue font-bold uppercase tracking-wider hidden sm:block">Reading</span>
-              <h1 className="font-bold text-sm md:text-lg dark:text-white whitespace-nowrap">
-                Ch. {chapter.number}
-              </h1>
+              {isComingSoon ? (
+                <span className="font-bold text-sm md:text-lg dark:text-white whitespace-nowrap">
+                  Ch. {chapter.number}
+                </span>
+              ) : (
+                <h1 className="font-bold text-sm md:text-lg dark:text-white whitespace-nowrap">
+                  Ch. {chapter.number}
+                </h1>
+              )}
             </div>
           </div>
 
@@ -282,7 +288,7 @@ const ChapterReader: React.FC = () => {
                   </h1>
                   <h2 className="text-2xl font-heading font-bold text-gray-900 dark:text-white mb-4">Coming Soon</h2>
                   <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Blue Lock {t.reader.chapter} {chapter.number} is coming soon! This chapter page is being prepared and the latest scans will be available here as soon as the chapter is released. Stay tuned and check back soon!
+                    Blue Lock {t.reader.chapter} {chapter.number} is coming soon! This chapter page is being prepared, and the latest updates will be available here as soon as the chapter is released. Stay tuned and check back soon!
                   </p>
                 </>
               ) : (

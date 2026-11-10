@@ -101,7 +101,9 @@ const MangaList: React.FC = () => {
                 <div className="flex justify-between items-start mb-2">
                   <span className="text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">{t.mangaList.chapter} {chapter.number}</span>
                   <span className="text-[10px] font-mono text-gray-300 dark:text-gray-600 bg-gray-100 dark:bg-white/5 px-2 py-0.5 rounded">
-                    {new Date(chapter.releaseDate).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+                    {chapter.releaseDate && !isNaN(new Date(chapter.releaseDate).getTime())
+                      ? new Date(chapter.releaseDate).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })
+                      : 'TBA'}
                   </span>
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-bb-blue transition-colors line-clamp-1 pr-4">

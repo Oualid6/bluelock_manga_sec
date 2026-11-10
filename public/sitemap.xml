@@ -9647,6 +9647,13 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://bluelockhub.com/chapter/365</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bluelockhub.com/chapter/365" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bluelockhub.com/chapter/365" />
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://bluelockhub.com/chapter/366</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://bluelockhub.com/chapter/366" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bluelockhub.com/chapter/366" />
@@ -9666,6 +9673,7 @@
     <loc>https://bluelockhub.com/chapter/368</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://bluelockhub.com/chapter/368" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bluelockhub.com/chapter/368" />
+    <lastmod>2026-11-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -9673,6 +9681,13 @@
     <loc>https://bluelockhub.com/chapter/369</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://bluelockhub.com/chapter/369" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://bluelockhub.com/chapter/369" />
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://bluelockhub.com/chapter/370</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://bluelockhub.com/chapter/370" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://bluelockhub.com/chapter/370" />
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

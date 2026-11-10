@@ -41,7 +41,7 @@ assert(!sitemapContent.includes('/fr/chapter/343<'), 'No empty French chapter 34
 assert(!sitemapContent.includes('/fr/chapter/365<'), 'No empty French chapter 365 in sitemap');
 assert(!sitemapContent.includes('/es/chapter/346<'), 'No empty Spanish chapter 346 in sitemap');
 assert(!sitemapContent.includes('/es/chapter/365<'), 'No empty Spanish chapter 365 in sitemap');
-assert(!sitemapContent.includes('/chapter/365<'), 'No empty English chapter 365 in sitemap');
+assert(!sitemapContent.includes('/chapter/371<'), 'No empty English chapter 371 in sitemap');
 
 // Check static pages in sitemap
 const expectedStatic = [
@@ -62,6 +62,9 @@ const expectedStatic = [
 expectedStatic.forEach(url => {
   assert(locs.includes(url), `Sitemap includes verified static route: ${url}`);
 });
+
+assert(locs.includes('https://bluelockhub.com/chapter/368'), 'Sitemap includes Chapter 368');
+assert(locs.includes('https://bluelockhub.com/chapter/370'), 'Sitemap includes Chapter 370');
 
 // Check canonical English chapter URLs format (must be /chapter/X, not /en/chapter/X)
 const enChapterInSitemap = locs.some(u => u.includes('/en/chapter/'));
