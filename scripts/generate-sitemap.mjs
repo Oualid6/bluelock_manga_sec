@@ -22,8 +22,8 @@ const staticPages = [
 const languages = ['en', 'fr', 'es'];
 
 // 2. Chapters Data Definition (matches constants.ts exactly)
-// Integer chapters 1-370
-// English: ch 1-370 (365+ are EN-only) + 346.2 + 364.2
+// Integer chapters 1-371
+// English: ch 1-371 (365+ are EN-only) + 346.2 + 364.2
 // French: ch 1-342 (ch > 342 are empty [])
 // Spanish: ch 1-345 (ch >= 346 are empty [])
 const chapters = [];
@@ -31,12 +31,13 @@ const chapters = [];
 const chapterMeta = {
   366: { lastmod: '2026-10-27', changefreq: 'monthly', priority: '0.9' },
   367: { lastmod: '2026-11-03', changefreq: 'monthly', priority: '0.9' },
-  368: { lastmod: '2026-11-10', changefreq: 'weekly', priority: '0.9' },
-  369: { changefreq: 'weekly', priority: '0.9' },
-  370: { changefreq: 'weekly', priority: '0.9' }
+  368: { lastmod: '2026-11-10', changefreq: 'monthly', priority: '0.9' },
+  369: { lastmod: '2026-11-17', changefreq: 'weekly', priority: '0.9' },
+  370: { changefreq: 'weekly', priority: '0.9' },
+  371: { changefreq: 'weekly', priority: '0.9' }
 };
 
-for (let i = 1; i <= 370; i++) {
+for (let i = 1; i <= 371; i++) {
   // ch 365+: EN only (pages exist in EN, no FR/ES)
   const hasEn = true;
   const hasFr = i <= 342;

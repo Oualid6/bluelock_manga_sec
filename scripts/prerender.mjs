@@ -38,11 +38,12 @@ function esc(str) {
 
 // Generate chapter numbers list for rendering
 function getChaptersForLang(lang) {
-  const max = lang === 'fr' ? 342 : (lang === 'es' ? 345 : 370);
+  const max = lang === 'fr' ? 342 : (lang === 'es' ? 345 : 371);
   const list = [];
   if (lang === 'en') {
+    list.push({ number: 371, title: 'Blue Lock Chapter 371' });
     list.push({ number: 370, title: 'Blue Lock Chapter 370' });
-    list.push({ number: 369, title: 'Blue Lock Chapter 369' });
+    list.push({ number: 369, title: 'Blue Lock Chapter 369: Resonance' });
     list.push({ number: 368, title: 'Blue Lock Chapter 368' });
     list.push({ number: 367, title: 'Blue Lock Chapter 367' });
     list.push({ number: 366, title: 'Blue Lock Chapter 366: The Pinnacle' });

@@ -66,13 +66,15 @@ const chapter368: Chapter = {
   pagesFr: [],
 };
 
-// Chapter 369 — Coming Soon (no pages yet)
+// Chapter 369 — Available (18 pages from MangaFreak, released 2026-11-17)
 const chapter369: Chapter = {
   id: '369',
   number: 369,
-  title: 'Blue Lock Chapter 369',
+  title: 'Blue Lock Chapter 369: Resonance',
   releaseDate: '2026-11-17T00:00:00.000Z',
-  pages: [],
+  pages: Array.from({ length: 18 }, (_, p) =>
+    `https://images.mangafreak.me/mangas/blue_lock/blue_lock_369/blue_lock_369_${p + 1}.jpg`
+  ),
   pagesEs: [],
   pagesFr: [],
 };
@@ -82,6 +84,17 @@ const chapter370: Chapter = {
   id: '370',
   number: 370,
   title: 'Blue Lock Chapter 370',
+  releaseDate: '2026-11-24T00:00:00.000Z',
+  pages: [],
+  pagesEs: [],
+  pagesFr: [],
+};
+
+// Chapter 371 — Coming Soon (no pages yet)
+const chapter371: Chapter = {
+  id: '371',
+  number: 371,
+  title: 'Blue Lock Chapter 371',
   releaseDate: '',
   pages: [],
   pagesEs: [],
@@ -114,7 +127,7 @@ const chapter364_2: Chapter = {
   pagesFr: []
 };
 
-export const MOCK_CHAPTERS: Chapter[] = [...integerChapters, chapter346_2, chapter364_2, chapter366, chapter367, chapter368, chapter369, chapter370]
+export const MOCK_CHAPTERS: Chapter[] = [...integerChapters, chapter346_2, chapter364_2, chapter366, chapter367, chapter368, chapter369, chapter370, chapter371]
   .sort((a, b) => b.number - a.number); // Latest chapters first
 
 export const CHARACTERS: Character[] = [
